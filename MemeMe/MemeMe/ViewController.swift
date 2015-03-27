@@ -44,7 +44,7 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
         
         cameraButton.enabled = UIImagePickerController.isSourceTypeAvailable    (UIImagePickerControllerSourceType.Camera)
         
-        imageView.contentMode = UIViewContentMode.ScaleAspectFill
+        //imageView.contentMode = UIViewContentMode.ScaleAspectFill
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -263,9 +263,9 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
         navigationBar.hidden = true
         
         // Render view to an image
-        UIGraphicsBeginImageContext(self.imageView.frame.size)
-        
         var rect = CGRect(x: self.imageView.frame.origin.x, y: self.imageView.frame.origin.y - self.navigationBar.frame.height - 20, width: self.imageView.frame.width, height: self.imageView.frame.height)
+    
+        UIGraphicsBeginImageContext(self.imageView.frame.size)
         
         self.view.drawViewHierarchyInRect(rect,
             afterScreenUpdates: true)
