@@ -233,10 +233,11 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
     
     func swipeLeft(){
         ++templateIndex
-        if(templateIndex == templateImages.count){
+        if(templateIndex > templateImages.count){
             templateIndex = 0
         }
         imageView.image = UIImage(named: "t\(templateIndex).jpg")
+        println(templateIndex)
     }
     
     func swipeRight(){
@@ -247,6 +248,7 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
         }
         
         imageView.image = UIImage(named: "t\(templateIndex).jpg")
+        println(templateIndex)
     }
     
     func save(activityType:String!, completed: Bool, returnedItems: [AnyObject]!, error: NSError!) {
