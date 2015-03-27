@@ -47,10 +47,17 @@
                                             <state key="normal" image="album">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
+                                            <connections>
+                                                <action selector="pickImage:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="pb5-ba-4vw"/>
+                                            </connections>
                                         </button>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="f1S-ae-cPz"/>
-                                    <barButtonItem style="plain" systemItem="camera" id="BbC-dH-H2H"/>
+                                    <barButtonItem style="plain" systemItem="camera" id="BbC-dH-H2H">
+                                        <connections>
+                                            <action selector="pickAnImageFromCamera:" destination="vXZ-lx-hvc" id="JHr-o6-jQh"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="a3x-OH-ff5"/>
                                     <barButtonItem id="7UT-Re-lHN">
                                         <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="nU2-Lf-zen">
@@ -174,7 +181,9 @@
                     </view>
                     <connections>
                         <outlet property="bottomTextField" destination="kP1-36-tBa" id="6JT-60-cKi"/>
+                        <outlet property="cameraButton" destination="BbC-dH-H2H" id="bBB-cq-9Sy"/>
                         <outlet property="colorPick" destination="nU2-Lf-zen" id="Fk8-AS-dZu"/>
+                        <outlet property="imageView" destination="4YJ-if-826" id="Lvo-GN-zYv"/>
                         <outlet property="topTextField" destination="qhG-oA-gqS" id="z3A-Db-bBo"/>
                     </connections>
                 </viewController>
