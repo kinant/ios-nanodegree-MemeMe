@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -89,18 +90,12 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
                                 <textInputTraits key="textInputTraits"/>
-                                <variation key="widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="0.0" y="89" width="400" height="55"/>
-                                </variation>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="BOTTOM" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kP1-36-tBa">
                                 <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
                                 <textInputTraits key="textInputTraits"/>
-                                <variation key="widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="0.0" y="499" width="400" height="48"/>
-                                </variation>
                             </textField>
                         </subviews>
                         <color key="backgroundColor" red="0.97647058823529409" green="0.36862745098039218" blue="0.082352941176470587" alpha="1" colorSpace="calibratedRGB"/>
@@ -131,23 +126,23 @@
                                 <exclude reference="kP1-36-tBa"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="BKp-zH-zZU"/>
-                                <exclude reference="So7-hT-DYM"/>
-                                <exclude reference="gqE-z1-Boo"/>
-                                <exclude reference="53D-Kl-4Cy"/>
-                                <exclude reference="5Eq-f2-PiV"/>
-                                <exclude reference="qjP-jv-MtU"/>
-                                <exclude reference="tnR-aM-1Of"/>
-                                <exclude reference="7XX-YO-P7b"/>
-                                <exclude reference="VvJ-9B-X6I"/>
                                 <exclude reference="8Bg-oY-DDJ"/>
                                 <exclude reference="Ugo-FM-rsL"/>
                                 <exclude reference="Vxl-DP-6C9"/>
+                                <exclude reference="7XX-YO-P7b"/>
+                                <exclude reference="VvJ-9B-X6I"/>
                                 <exclude reference="G4a-Kg-HtI"/>
                                 <exclude reference="Hf3-vg-hNy"/>
                                 <exclude reference="ZEf-5h-U3c"/>
                                 <exclude reference="dA7-jK-4B8"/>
                                 <exclude reference="6LH-YW-h9V"/>
+                                <exclude reference="53D-Kl-4Cy"/>
+                                <exclude reference="5Eq-f2-PiV"/>
+                                <exclude reference="qjP-jv-MtU"/>
+                                <exclude reference="tnR-aM-1Of"/>
+                                <exclude reference="BKp-zH-zZU"/>
+                                <exclude reference="So7-hT-DYM"/>
+                                <exclude reference="gqE-z1-Boo"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -157,23 +152,23 @@
                                 <include reference="kP1-36-tBa"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="BKp-zH-zZU"/>
-                                <include reference="So7-hT-DYM"/>
-                                <include reference="gqE-z1-Boo"/>
-                                <include reference="53D-Kl-4Cy"/>
-                                <include reference="5Eq-f2-PiV"/>
-                                <include reference="qjP-jv-MtU"/>
-                                <include reference="tnR-aM-1Of"/>
-                                <include reference="7XX-YO-P7b"/>
-                                <include reference="VvJ-9B-X6I"/>
                                 <include reference="8Bg-oY-DDJ"/>
                                 <include reference="Ugo-FM-rsL"/>
                                 <include reference="Vxl-DP-6C9"/>
+                                <include reference="7XX-YO-P7b"/>
+                                <include reference="VvJ-9B-X6I"/>
                                 <include reference="G4a-Kg-HtI"/>
                                 <include reference="Hf3-vg-hNy"/>
                                 <include reference="ZEf-5h-U3c"/>
                                 <include reference="dA7-jK-4B8"/>
                                 <include reference="6LH-YW-h9V"/>
+                                <include reference="53D-Kl-4Cy"/>
+                                <include reference="5Eq-f2-PiV"/>
+                                <include reference="qjP-jv-MtU"/>
+                                <include reference="tnR-aM-1Of"/>
+                                <include reference="BKp-zH-zZU"/>
+                                <include reference="So7-hT-DYM"/>
+                                <include reference="gqE-z1-Boo"/>
                             </mask>
                         </variation>
                     </view>
