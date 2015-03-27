@@ -16,6 +16,9 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
     @IBOutlet weak var bottomTextField: UITextField!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
+    @IBOutlet weak var mainToolbar: UIToolbar!
+    @IBOutlet weak var navigationBar: UINavigationBar!
+    
     let swipeRecRight = UISwipeGestureRecognizer()
     let swipeRecLeft = UISwipeGestureRecognizer()
     
@@ -31,6 +34,8 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
     var templateIndex = 0
     
     var editingBottom = false
+    
+    var memeImg: UIImage!
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -243,4 +248,45 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
         
         imageView.image = UIImage(named: "t\(templateIndex).jpg")
     }
+    
+    func save(activityType:String!, completed: Bool, returnedItems: [AnyObject]!, error: NSError!) {
+        //Create the meme
+        if completed {
+            var meme = Meme(topText: topTextField.text, bottomText: bottomTextField.text, original: imageView.image!, meme: memeImg)
+            // self.dismissViewControllerAnimated(false, completion: {})
+        }
+    }
+    
+    func generateMemedImage() -> UIImage {
+        // TODO: Hide toolbar and navbar
+        mainToolbar.hidden = true
+        navigationBar.hidden = true
+        
+        // Render view to an image
+        UIGraphicsBeginImageContext(self.imageView.frame.size)
+        
+        var rect = CGRect(x: self.imageView.frame.origin.x, y: self.imageView.frame.origin.y - self.navigationBar.frame.height - 20, width: self.imageView.frame.width, height: self.imageView.frame.height)
+        
+        self.view.drawViewHierarchyInRect(rect,
+            afterScreenUpdates: true)
+        let memedImage : UIImage =
+        UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        // TODO:  Show toolbar and navbar
+        mainToolbar.hidden = false
+        navigationBar.hidden = false
+        
+        return memedImage
+    }
+    
+    @IBAction func shareMeme(sender: UIButton) {
+        memeImg = generateMemedImage()
+        let objectsToShare = [memeImg]
+        let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+        self.presentViewController(activityVC, animated: true, completion: nil)
+        
+        activityVC.completionWithItemsHandler = save
+    }
+    
 }

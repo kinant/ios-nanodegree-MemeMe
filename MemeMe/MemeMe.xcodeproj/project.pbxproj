@@ -18,6 +18,7 @@
 		C94CE8141AC531DA00384C9E /* t6.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C94CE80C1AC531DA00384C9E /* t6.jpg */; };
 		C94CE8151AC531DA00384C9E /* t7.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C94CE80D1AC531DA00384C9E /* t7.jpg */; };
 		C94CE8161AC531DA00384C9E /* t8.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C94CE80E1AC531DA00384C9E /* t8.jpg */; };
+		C94CE8181AC536E000384C9E /* Meme.swift in Sources */ = {isa = PBXBuildFile; fileRef = C94CE8171AC536E000384C9E /* Meme.swift */; };
 		C94DDDCB1AC4AC820039E51F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C94DDDCA1AC4AC820039E51F /* AppDelegate.swift */; };
 		C94DDDCD1AC4AC820039E51F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C94DDDCC1AC4AC820039E51F /* ViewController.swift */; };
 		C94DDDD01AC4AC820039E51F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C94DDDCE1AC4AC820039E51F /* Main.storyboard */; };
@@ -48,6 +49,7 @@
 		C94CE80C1AC531DA00384C9E /* t6.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = t6.jpg; sourceTree = "<group>"; };
 		C94CE80D1AC531DA00384C9E /* t7.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = t7.jpg; sourceTree = "<group>"; };
 		C94CE80E1AC531DA00384C9E /* t8.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = t8.jpg; sourceTree = "<group>"; };
+		C94CE8171AC536E000384C9E /* Meme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Meme.swift; sourceTree = "<group>"; };
 		C94DDDC51AC4AC820039E51F /* MemeMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MemeMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C94DDDC91AC4AC820039E51F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C94DDDCA1AC4AC820039E51F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 			children = (
 				C94DDDCA1AC4AC820039E51F /* AppDelegate.swift */,
 				C94DDDCC1AC4AC820039E51F /* ViewController.swift */,
+				C94CE8171AC536E000384C9E /* Meme.swift */,
 				C94DDDCE1AC4AC820039E51F /* Main.storyboard */,
 				C94CE8011AC50B7D00384C9E /* ColorPickerViewController.swift */,
 				C94CE8021AC50B7D00384C9E /* FontPickerViewController.swift */,
@@ -258,6 +261,7 @@
 				C94CE8051AC50B7D00384C9E /* FontPickerViewController.swift in Sources */,
 				C94DDDCB1AC4AC820039E51F /* AppDelegate.swift in Sources */,
 				C94CE8041AC50B7D00384C9E /* ColorPickerViewController.swift in Sources */,
+				C94CE8181AC536E000384C9E /* Meme.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -381,6 +385,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = MemeMe/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -391,6 +396,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = MemeMe/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
