@@ -43,8 +43,6 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
         self.subscribeToKeyboardNotifications()
         
         cameraButton.enabled = UIImagePickerController.isSourceTypeAvailable    (UIImagePickerControllerSourceType.Camera)
-        
-        //imageView.contentMode = UIViewContentMode.ScaleAspectFill
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -54,7 +52,6 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
         
         let memeTextAttributes = [
             NSStrokeColorAttributeName : UIColor.blackColor(),
@@ -237,7 +234,6 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
             templateIndex = 0
         }
         imageView.image = UIImage(named: "t\(templateIndex).jpg")
-        println(templateIndex)
     }
     
     func swipeRight(){
@@ -248,20 +244,17 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
         }
         
         imageView.image = UIImage(named: "t\(templateIndex).jpg")
-        println(templateIndex)
     }
     
     func save(activityType:String!, completed: Bool, returnedItems: [AnyObject]!, error: NSError!) {
         //Create the meme
         if completed {
             var meme = Meme(topText: topTextField.text, bottomText: bottomTextField.text, original: imageView.image!, meme: memeImg)
-            // self.dismissViewControllerAnimated(false, completion: {})
         }
     }
     
     func generateMemedImage() -> UIImage {
         
-        // TODO: Hide toolbar and navbar
         mainToolbar.hidden = true
         navigationBar.hidden = true
         
@@ -275,7 +268,6 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
         UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
-        // TODO:  Show toolbar and navbar
         mainToolbar.hidden = false
         navigationBar.hidden = false
         
