@@ -260,25 +260,10 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
     }
     
     func generateMemedImage() -> UIImage {
+        
         // TODO: Hide toolbar and navbar
         mainToolbar.hidden = true
         navigationBar.hidden = true
-        
-        println("============= VIEW ===============")
-        println("x: \(self.view.frame.origin.x)")
-        println("y: \(self.view.frame.origin.y)")
-        println("w: \(self.view.frame.width)")
-        println("h: \(self.view.frame.height)")
-        println("============= END VIEW============")
-        
-        println("============= IMAGEVIEW ===============")
-        println("x: \(self.imageView.frame.origin.x)")
-        println("y: \(self.imageView.frame.origin.y)")
-        println("w: \(self.imageView.frame.width)")
-        println("h: \(self.imageView.frame.height)")
-        println("============= END IMAGEVIEW============")
-        
-        println(self.view.frame.origin.y - self.imageView.frame.origin.y)
         
         UIGraphicsBeginImageContextWithOptions(self.imageView.frame.size, false, 0.0)
         
