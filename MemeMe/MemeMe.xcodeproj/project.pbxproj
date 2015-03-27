@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C94CE8041AC50B7D00384C9E /* ColorPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C94CE8011AC50B7D00384C9E /* ColorPickerViewController.swift */; };
+		C94CE8051AC50B7D00384C9E /* FontPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C94CE8021AC50B7D00384C9E /* FontPickerViewController.swift */; };
+		C94CE8061AC50B7D00384C9E /* colorPalette.plist in Resources */ = {isa = PBXBuildFile; fileRef = C94CE8031AC50B7D00384C9E /* colorPalette.plist */; };
 		C94DDDCB1AC4AC820039E51F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C94DDDCA1AC4AC820039E51F /* AppDelegate.swift */; };
 		C94DDDCD1AC4AC820039E51F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C94DDDCC1AC4AC820039E51F /* ViewController.swift */; };
 		C94DDDD01AC4AC820039E51F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C94DDDCE1AC4AC820039E51F /* Main.storyboard */; };
@@ -26,6 +29,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C94CE8011AC50B7D00384C9E /* ColorPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPickerViewController.swift; sourceTree = "<group>"; };
+		C94CE8021AC50B7D00384C9E /* FontPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontPickerViewController.swift; sourceTree = "<group>"; };
+		C94CE8031AC50B7D00384C9E /* colorPalette.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = colorPalette.plist; sourceTree = "<group>"; };
 		C94DDDC51AC4AC820039E51F /* MemeMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MemeMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C94DDDC91AC4AC820039E51F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C94DDDCA1AC4AC820039E51F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -80,6 +86,9 @@
 				C94DDDCA1AC4AC820039E51F /* AppDelegate.swift */,
 				C94DDDCC1AC4AC820039E51F /* ViewController.swift */,
 				C94DDDCE1AC4AC820039E51F /* Main.storyboard */,
+				C94CE8011AC50B7D00384C9E /* ColorPickerViewController.swift */,
+				C94CE8021AC50B7D00384C9E /* FontPickerViewController.swift */,
+				C94CE8031AC50B7D00384C9E /* colorPalette.plist */,
 				C94DDDD11AC4AC820039E51F /* Images.xcassets */,
 				C94DDDD31AC4AC820039E51F /* LaunchScreen.xib */,
 				C94DDDC81AC4AC820039E51F /* Supporting Files */,
@@ -194,6 +203,7 @@
 			files = (
 				C94DDDD01AC4AC820039E51F /* Main.storyboard in Resources */,
 				C94DDDD51AC4AC820039E51F /* LaunchScreen.xib in Resources */,
+				C94CE8061AC50B7D00384C9E /* colorPalette.plist in Resources */,
 				C94DDDD21AC4AC820039E51F /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -213,7 +223,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				C94DDDCD1AC4AC820039E51F /* ViewController.swift in Sources */,
+				C94CE8051AC50B7D00384C9E /* FontPickerViewController.swift in Sources */,
 				C94DDDCB1AC4AC820039E51F /* AppDelegate.swift in Sources */,
+				C94CE8041AC50B7D00384C9E /* ColorPickerViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -405,6 +417,7 @@
 				C94DDDE61AC4AC820039E51F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C94DDDE71AC4AC820039E51F /* Build configuration list for PBXNativeTarget "MemeMeTests" */ = {
 			isa = XCConfigurationList;
@@ -413,6 +426,7 @@
 				C94DDDE91AC4AC820039E51F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

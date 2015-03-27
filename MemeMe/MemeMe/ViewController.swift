@@ -9,7 +9,7 @@
 import UIKit
 
 class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate,
-UINavigationControllerDelegate {
+UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
     
     @IBOutlet weak var colorPick: UIButton!
     @IBOutlet weak var topTextField: UITextField!
@@ -145,5 +145,44 @@ UINavigationControllerDelegate {
         imagePicker.delegate = self
         imagePicker.sourceType = UIImagePickerControllerSourceType.Camera
         self.presentViewController(imagePicker, animated: true, completion: nil)
+    }
+    
+    @IBAction func colorPickerButton(sender: UIButton) {
+        
+        let popoverVC = storyboard?.instantiateViewControllerWithIdentifier("colorPickerPopover") as ColorPickerViewController
+        
+        popoverVC.modalPresentationStyle = .Popover
+        
+        popoverVC.preferredContentSize = CGSizeMake(284, 446)
+        
+        if let popoverController = popoverVC.popoverPresentationController {
+            popoverController.sourceView = sender
+            popoverController.sourceRect = CGRect(x: 0, y: 0, width: 85, height: 30)
+            popoverController.permittedArrowDirections = .Any
+            popoverController.delegate = self
+            popoverVC.delegate = self
+        }
+
+        presentViewController(popoverVC, animated: false, completion: nil)
+        
+    }
+    
+    // Override the iPhone behavior that presents a popover as fullscreen
+    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController!) -> UIModalPresentationStyle {
+        // Return no adaptive presentation style, use default presentation behaviour
+        return .None
+    }
+    
+    func setButtonColor (color: UIColor) {
+        // button.setTitleColor(color, forState:UIControlState.Normal)
+        // button.backgroundColor = color
+        self.topTextField.textColor = color
+        self.bottomTextField.textColor  = color
+        colorPick.setTitleColor(color, forState: UIControlState.Normal)
+        // self.topTextField.defaultTextAttributes = memeTextAttributes
+    }
+    func setTextFont(font: UIFont){
+        topTextField.font = font
+        bottomTextField.font = font
     }
 }
