@@ -264,10 +264,25 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
         mainToolbar.hidden = true
         navigationBar.hidden = true
         
-        // Render view to an image
-        var rect = CGRect(x: self.imageView.frame.origin.x, y: self.imageView.frame.origin.y - self.navigationBar.frame.height - 20, width: self.imageView.frame.width, height: self.imageView.frame.height)
-    
-        UIGraphicsBeginImageContext(self.imageView.frame.size)
+        println("============= VIEW ===============")
+        println("x: \(self.view.frame.origin.x)")
+        println("y: \(self.view.frame.origin.y)")
+        println("w: \(self.view.frame.width)")
+        println("h: \(self.view.frame.height)")
+        println("============= END VIEW============")
+        
+        println("============= IMAGEVIEW ===============")
+        println("x: \(self.imageView.frame.origin.x)")
+        println("y: \(self.imageView.frame.origin.y)")
+        println("w: \(self.imageView.frame.width)")
+        println("h: \(self.imageView.frame.height)")
+        println("============= END IMAGEVIEW============")
+        
+        println(self.view.frame.origin.y - self.imageView.frame.origin.y)
+        
+        UIGraphicsBeginImageContextWithOptions(self.imageView.frame.size, false, 0.0)
+        
+        var rect = CGRect(x: self.view.frame.origin.x, y: self.view.frame.origin.y - self.imageView.frame.origin.y, width: self.view.frame.width, height: self.view.frame.height)
         
         self.view.drawViewHierarchyInRect(rect,
             afterScreenUpdates: true)
