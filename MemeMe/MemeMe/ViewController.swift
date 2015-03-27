@@ -37,7 +37,6 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        // colorPick.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
         
         let memeTextAttributes = [
             NSStrokeColorAttributeName : UIColor.blackColor(),
@@ -98,6 +97,7 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
                 textField.text = "TOP"
             }
         }
+        textField.resignFirstResponder()
     }
     
     func keyboardWillShow(notification: NSNotification) {
@@ -182,9 +182,7 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
             popoverController.delegate = self
             popoverVC.delegate = self
         }
-        
         presentViewController(popoverVC, animated: false, completion: nil)
-        
     }
     
     // Override the iPhone behavior that presents a popover as fullscreen
@@ -194,12 +192,9 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
     }
     
     func setButtonColor (color: UIColor) {
-        // button.setTitleColor(color, forState:UIControlState.Normal)
-        // button.backgroundColor = color
         self.topTextField.textColor = color
         self.bottomTextField.textColor  = color
         colorPick.setTitleColor(color, forState: UIControlState.Normal)
-        // self.topTextField.defaultTextAttributes = memeTextAttributes
     }
     func setTextFont(font: UIFont){
         topTextField.font = font
