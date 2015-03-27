@@ -26,7 +26,7 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
         
         cameraButton.enabled = UIImagePickerController.isSourceTypeAvailable    (UIImagePickerControllerSourceType.Camera)
         
-        imageView.contentMode = UIViewContentMode.ScaleAspectFit
+        imageView.contentMode = UIViewContentMode.ScaleAspectFill
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -163,6 +163,26 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
             popoverVC.delegate = self
         }
 
+        presentViewController(popoverVC, animated: false, completion: nil)
+        
+    }
+    
+    @IBAction func fontPickerButton(sender: UIButton) {
+        
+        let popoverVC = storyboard?.instantiateViewControllerWithIdentifier("fontPickerPopover") as FontPickerViewController
+        
+        popoverVC.modalPresentationStyle = .Popover
+        
+        popoverVC.preferredContentSize = CGSizeMake(284, 446)
+        
+        if let popoverController = popoverVC.popoverPresentationController {
+            popoverController.sourceView = sender
+            popoverController.sourceRect = CGRect(x: 0, y: 0, width: 85, height: 30)
+            popoverController.permittedArrowDirections = .Any
+            popoverController.delegate = self
+            popoverVC.delegate = self
+        }
+        
         presentViewController(popoverVC, animated: false, completion: nil)
         
     }
