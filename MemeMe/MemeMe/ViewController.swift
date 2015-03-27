@@ -16,6 +16,19 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
     @IBOutlet weak var bottomTextField: UITextField!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
+    let swipeRecRight = UISwipeGestureRecognizer()
+    let swipeRecLeft = UISwipeGestureRecognizer()
+    
+    let templateImages = [
+        "t1.jpg",
+        "t2.jpg",
+        "t3.jpg",
+        "t4.jpg",
+        "t5.jpg",
+        "t6.jpg"
+    ]
+    
+    var templateIndex = 0
     
     var editingBottom = false
     
@@ -55,6 +68,17 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
         self.bottomTextField.tag = 2
         self.topTextField.textAlignment = .Center
         self.bottomTextField.textAlignment = .Center
+        
+        // http://www.avocarrot.com/blog/implement-gesture-recognizers-swift/
+        self.imageView.userInteractionEnabled = true
+        
+        self.imageView.addGestureRecognizer(swipeRecRight)
+        swipeRecRight.direction = UISwipeGestureRecognizerDirection.Right
+        swipeRecRight.addTarget(self, action: "swipeRight")
+        
+        self.imageView.addGestureRecognizer(swipeRecLeft)
+        swipeRecLeft.direction = UISwipeGestureRecognizerDirection.Left
+        swipeRecLeft.addTarget(self, action: "swipeLeft")
     }
     
     func subscribeToKeyboardNotifications() {
@@ -196,8 +220,27 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
         self.bottomTextField.textColor  = color
         colorPick.setTitleColor(color, forState: UIControlState.Normal)
     }
+    
     func setTextFont(font: UIFont){
         topTextField.font = font
         bottomTextField.font = font
+    }
+    
+    func swipeLeft(){
+        ++templateIndex
+        if(templateIndex == templateImages.count){
+            templateIndex = 0
+        }
+        imageView.image = UIImage(named: "t\(templateIndex).jpg")
+    }
+    
+    func swipeRight(){
+        --templateIndex
+        
+        if(templateIndex < 0){
+            templateIndex = templateImages.count
+        }
+        
+        imageView.image = UIImage(named: "t\(templateIndex).jpg")
     }
 }
