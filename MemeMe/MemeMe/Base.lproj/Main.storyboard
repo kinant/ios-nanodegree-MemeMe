@@ -173,7 +173,9 @@
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="bottomTextField" destination="kP1-36-tBa" id="6JT-60-cKi"/>
                         <outlet property="colorPick" destination="nU2-Lf-zen" id="Fk8-AS-dZu"/>
+                        <outlet property="topTextField" destination="qhG-oA-gqS" id="z3A-Db-bBo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>

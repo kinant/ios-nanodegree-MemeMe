@@ -8,18 +8,106 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var colorPick: UIButton!
+    @IBOutlet weak var topTextField: UITextField!
+    @IBOutlet weak var bottomTextField: UITextField!
+    
+    var editingBottom = false
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.subscribeToKeyboardNotifications()
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.unsubscribeFromKeyboardNotifications()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         // colorPick.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
+        
+        let memeTextAttributes = [
+            NSStrokeColorAttributeName : UIColor.blackColor(),
+            NSForegroundColorAttributeName :UIColor.whiteColor(),
+            NSFontAttributeName : UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
+            NSStrokeWidthAttributeName : NSNumber(float: -3.0)
+        ]
+        
+        self.topTextField.defaultTextAttributes = memeTextAttributes
+        self.bottomTextField.defaultTextAttributes = memeTextAttributes
+        self.topTextField.text = "TOP"
+        self.bottomTextField.text = "BOTTOM"
+        self.topTextField.delegate = self
+        self.bottomTextField.delegate = self
+        self.topTextField.tag = 1
+        self.bottomTextField.tag = 2
+        self.topTextField.textAlignment = .Center
+        self.bottomTextField.textAlignment = .Center
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    func subscribeToKeyboardNotifications() {
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:"    , name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:"    , name: UIKeyboardWillHideNotification, object: nil)
+        
+    }
+    
+    func unsubscribeFromKeyboardNotifications() {
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
+        
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    func textFieldDidBeginEditing(textField: UITextField) {
+        
+        if(textField.text == "TOP"){
+            textField.text = ""
+        }
+        else if(textField.text == "BOTTOM"){
+            textField.text = ""
+        }
+        
+        if(textField.tag == 2){
+            editingBottom = true
+        }
+    }
+    
+    func textFieldDidEndEditing(textField: UITextField) {
+        if(textField.text == ""){
+            
+            textField.text = "BOTTOM"
+            
+            if(textField.tag == 1){
+                textField.text = "TOP"
+            }
+        }
+    }
+    
+    func keyboardWillShow(notification: NSNotification) {
+        if(editingBottom){
+            self.view.frame.origin.y -= getKeyboardHeight(notification)
+        }
+    }
+    
+    func keyboardWillHide(notification: NSNotification) {
+        if(editingBottom){
+            self.view.frame.origin.y += getKeyboardHeight(notification)
+        }
+        editingBottom = false
+    }
+    
+    func getKeyboardHeight(notification: NSNotification) -> CGFloat {
+        let userInfo = notification.userInfo
+        let keyboardSize = userInfo![UIKeyboardFrameEndUserInfoKey] as NSValue // of CGRect
+        return keyboardSize.CGRectValue().height
     }
 }
