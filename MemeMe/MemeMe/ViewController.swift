@@ -15,7 +15,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        colorPick.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
+        // colorPick.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
     }
 
     override func didReceiveMemoryWarning() {
