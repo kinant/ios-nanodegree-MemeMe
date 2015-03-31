@@ -40,10 +40,11 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
     var originalH:CGFloat!
     var originalW:CGFloat!
     
-    var previousConstraintX:NSLayoutConstraint!
-    var previousConstraintY:NSLayoutConstraint!
+    var bottomTextFieldConstraintY:NSLayoutConstraint!
+    var topTextFieldConstraintY:NSLayoutConstraint!
     
-    var firstRun = true;
+    var ranOnce = false;
+    var setConstraints: NSArray!
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -332,11 +333,13 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
         
         //Don't forget this line
         // new_view.setTranslatesAutoresizingMaskIntoConstraints(false)
-        
         // var newImage = UIImage(named: "2");
-        if(!firstRun){
-            view.removeConstraints([previousConstraintY])
-            firstRun = true
+        if(ranOnce){
+            view.removeConstraint(topTextFieldConstraintY)
+            view.removeConstraint(bottomTextFieldConstraintY)
+        }
+        else {
+            ranOnce = true
         }
         var frame = frameFromImage(imageView.image!, imageView: imageView)
         
@@ -359,23 +362,17 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
         
         var topL = self.topLayoutGuide
         
-        topTextField.setTranslatesAutoresizingMaskIntoConstraints(false)
+        view.setTranslatesAutoresizingMaskIntoConstraints(false)
         
-        var constX = NSLayoutConstraint(item: topTextField, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: self.view, attribute: NSLayoutAttribute.CenterX, multiplier: 1, constant: 0)
-        view.addConstraint(constX)
-        previousConstraintX = constX;
+        // previousConstraintX = NSLayoutConstraint(item: topTextField, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: self.view, attribute: NSLayoutAttribute.CenterX, multiplier: 1, constant: 0)
+        // view.addConstraint(previousConstraintX)
         
-        var constY = NSLayoutConstraint(item: topTextField, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: imageView, attribute: NSLayoutAttribute.CenterY, multiplier: 1, constant: -(29/100)*frame.height)
-        view.addConstraint(constY)
-        // previousConstraintY = constY;
+        topTextFieldConstraintY = NSLayoutConstraint(item: topTextField, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: self.topLayoutGuide, attribute: NSLayoutAttribute.Bottom, multiplier: 1, constant: (frame.origin.y + 50))
+        view.addConstraint(topTextFieldConstraintY)
         
-        // var constY = NSLayoutConstraint(item: topTextField, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: topL, attribute: NSLayoutAttribute.Bottom, multiplier: 1, constant: 1)
-        // view.addConstraint(constY)
-
+        bottomTextFieldConstraintY = NSLayoutConstraint(item: bottomTextField, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: self.topLayoutGuide, attribute: NSLayoutAttribute.Bottom, multiplier: 1, constant: (frame.origin.y + frame.height + 30))
+        view.addConstraint(bottomTextFieldConstraintY)
         
-        var constW = NSLayoutConstraint(item: topTextField, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1, constant: self.view.frame.width)
-        // topTextField.addConstraint(constW)
-        //view.addConstraint(constW) also works
     }
     
 }

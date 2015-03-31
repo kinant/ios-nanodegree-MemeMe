@@ -124,6 +124,7 @@
                         <color key="backgroundColor" red="0.97647058823529409" green="0.36862745098039218" blue="0.082352941176470587" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="2my-Af-ZaG" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="topMargin" constant="20" id="2e8-Xw-xKm"/>
+                            <constraint firstAttribute="centerX" secondItem="H0M-pV-ed9" secondAttribute="centerX" id="2fI-VQ-4u5"/>
                             <constraint firstItem="H0M-pV-ed9" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="80" id="5Nb-gR-RdR"/>
                             <constraint firstItem="xXv-tA-FSi" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-16" id="88A-4f-yLw"/>
                             <constraint firstItem="2my-Af-ZaG" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-16" id="CFo-zY-Gdl"/>
