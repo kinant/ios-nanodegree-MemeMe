@@ -46,8 +46,14 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
     var ranOnce = false;
     var setConstraints: NSArray!
     
+    var memes: [Meme]!
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        
+        let object = UIApplication.sharedApplication().delegate
+        let appDelegate = object as AppDelegate
+        memes = appDelegate.memes
         
         self.subscribeToKeyboardNotifications()
         
@@ -270,6 +276,11 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
         //Create the meme
         if completed {
             var meme = Meme(topText: topTextField.text, bottomText: bottomTextField.text, original: imageView.image!, meme: memeImg)
+            
+            // Add it to the memes array in the Application Delegate
+            let object = UIApplication.sharedApplication().delegate
+            let appDelegate = object as AppDelegate
+            appDelegate.memes.append(meme)
         }
     }
     
