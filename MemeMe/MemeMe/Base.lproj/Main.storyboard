@@ -104,7 +104,7 @@
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <color key="barTintColor" red="0.97647058819999999" green="0.36862745099999999" blue="0.08235294118" alpha="1" colorSpace="calibratedRGB"/>
                             </toolbar>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xXv-tA-FSi">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="t3.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="xXv-tA-FSi">
                                 <rect key="frame" x="0.0" y="64" width="600" height="492"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </imageView>
@@ -114,7 +114,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="H0M-pV-ed9">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="H0M-pV-ed9">
                                 <rect key="frame" x="287" y="100" width="26" height="30"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -138,6 +138,12 @@
                             <constraint firstItem="s09-EW-8DS" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-16" id="rhb-ma-IEU"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="s09-EW-8DS" secondAttribute="bottom" id="zdg-EI-u0U"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="5Nb-gR-RdR"/>
+                                <exclude reference="fO4-ay-bjp"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <outlet property="bottomTextField" destination="uRq-hI-Q9N" id="Gn9-el-za8"/>
@@ -255,5 +261,6 @@
     <resources>
         <image name="album" width="25" height="25"/>
         <image name="palette" width="268" height="430"/>
+        <image name="t3.jpg" width="550" height="690"/>
     </resources>
 </document>

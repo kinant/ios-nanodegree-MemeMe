@@ -40,6 +40,11 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
     var originalH:CGFloat!
     var originalW:CGFloat!
     
+    var previousConstraintX:NSLayoutConstraint!
+    var previousConstraintY:NSLayoutConstraint!
+    
+    var firstRun = true;
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -76,6 +81,8 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
         self.bottomTextField.tag = 2
         self.topTextField.textAlignment = .Center
         self.bottomTextField.textAlignment = .Center
+        
+        setTextFieldPosition()
         
         // http://www.avocarrot.com/blog/implement-gesture-recognizers-swift/
         self.imageView.userInteractionEnabled = true
@@ -240,6 +247,7 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
             templateIndex = 0
         }
         imageView.image = UIImage(named: "t\(templateIndex).jpg")
+        setTextFieldPosition()
     }
     
     func swipeRight(){
@@ -250,6 +258,7 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
         }
         
         imageView.image = UIImage(named: "t\(templateIndex).jpg")
+        setTextFieldPosition()
     }
     
     func save(activityType:String!, completed: Bool, returnedItems: [AnyObject]!, error: NSError!) {
@@ -287,6 +296,86 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
         self.presentViewController(activityVC, animated: true, completion: nil)
         
         activityVC.completionWithItemsHandler = save
+    }
+    func frameFromImage(image: UIImage, imageView: UIImageView)->CGRect {
+        var imageRatio = image.size.width / image.size.height;
+        
+        var viewRatio = imageView.frame.size.width / imageView.frame.size.height;
+        
+        if(imageRatio < viewRatio)
+        {
+            var scale = imageView.frame.size.height / image.size.height;
+            
+            var width = scale * image.size.width;
+            
+            var topLeftX = (imageView.frame.size.width - width) * 0.5;
+            
+            return CGRectMake(topLeftX, 0, width, imageView.frame.size.height);
+        }
+        else
+        {
+            var scale = imageView.frame.size.width / image.size.width;
+            
+            var height = scale * image.size.height;
+            
+            var topLeftY = (imageView.frame.size.height - height) * 0.5;
+            
+            return CGRectMake(0, topLeftY, imageView.frame.size.width, height);
+        }
+    }
+    
+    func setTextFieldPosition(){
+        
+        // var new_view = UIView()
+        // new_view.backgroundColor = UIColor.redColor()
+        // view.addSubview(new_view)
+        
+        //Don't forget this line
+        // new_view.setTranslatesAutoresizingMaskIntoConstraints(false)
+        
+        // var newImage = UIImage(named: "2");
+        if(!firstRun){
+            view.removeConstraints([previousConstraintY])
+            firstRun = true
+        }
+        var frame = frameFromImage(imageView.image!, imageView: imageView)
+        
+        // imageView.image = newImage;
+        
+        /*
+        println("================= ORIGINAL IMAGE =====================");
+        println("x: \(imageView.frame.origin.x)");
+        println("y: \(imageView.frame.origin.y)");
+        println("h: \(newImage!.size.height)");
+        println("w: \(newImage!.size.width)");
+        println("======================================================");
+        println("================= ASPECT FIT IMAGE =====================");
+        println("x: \(frame.origin.x)");
+        println("y: \(frame.origin.y)");
+        println("h: \(frame.size.height)");
+        println("w: \(frame.size.width)");
+        println("======================================================");
+        */
+        
+        var topL = self.topLayoutGuide
+        
+        topTextField.setTranslatesAutoresizingMaskIntoConstraints(false)
+        
+        var constX = NSLayoutConstraint(item: topTextField, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: self.view, attribute: NSLayoutAttribute.CenterX, multiplier: 1, constant: 0)
+        view.addConstraint(constX)
+        previousConstraintX = constX;
+        
+        var constY = NSLayoutConstraint(item: topTextField, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: imageView, attribute: NSLayoutAttribute.CenterY, multiplier: 1, constant: -(29/100)*frame.height)
+        view.addConstraint(constY)
+        // previousConstraintY = constY;
+        
+        // var constY = NSLayoutConstraint(item: topTextField, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: topL, attribute: NSLayoutAttribute.Bottom, multiplier: 1, constant: 1)
+        // view.addConstraint(constY)
+
+        
+        var constW = NSLayoutConstraint(item: topTextField, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1, constant: self.view.frame.width)
+        // topTextField.addConstraint(constW)
+        //view.addConstraint(constW) also works
     }
     
 }
