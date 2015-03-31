@@ -272,6 +272,11 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
         setTextFieldPosition()
     }
     
+    func goToTabBarView(){
+        let tabBarVC = storyboard?.instantiateViewControllerWithIdentifier("tabBarView") as UITabBarController
+        presentViewController(tabBarVC, animated: false, completion: nil)
+    }
+    
     func save(activityType:String!, completed: Bool, returnedItems: [AnyObject]!, error: NSError!) {
         //Create the meme
         if completed {
@@ -281,6 +286,8 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
             let object = UIApplication.sharedApplication().delegate
             let appDelegate = object as AppDelegate
             appDelegate.memes.append(meme)
+            
+            goToTabBarView()
         }
     }
     
