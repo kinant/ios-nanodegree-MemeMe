@@ -37,6 +37,9 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
     
     var memeImg: UIImage!
     
+    var originalH:CGFloat!
+    var originalW:CGFloat!
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -52,6 +55,9 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        originalH = imageView.frame.height
+        originalW = imageView.frame.width
         
         let memeTextAttributes = [
             NSStrokeColorAttributeName : UIColor.blackColor(),
