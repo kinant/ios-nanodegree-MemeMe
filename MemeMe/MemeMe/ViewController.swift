@@ -83,6 +83,12 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
         self.topTextField.textAlignment = .Center
         self.bottomTextField.textAlignment = .Center
         
+        topTextFieldConstraintY = NSLayoutConstraint(item: topTextField, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: self.topLayoutGuide, attribute: NSLayoutAttribute.Top, multiplier: 1, constant: 150)
+        view.addConstraint(topTextFieldConstraintY)
+        
+        bottomTextFieldConstraintY = NSLayoutConstraint(item: bottomTextField, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: self.bottomLayoutGuide, attribute: NSLayoutAttribute.Top, multiplier: 1, constant: -150)
+        view.addConstraint(bottomTextFieldConstraintY)
+        
         // setTextFieldPosition()
         
         // http://www.avocarrot.com/blog/implement-gesture-recognizers-swift/
@@ -164,7 +170,6 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             //imageView.contentMode = UIViewContentMode.ScaleAspectFill;
             self.imageView.image = image
-            imageView.contentMode = UIViewContentMode.ScaleAspectFit;
             setTextFieldPosition()
         }
         
@@ -190,7 +195,7 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
         self.presentViewController(imagePicker, animated: true, completion: nil)
     }
     
-    @IBAction func colorPickerButton(sender: AnyObject) {
+    @IBAction func colorPickerButton(sender: UIButton) {
         
         let popoverVC = storyboard?.instantiateViewControllerWithIdentifier("colorPickerPopover") as ColorPickerViewController
         
@@ -199,7 +204,7 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
         popoverVC.preferredContentSize = CGSizeMake(284, 446)
         
         if let popoverController = popoverVC.popoverPresentationController {
-            // popoverController.sourceView = sender
+            popoverController.sourceView = sender
             popoverController.sourceRect = CGRect(x: 0, y: 0, width: 85, height: 30)
             popoverController.permittedArrowDirections = .Any
             popoverController.delegate = self
@@ -210,7 +215,7 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
         
     }
     
-    @IBAction func fontPickerButton(sender: AnyObject) {
+    @IBAction func fontPickerButton(sender: UIButton) {
         
         let popoverVC = storyboard?.instantiateViewControllerWithIdentifier("fontPickerPopover") as FontPickerViewController
         
@@ -219,7 +224,7 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
         popoverVC.preferredContentSize = CGSizeMake(284, 446)
         
         if let popoverController = popoverVC.popoverPresentationController {
-            // popoverController.sourceView = sender
+            popoverController.sourceView = sender
             popoverController.sourceRect = CGRect(x: 0, y: 0, width: 85, height: 30)
             popoverController.permittedArrowDirections = .Any
             popoverController.delegate = self
@@ -251,7 +256,7 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
             templateIndex = 0
         }
         imageView.image = UIImage(named: "t\(templateIndex).jpg")
-        //setTextFieldPosition()
+        setTextFieldPosition()
     }
     
     func swipeRight(){
@@ -262,7 +267,7 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
         }
         
         imageView.image = UIImage(named: "t\(templateIndex).jpg")
-        //setTextFieldPosition()
+        setTextFieldPosition()
     }
     
     func save(activityType:String!, completed: Bool, returnedItems: [AnyObject]!, error: NSError!) {
@@ -330,18 +335,14 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
     
     func setTextFieldPosition(){
         
-        if(ranOnce){
-            view.removeConstraint(topTextFieldConstraintY)
-            view.removeConstraint(bottomTextFieldConstraintY)
-        }
-        else {
-            ranOnce = true
-        }
+        view.removeConstraint(topTextFieldConstraintY)
+        view.removeConstraint(bottomTextFieldConstraintY)
+
         var frame = frameFromImage(imageView.image!, imageView: imageView)
         
         var topL = self.topLayoutGuide
         
-        view.setTranslatesAutoresizingMaskIntoConstraints(false)
+        // view.setTranslatesAutoresizingMaskIntoConstraints(false)
         
         topTextFieldConstraintY = NSLayoutConstraint(item: topTextField, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: self.topLayoutGuide, attribute: NSLayoutAttribute.Bottom, multiplier: 1, constant: (frame.origin.y + 50))
         view.addConstraint(topTextFieldConstraintY)
@@ -350,5 +351,4 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
         view.addConstraint(bottomTextFieldConstraintY)
         
     }
-    
 }

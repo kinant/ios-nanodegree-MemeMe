@@ -19,10 +19,23 @@
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gpa-lN-4jH">
                                 <rect key="frame" x="0.0" y="20" width="600" height="44"/>
                                 <items>
-                                    <navigationItem title="Title" id="fyz-EL-v4R"/>
+                                    <navigationItem title="Title" id="02h-N6-CwV">
+                                        <barButtonItem key="leftBarButtonItem" style="plain" id="C0X-IG-zfg">
+                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Z9x-h0-BVE">
+                                                <rect key="frame" x="-23" y="-15" width="133" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" title="Button">
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="shareMeme:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="0Cg-bd-OCL"/>
+                                                </connections>
+                                            </button>
+                                        </barButtonItem>
+                                    </navigationItem>
                                 </items>
                             </navigationBar>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V94-HD-W9Y">
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="V94-HD-W9Y">
                                 <rect key="frame" x="0.0" y="556" width="600" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="D7Q-wW-9sX"/>
@@ -35,6 +48,9 @@
                                             <state key="normal" title="Button">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
+                                            <connections>
+                                                <action selector="pickImage:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Gbs-on-h4z"/>
+                                            </connections>
                                         </button>
                                     </barButtonItem>
                                     <barButtonItem style="plain" id="DqV-W1-mla">
@@ -44,6 +60,9 @@
                                             <state key="normal" title="Button">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
+                                            <connections>
+                                                <action selector="pickAnImageFromCamera:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="hmh-ql-h6j"/>
+                                            </connections>
                                         </button>
                                     </barButtonItem>
                                     <barButtonItem style="plain" id="Ift-8h-CTo">
@@ -53,6 +72,9 @@
                                             <state key="normal" title="Button">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
+                                            <connections>
+                                                <action selector="colorPickerButton:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="eiW-wy-WUh"/>
+                                            </connections>
                                         </button>
                                     </barButtonItem>
                                     <barButtonItem style="plain" id="AOX-fZ-6bi">
@@ -62,13 +84,28 @@
                                             <state key="normal" title="Button">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
+                                            <connections>
+                                                <action selector="fontPickerButton:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="IQc-j0-G4e"/>
+                                            </connections>
                                         </button>
                                     </barButtonItem>
                                 </items>
                             </toolbar>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oZI-VL-U0M">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oZI-VL-U0M">
                                 <rect key="frame" x="0.0" y="64" width="600" height="492"/>
                             </imageView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GYt-Tg-l8i">
+                                <rect key="frame" x="288" y="520" width="26" height="30"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mch-OI-r7G">
+                                <rect key="frame" x="287" y="75" width="26" height="30"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" red="0.97647058823529409" green="0.36862745098039218" blue="0.082352941176470587" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -77,18 +114,35 @@
                             <constraint firstItem="V94-HD-W9Y" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailing" id="Ago-wr-O1q"/>
                             <constraint firstItem="V94-HD-W9Y" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="Asw-Ds-3To"/>
                             <constraint firstItem="gpa-lN-4jH" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailing" id="BMK-7s-wDA"/>
-                            <constraint firstItem="V94-HD-W9Y" firstAttribute="bottom" secondItem="2fi-mo-0CV" secondAttribute="top" id="Otn-J3-S6N"/>
+                            <constraint firstItem="V94-HD-W9Y" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="2fi-mo-0CV" secondAttribute="top" id="Otn-J3-S6N"/>
                             <constraint firstItem="oZI-VL-U0M" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="ct7-oh-cUv"/>
                             <constraint firstAttribute="centerX" secondItem="gpa-lN-4jH" secondAttribute="centerX" id="e95-Ri-c1U"/>
                             <constraint firstItem="oZI-VL-U0M" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="44" id="hrD-Zk-meo"/>
                             <constraint firstItem="oZI-VL-U0M" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailing" id="l0L-gx-SD0"/>
                             <constraint firstItem="oZI-VL-U0M" firstAttribute="bottom" secondItem="2fi-mo-0CV" secondAttribute="top" constant="-44" id="pEf-sh-3Ov"/>
+                            <constraint firstItem="mch-OI-r7G" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="pJr-UF-95N"/>
+                            <constraint firstItem="GYt-Tg-l8i" firstAttribute="bottom" secondItem="2fi-mo-0CV" secondAttribute="top" constant="-50" id="tVM-DN-nnU"/>
+                            <constraint firstItem="GYt-Tg-l8i" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" constant="0.5" id="zAH-6d-rUS"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="tVM-DN-nnU"/>
+                            </mask>
+                        </variation>
                     </view>
+                    <connections>
+                        <outlet property="bottomTextField" destination="GYt-Tg-l8i" id="Prb-CO-Uci"/>
+                        <outlet property="cameraButton" destination="DqV-W1-mla" id="ikv-Xl-weA"/>
+                        <outlet property="colorPick" destination="7cM-7c-hha" id="VW6-wp-raN"/>
+                        <outlet property="imageView" destination="oZI-VL-U0M" id="adM-5t-iYw"/>
+                        <outlet property="mainToolbar" destination="V94-HD-W9Y" id="ScS-dN-6AZ"/>
+                        <outlet property="navigationBar" destination="gpa-lN-4jH" id="u74-49-FfW"/>
+                        <outlet property="topTextField" destination="mch-OI-r7G" id="TCI-q2-XKN"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="707" y="446"/>
+            <point key="canvasLocation" x="711" y="516"/>
         </scene>
         <!--Color Picker View Controller-->
         <scene sceneID="rfE-L0-Jis">
