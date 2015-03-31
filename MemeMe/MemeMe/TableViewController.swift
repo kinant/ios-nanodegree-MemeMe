@@ -30,17 +30,13 @@ class TableViewController: UITableViewController, UITableViewDataSource {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("MemeTableCell") as UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("MemeTableCell") as CustomTableViewCell
         let meme = self.memes[indexPath.row]
         
         // Set the name and image
-        cell.textLabel?.text = meme.topText + meme.bottomText
-        cell.imageView?.image = meme.memeImg
-        
-        // If the cell has a detail label, we will put the evil scheme in.
-        if let detailTextLabel = cell.detailTextLabel {
-            detailTextLabel.text = "Meme: \(meme.topText + meme.bottomText)"
-        }
+        cell.topText.text = meme.topText
+        cell.bottomText.text = meme.bottomText
+        cell.memeImage.image = meme.memeImg
         
         return cell
     }
