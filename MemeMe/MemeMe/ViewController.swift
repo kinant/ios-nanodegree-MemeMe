@@ -89,8 +89,6 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
         bottomTextFieldConstraintY = NSLayoutConstraint(item: bottomTextField, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: self.bottomLayoutGuide, attribute: NSLayoutAttribute.Top, multiplier: 1, constant: -150)
         view.addConstraint(bottomTextFieldConstraintY)
         
-        // setTextFieldPosition()
-        
         // http://www.avocarrot.com/blog/implement-gesture-recognizers-swift/
         self.imageView.userInteractionEnabled = true
         
@@ -282,14 +280,14 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
         mainToolbar.hidden = true
         navigationBar.hidden = true
         
-        UIGraphicsBeginImageContextWithOptions(self.imageView.frame.size, false, 0.0)
+        var frame = frameFromImage(imageView.image!, imageView: imageView)
         
-        var rect = CGRect(x: self.view.frame.origin.x, y: self.view.frame.origin.y - self.imageView.frame.origin.y, width: self.view.frame.width, height: self.view.frame.height)
+        UIGraphicsBeginImageContext(frame.size)
         
-        self.view.drawViewHierarchyInRect(rect,
-            afterScreenUpdates: true)
-        let memedImage : UIImage =
-        UIGraphicsGetImageFromCurrentImageContext()
+        var rectangle = CGRectMake(0, self.view.frame.origin.y - frame.origin.y - 64, self.view.frame.width, self.view.frame.height)
+        
+        self.view.drawViewHierarchyInRect(rectangle, afterScreenUpdates: true)
+        let memedImage : UIImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
         mainToolbar.hidden = false
