@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C90F422F1ACB4B9900C01F82 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90F422E1ACB4B9900C01F82 /* CustomTableViewCell.swift */; };
+		C90F42331ACB79B000C01F82 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90F42321ACB79B000C01F82 /* DetailViewController.swift */; };
 		C94CE8041AC50B7D00384C9E /* ColorPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C94CE8011AC50B7D00384C9E /* ColorPickerViewController.swift */; };
 		C94CE8051AC50B7D00384C9E /* FontPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C94CE8021AC50B7D00384C9E /* FontPickerViewController.swift */; };
 		C94CE8061AC50B7D00384C9E /* colorPalette.plist in Resources */ = {isa = PBXBuildFile; fileRef = C94CE8031AC50B7D00384C9E /* colorPalette.plist */; };
@@ -41,6 +42,7 @@
 
 /* Begin PBXFileReference section */
 		C90F422E1ACB4B9900C01F82 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
+		C90F42321ACB79B000C01F82 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		C94CE8011AC50B7D00384C9E /* ColorPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPickerViewController.swift; sourceTree = "<group>"; };
 		C94CE8021AC50B7D00384C9E /* FontPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontPickerViewController.swift; sourceTree = "<group>"; };
 		C94CE8031AC50B7D00384C9E /* colorPalette.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = colorPalette.plist; sourceTree = "<group>"; };
@@ -105,6 +107,7 @@
 		C94DDDC71AC4AC820039E51F /* MemeMe */ = {
 			isa = PBXGroup;
 			children = (
+				C90F42321ACB79B000C01F82 /* DetailViewController.swift */,
 				C94DDDCA1AC4AC820039E51F /* AppDelegate.swift */,
 				C94DDDCC1AC4AC820039E51F /* ViewController.swift */,
 				C94CE8171AC536E000384C9E /* Meme.swift */,
@@ -271,6 +274,7 @@
 				C94DDDCB1AC4AC820039E51F /* AppDelegate.swift in Sources */,
 				C94CE8041AC50B7D00384C9E /* ColorPickerViewController.swift in Sources */,
 				C94CE8181AC536E000384C9E /* Meme.swift in Sources */,
+				C90F42331ACB79B000C01F82 /* DetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
