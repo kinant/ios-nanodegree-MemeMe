@@ -255,11 +255,12 @@
                     </tabBar>
                     <connections>
                         <segue destination="vEj-WW-iQ7" kind="relationship" relationship="viewControllers" id="ER4-Ip-wZR"/>
+                        <segue destination="Tsk-uN-XHK" kind="relationship" relationship="viewControllers" id="KLX-40-C33"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yeN-8e-uZK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="764" y="792"/>
+            <point key="canvasLocation" x="372" y="792"/>
         </scene>
         <!--Detail View Controller-->
         <scene sceneID="hl7-c8-BIN">
@@ -383,6 +384,73 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="miS-JF-Cyx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2318" y="792"/>
+        </scene>
+        <!--Item-->
+        <scene sceneID="w1s-Bp-Q4E">
+            <objects>
+                <navigationController id="Tsk-uN-XHK" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="EOc-G9-b5H"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="SoE-kw-QhQ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="80d-pl-D7v" kind="relationship" relationship="rootViewController" id="RDn-XH-hSY"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fOW-lk-8sa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="922" y="-80"/>
+        </scene>
+        <!--Item-->
+        <scene sceneID="sCd-d4-r2C">
+            <objects>
+                <collectionViewController id="80d-pl-D7v" customClass="CollectionViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="H9q-oD-ROW">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="gBB-dI-n29">
+                            <size key="itemSize" width="115" height="115"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="MemeCollectionViewCell" reuseIdentifier="MemeCollectionViewCell" id="cpk-nn-yZZ" customClass="CustomCollectionViewCell" customModule="MemeMe" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="115" height="115"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="t1.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="H0H-zd-Cz7">
+                                            <rect key="frame" x="8" y="8" width="100" height="100"/>
+                                        </imageView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <constraints>
+                                    <constraint firstItem="H0H-zd-Cz7" firstAttribute="top" secondItem="cpk-nn-yZZ" secondAttribute="topMargin" id="6mT-B8-ZyQ"/>
+                                    <constraint firstAttribute="trailingMargin" secondItem="H0H-zd-Cz7" secondAttribute="trailing" constant="-1" id="Pcp-UX-fcL"/>
+                                    <constraint firstItem="H0H-zd-Cz7" firstAttribute="leading" secondItem="cpk-nn-yZZ" secondAttribute="leadingMargin" id="Th9-9g-NsQ"/>
+                                    <constraint firstAttribute="bottomMargin" secondItem="H0H-zd-Cz7" secondAttribute="bottom" constant="-1" id="uYM-AM-h0v"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="memeImage" destination="H0H-zd-Cz7" id="96t-ah-66T"/>
+                                </connections>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="80d-pl-D7v" id="reD-nk-bZH"/>
+                            <outlet property="delegate" destination="80d-pl-D7v" id="TQH-kc-Jbd"/>
+                        </connections>
+                    </collectionView>
+                    <tabBarItem key="tabBarItem" title="Item" id="L0I-U0-Jxh"/>
+                    <navigationItem key="navigationItem" id="74a-rz-H1B"/>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oOb-M4-SaY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1638" y="-80"/>
         </scene>
         <!--Item-->
         <scene sceneID="JPk-qR-7re">
