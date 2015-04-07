@@ -23,6 +23,9 @@
                                     <navigationItem title="Title" id="02h-N6-CwV">
                                         <barButtonItem key="leftBarButtonItem" style="plain" systemItem="action" id="C0X-IG-zfg">
                                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <connections>
+                                                <action selector="shareMeme:" destination="vXZ-lx-hvc" id="R2a-nI-Hzx"/>
+                                            </connections>
                                         </barButtonItem>
                                     </navigationItem>
                                 </items>

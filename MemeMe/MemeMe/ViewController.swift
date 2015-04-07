@@ -317,7 +317,7 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
         return memedImage
     }
     
-    @IBAction func shareMeme(sender: UIButton) {
+    @IBAction func shareMeme(sender: UIBarButtonItem) {
         memeImg = generateMemedImage()
         let objectsToShare = [memeImg]
         let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
