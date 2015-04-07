@@ -187,7 +187,7 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
-    @IBAction func pickImage(sender: AnyObject) {
+    @IBAction func pickImage(sender: UIBarButtonItem) {
         
         let pickerController = UIImagePickerController()
         pickerController.delegate = self
@@ -195,7 +195,7 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
         self.presentViewController(pickerController, animated: true, completion: nil)
     }
     
-    @IBAction func pickAnImageFromCamera (sender: AnyObject) {
+    @IBAction func pickAnImageFromCamera (sender: UIBarButtonItem) {
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
         imagePicker.sourceType = UIImagePickerControllerSourceType.Camera

@@ -37,30 +37,18 @@
                                 </constraints>
                                 <items>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="2jQ-s5-wTD"/>
-                                    <barButtonItem title="Item" style="plain" id="Pub-sV-tLg">
-                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Bhz-49-Qkv">
-                                            <rect key="frame" x="16" y="9.5" width="25" height="25"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <state key="normal" image="album">
-                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                            </state>
-                                            <connections>
-                                                <action selector="pickImage:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Gbs-on-h4z"/>
-                                            </connections>
-                                        </button>
+                                    <barButtonItem image="album" id="6GP-A0-thN">
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <action selector="pickImage:" destination="vXZ-lx-hvc" id="ctB-CH-ebd"/>
+                                        </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="Ifl-KO-wnt"/>
-                                    <barButtonItem title="Item" style="plain" id="DqV-W1-mla">
-                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="QJk-tt-uL5">
-                                            <rect key="frame" x="220" y="10" width="32" height="25"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <state key="normal" image="camera">
-                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                            </state>
-                                            <connections>
-                                                <action selector="pickAnImageFromCamera:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="hmh-ql-h6j"/>
-                                            </connections>
-                                        </button>
+                                    <barButtonItem image="camera" id="Ino-BO-Az2">
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <action selector="pickAnImageFromCamera:" destination="vXZ-lx-hvc" id="lSu-T6-vbd"/>
+                                        </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="Fi8-JX-DVK"/>
                                     <barButtonItem style="plain" id="Ift-8h-CTo">
@@ -136,7 +124,7 @@
                     </view>
                     <connections>
                         <outlet property="bottomTextField" destination="GYt-Tg-l8i" id="Prb-CO-Uci"/>
-                        <outlet property="cameraButton" destination="DqV-W1-mla" id="ikv-Xl-weA"/>
+                        <outlet property="cameraButton" destination="Ino-BO-Az2" id="d4l-UQ-8gB"/>
                         <outlet property="colorPick" destination="7cM-7c-hha" id="VW6-wp-raN"/>
                         <outlet property="imageView" destination="oZI-VL-U0M" id="adM-5t-iYw"/>
                         <outlet property="mainToolbar" destination="V94-HD-W9Y" id="ScS-dN-6AZ"/>
