@@ -55,10 +55,10 @@
                                         </button>
                                     </barButtonItem>
                                     <barButtonItem title="Item" style="plain" id="DqV-W1-mla">
-                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="QJk-tt-uL5">
-                                            <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="QJk-tt-uL5">
+                                            <rect key="frame" x="51" y="7" width="80" height="25"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <state key="normal" title="Button">
+                                            <state key="normal" image="camera">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
                                             <connections>
@@ -68,9 +68,11 @@
                                     </barButtonItem>
                                     <barButtonItem style="plain" id="Ift-8h-CTo">
                                         <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="7cM-7c-hha">
-                                            <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                            <rect key="frame" x="141" y="7" width="30" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <state key="normal" title="Button">
+                                            <fontDescription key="fontDescription" name="ZapfDingbatsITC" family="Zapf Dingbats" pointSize="24"/>
+                                            <state key="normal" title="■">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
                                             <connections>
@@ -80,9 +82,11 @@
                                     </barButtonItem>
                                     <barButtonItem style="plain" id="AOX-fZ-6bi">
                                         <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="pdx-ls-xZU">
-                                            <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                            <rect key="frame" x="181" y="7" width="30" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <state key="normal" title="Button">
+                                            <fontDescription key="fontDescription" name="TimesNewRomanPS-BoldItalicMT" family="Times New Roman" pointSize="24"/>
+                                            <state key="normal" title="F">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
                                             <connections>
@@ -473,6 +477,7 @@
     </scenes>
     <resources>
         <image name="album" width="25" height="25"/>
+        <image name="camera" width="25" height="25"/>
         <image name="palette" width="268" height="430"/>
         <image name="t1.jpg" width="568" height="335"/>
     </resources>
