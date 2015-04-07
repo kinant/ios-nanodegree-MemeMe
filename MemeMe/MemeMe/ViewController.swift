@@ -11,6 +11,7 @@ import UIKit
 class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate,
 UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
     
+    @IBOutlet weak var navTitle: UINavigationItem!
     @IBOutlet weak var colorPick: UIButton!
     @IBOutlet weak var topTextField: UITextField!
     @IBOutlet weak var bottomTextField: UITextField!
@@ -105,6 +106,9 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
         self.imageView.addGestureRecognizer(swipeRecLeft)
         swipeRecLeft.direction = UISwipeGestureRecognizerDirection.Left
         swipeRecLeft.addTarget(self, action: "swipeLeft")
+        
+        navTitle.title = "MemeMe"
+        //navTitle.title.
     }
     
     func subscribeToKeyboardNotifications() {
@@ -320,6 +324,7 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
         
         activityVC.completionWithItemsHandler = save
     }
+    
     func frameFromImage(image: UIImage, imageView: UIImageView)->CGRect {
         var imageRatio = image.size.width / image.size.height;
         

@@ -42,11 +42,11 @@
                                     <constraint firstAttribute="height" constant="44" id="D7Q-wW-9sX"/>
                                 </constraints>
                                 <items>
-                                    <barButtonItem style="plain" id="Pub-sV-tLg">
-                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Bhz-49-Qkv">
-                                            <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                    <barButtonItem title="Item" style="plain" id="Pub-sV-tLg">
+                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Bhz-49-Qkv">
+                                            <rect key="frame" x="16" y="9.5" width="25" height="25"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <state key="normal" title="Button">
+                                            <state key="normal" image="album">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
                                             <connections>
@@ -54,7 +54,7 @@
                                             </connections>
                                         </button>
                                     </barButtonItem>
-                                    <barButtonItem style="plain" id="DqV-W1-mla">
+                                    <barButtonItem title="Item" style="plain" id="DqV-W1-mla">
                                         <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="QJk-tt-uL5">
                                             <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -137,6 +137,7 @@
                         <outlet property="colorPick" destination="7cM-7c-hha" id="VW6-wp-raN"/>
                         <outlet property="imageView" destination="oZI-VL-U0M" id="adM-5t-iYw"/>
                         <outlet property="mainToolbar" destination="V94-HD-W9Y" id="ScS-dN-6AZ"/>
+                        <outlet property="navTitle" destination="02h-N6-CwV" id="31R-ym-thd"/>
                         <outlet property="navigationBar" destination="gpa-lN-4jH" id="u74-49-FfW"/>
                         <outlet property="topTextField" destination="mch-OI-r7G" id="TCI-q2-XKN"/>
                     </connections>
@@ -336,7 +337,7 @@
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="chO-e8-bTJ">
-                                            <rect key="frame" x="194" y="34" width="398" height="20.5"/>
+                                            <rect key="frame" x="194" y="34" width="398" height="21"/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="23"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
@@ -471,6 +472,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="album" width="25" height="25"/>
         <image name="palette" width="268" height="430"/>
         <image name="t1.jpg" width="568" height="335"/>
     </resources>
