@@ -108,7 +108,8 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
         swipeRecLeft.addTarget(self, action: "swipeLeft")
         
         navTitle.title = "MemeMe"
-        //navTitle.title.
+        self.navigationBar.barTintColor = UIColor.orangeColor()
+        self.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
     }
     
     func subscribeToKeyboardNotifications() {
