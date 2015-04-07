@@ -298,6 +298,12 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
     
     func generateMemedImage() -> UIImage {
         
+        var additive = CGFloat(64.0)
+        
+        if(UIDeviceOrientationIsLandscape(UIDevice.currentDevice().orientation)){
+            additive = 44
+        }
+
         mainToolbar.hidden = true
         navigationBar.hidden = true
         
@@ -305,7 +311,7 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
         
         UIGraphicsBeginImageContext(frame.size)
         
-        var rectangle = CGRectMake(0, self.view.frame.origin.y - frame.origin.y - 64, self.view.frame.width, self.view.frame.height)
+        var rectangle = CGRectMake(self.view.frame.origin.x - frame.origin.x, self.view.frame.origin.y - frame.origin.y - additive, self.view.frame.width, self.view.frame.height)
         
         self.view.drawViewHierarchyInRect(rectangle, afterScreenUpdates: true)
         let memedImage : UIImage = UIGraphicsGetImageFromCurrentImageContext()
