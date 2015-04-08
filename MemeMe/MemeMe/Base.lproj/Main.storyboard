@@ -280,7 +280,7 @@
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kcd-UY-3gr">
                                 <rect key="frame" x="0.0" y="20" width="600" height="44"/>
                                 <items>
-                                    <navigationItem title="Title" id="Pgk-aB-TTU">
+                                    <navigationItem title="Detailed View" id="Pgk-aB-TTU">
                                         <barButtonItem key="leftBarButtonItem" title="Back" id="Gmq-UL-XKw">
                                             <connections>
                                                 <segue destination="dhS-Qh-BgO" kind="popoverPresentation" popoverAnchorBarButtonItem="Gmq-UL-XKw" id="maM-fC-s2V">
@@ -512,7 +512,7 @@
         <scene sceneID="JPk-qR-7re">
             <objects>
                 <navigationController id="vEj-WW-iQ7" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="ei1-am-UbA"/>
+                    <tabBarItem key="tabBarItem" title="Item" id="OCh-69-PeW"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="g93-f9-wkC">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>

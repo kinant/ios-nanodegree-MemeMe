@@ -17,11 +17,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
-        // var navigationBarAppearace = UINavigationBar.appearance()
-        // navigationBarAppearace.tintColor = UIColor.orangeColor()
-        // navigationBarAppearace.barTintColor = UIColor.whiteColor()
+        var navigationBarAppearance = UINavigationBar.appearance()
+        navigationBarAppearance.tintColor = UIColor.whiteColor()
+        
+        navigationBarAppearance.barTintColor = UIColor.orangeColor()
+        
+        navigationBarAppearance.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.whiteColor()]
+        
+        var tabBarAppearance = UITabBar.appearance()
+        tabBarAppearance.tintColor = UIColor.whiteColor()
+        tabBarAppearance.barTintColor = UIColor.orangeColor()
         
         UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: true)
+        
+        //var collectionViewAppearance = UICollectionView.appearance()
+        //collectionViewAppearance.backgroundColor = UIColor.orangeColor()
+        
+        var tableViewAppearance = UITableView.appearance()
+        tableViewAppearance.backgroundColor = UIColor.orangeColor()
+        
+        var tableCellAppearance = CustomTableViewCell.appearance()
+        tableCellAppearance.backgroundColor = UIColor.clearColor()
+        
+        var collectionCellAppearance = UICollectionViewCell.appearance()
+        collectionCellAppearance.backgroundColor = UIColor.clearColor()
+        
+        var pickerViewAppearance = UIPickerView.appearance()
+        pickerViewAppearance.backgroundColor = UIColor.orangeColor()
         
         return true
     }

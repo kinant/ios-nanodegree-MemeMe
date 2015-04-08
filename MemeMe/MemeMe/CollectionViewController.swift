@@ -26,6 +26,7 @@ class CollectionViewController: UICollectionViewController, UICollectionViewData
         let object = UIApplication.sharedApplication().delegate
         let appDelegate = object as AppDelegate
         memes = appDelegate.memes
+        memeCollectionView.backgroundColor = UIColor.orangeColor()
     }
     
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
