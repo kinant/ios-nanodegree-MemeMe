@@ -340,22 +340,28 @@
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="check" translatesAutoresizingMaskIntoConstraints="NO" id="6Es-9u-FkS">
+                                            <rect key="frame" x="547" y="45" width="40" height="40"/>
+                                        </imageView>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="G9X-Ra-6A6" firstAttribute="top" secondItem="chO-e8-bTJ" secondAttribute="bottom" constant="18.5" id="0lj-T6-jsC"/>
-                                        <constraint firstItem="G9X-Ra-6A6" firstAttribute="leading" secondItem="WZB-1F-MIz" secondAttribute="trailing" constant="20" id="9nw-XR-Mkl"/>
+                                        <constraint firstItem="G9X-Ra-6A6" firstAttribute="leading" secondItem="WZB-1F-MIz" secondAttribute="trailing" constant="15" id="9nw-XR-Mkl"/>
                                         <constraint firstItem="WZB-1F-MIz" firstAttribute="top" secondItem="1XI-LQ-T9w" secondAttribute="topMargin" constant="7" id="HQw-Fw-Ubm"/>
                                         <constraint firstItem="G9X-Ra-6A6" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="1XI-LQ-T9w" secondAttribute="trailingMargin" constant="15" id="I8S-cX-7HS"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="6Es-9u-FkS" secondAttribute="trailing" constant="5" id="MF8-KO-E68"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="WZB-1F-MIz" secondAttribute="bottom" constant="6.5" id="OF0-fe-NhT"/>
                                         <constraint firstItem="WZB-1F-MIz" firstAttribute="leading" secondItem="1XI-LQ-T9w" secondAttribute="leadingMargin" constant="5" id="ba4-K6-UYH"/>
                                         <constraint firstItem="chO-e8-bTJ" firstAttribute="top" secondItem="1XI-LQ-T9w" secondAttribute="topMargin" constant="26" id="dZc-MI-6Sj"/>
-                                        <constraint firstItem="chO-e8-bTJ" firstAttribute="leading" secondItem="WZB-1F-MIz" secondAttribute="trailing" constant="20" id="nRY-vD-bvU"/>
+                                        <constraint firstAttribute="centerY" secondItem="6Es-9u-FkS" secondAttribute="centerY" id="h6E-BN-Yo0"/>
+                                        <constraint firstItem="chO-e8-bTJ" firstAttribute="leading" secondItem="WZB-1F-MIz" secondAttribute="trailing" constant="15" id="nRY-vD-bvU"/>
                                         <constraint firstItem="chO-e8-bTJ" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="1XI-LQ-T9w" secondAttribute="trailingMargin" constant="15" id="uYl-pU-4XH"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" red="0.97480529546737671" green="0.5722048282623291" blue="0.15989843010902405" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <outlet property="bottomText" destination="G9X-Ra-6A6" id="8nV-au-FfU"/>
+                                    <outlet property="checkMark" destination="6Es-9u-FkS" id="1JG-I8-Q5q"/>
                                     <outlet property="memeImage" destination="WZB-1F-MIz" id="Gla-8d-796"/>
                                     <outlet property="topText" destination="chO-e8-bTJ" id="BZ5-cK-Ukz"/>
                                 </connections>
@@ -372,7 +378,16 @@
                                 <segue destination="vXZ-lx-hvc" kind="presentation" id="yHN-Dh-TSk"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="mau-ge-p4o">
+                            <connections>
+                                <action selector="editMemeTableView:" destination="1ry-KL-jC0" id="Jep-pj-1YY"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="memeTableView" destination="Gm6-yi-6Ub" id="Yie-bl-DCF"/>
+                        <outlet property="tableView" destination="Gm6-yi-6Ub" id="QHM-hN-v5X"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="miS-JF-Cyx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -466,6 +481,7 @@
     <resources>
         <image name="album" width="25" height="25"/>
         <image name="camera" width="25" height="25"/>
+        <image name="check" width="40" height="40"/>
         <image name="palette" width="268" height="430"/>
         <image name="t1.jpg" width="568" height="335"/>
     </resources>

@@ -14,6 +14,7 @@ class CustomTableViewCell : UITableViewCell {
     @IBOutlet var topText: UILabel!
     @IBOutlet var bottomText: UILabel!
     @IBOutlet var memeImage: UIImageView!
+    @IBOutlet weak var checkMark: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
