@@ -47,6 +47,7 @@ class CollectionViewController: UICollectionViewController, UICollectionViewData
         if(!isEditing){
             let detailController = self.storyboard!.instantiateViewControllerWithIdentifier("DetailViewController")! as DetailViewController
             detailController.meme = self.memes[indexPath.item]
+            detailController.index = indexPath.item
             presentViewController(detailController, animated: true, completion: nil)
         }
         else {

@@ -382,8 +382,6 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
         
         var topL = self.topLayoutGuide
         
-        // view.setTranslatesAutoresizingMaskIntoConstraints(false)
-        
         topTextFieldConstraintY = NSLayoutConstraint(item: topTextField, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: self.topLayoutGuide, attribute: NSLayoutAttribute.Bottom, multiplier: 1, constant: (frame.origin.y + 50))
         view.addConstraint(topTextFieldConstraintY)
         
