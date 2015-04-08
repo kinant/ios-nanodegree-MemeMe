@@ -42,8 +42,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         var collectionCellAppearance = UICollectionViewCell.appearance()
         collectionCellAppearance.backgroundColor = UIColor.clearColor()
         
-        var pickerViewAppearance = UIPickerView.appearance()
-        pickerViewAppearance.backgroundColor = UIColor.orangeColor()
+        // var pickerViewAppearance = UIPickerView.appearance()
+        // pickerViewAppearance.tintColor = UIColor.orangeColor()
+        // pickerViewAppearance.backgroundColor = UIColor.orangeColor()
+        // pickerViewAppearance.opaque = true
+        //
+        // var test = UIImagePickerController.appearance()
         
         return true
     }

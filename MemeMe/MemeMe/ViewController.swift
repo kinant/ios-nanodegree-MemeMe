@@ -115,8 +115,12 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
         swipeRecLeft.addTarget(self, action: "swipeLeft")
         
         navTitle.title = "MemeMe"
-        self.navigationBar.barTintColor = UIColor.orangeColor()
-        self.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+        // self.navigationBar.barTintColor = UIColor.orangeColor()
+        // self.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+        
+        cancelEdit.title = ""
+        // cancelEdit.enabled = false
+        
     }
     
     func subscribeToKeyboardNotifications() {
@@ -203,6 +207,8 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
     @IBAction func pickImage(sender: UIBarButtonItem) {
         
         let pickerController = UIImagePickerController()
+        // pickerController.navigationBar.tintColor = UIColor.orangeColor()
+        // pickerController.view.backgroundColor = UIColor.orangeColor()
         pickerController.delegate = self
         pickerController.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
         self.presentViewController(pickerController, animated: true, completion: nil)

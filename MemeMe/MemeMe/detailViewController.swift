@@ -30,6 +30,7 @@ class DetailViewController: UIViewController {
             editVC.isEditing = true
             editVC.editingIndex = self.index
             editVC.cancelEdit.title = "Cancel"
+            editVC.setTextFieldPosition()
         })
     }
 }
