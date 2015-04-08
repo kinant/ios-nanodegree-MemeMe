@@ -414,7 +414,7 @@
             </objects>
             <point key="canvasLocation" x="922" y="-80"/>
         </scene>
-        <!--Item-->
+        <!--Saved Memes-->
         <scene sceneID="sCd-d4-r2C">
             <objects>
                 <collectionViewController id="80d-pl-D7v" customClass="CollectionViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
@@ -438,16 +438,22 @@
                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="t1.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="H0H-zd-Cz7">
                                             <rect key="frame" x="8" y="8" width="100" height="100"/>
                                         </imageView>
+                                        <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="check" translatesAutoresizingMaskIntoConstraints="NO" id="shV-tx-X9e">
+                                            <rect key="frame" x="68" y="68" width="40" height="40"/>
+                                        </imageView>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <constraints>
+                                    <constraint firstItem="shV-tx-X9e" firstAttribute="bottom" secondItem="cpk-nn-yZZ" secondAttribute="bottomMargin" constant="1" id="02q-X4-poY"/>
                                     <constraint firstItem="H0H-zd-Cz7" firstAttribute="top" secondItem="cpk-nn-yZZ" secondAttribute="topMargin" id="6mT-B8-ZyQ"/>
                                     <constraint firstAttribute="trailingMargin" secondItem="H0H-zd-Cz7" secondAttribute="trailing" constant="-1" id="Pcp-UX-fcL"/>
                                     <constraint firstItem="H0H-zd-Cz7" firstAttribute="leading" secondItem="cpk-nn-yZZ" secondAttribute="leadingMargin" id="Th9-9g-NsQ"/>
                                     <constraint firstAttribute="bottomMargin" secondItem="H0H-zd-Cz7" secondAttribute="bottom" constant="-1" id="uYM-AM-h0v"/>
+                                    <constraint firstItem="shV-tx-X9e" firstAttribute="trailing" secondItem="cpk-nn-yZZ" secondAttribute="trailingMargin" constant="1" id="zip-dG-O1q"/>
                                 </constraints>
                                 <connections>
+                                    <outlet property="checkMark" destination="shV-tx-X9e" id="mX9-ms-KcW"/>
                                     <outlet property="memeImage" destination="H0H-zd-Cz7" id="96t-ah-66T"/>
                                 </connections>
                             </collectionViewCell>
@@ -458,7 +464,23 @@
                         </connections>
                     </collectionView>
                     <tabBarItem key="tabBarItem" title="Item" id="L0I-U0-Jxh"/>
-                    <navigationItem key="navigationItem" id="74a-rz-H1B"/>
+                    <navigationItem key="navigationItem" title="Saved Memes" id="74a-rz-H1B">
+                        <barButtonItem key="leftBarButtonItem" title="Back" id="EWx-xD-QFR">
+                            <connections>
+                                <action selector="leftNavBarButtonAction:" destination="80d-pl-D7v" id="3Sf-Ih-arl"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Edit" id="gGb-0W-P9Z">
+                            <connections>
+                                <action selector="editMemeTableView:" destination="80d-pl-D7v" id="y3i-fB-PDR"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="leftBarButton" destination="EWx-xD-QFR" id="K42-l8-mh3"/>
+                        <outlet property="memeCollectionView" destination="H9q-oD-ROW" id="HAg-Gj-833"/>
+                        <outlet property="rightBarButton" destination="gGb-0W-P9Z" id="on8-bI-3oS"/>
+                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oOb-M4-SaY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

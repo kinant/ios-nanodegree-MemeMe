@@ -12,6 +12,9 @@ import UIKit
 class CustomCollectionViewCell : UICollectionViewCell {
     
     @IBOutlet var memeImage: UIImageView!
+    @IBOutlet weak var checkMark: UIImageView!
+    
+    var isSelected = false
     
     override func awakeFromNib() {
         super.awakeFromNib()
