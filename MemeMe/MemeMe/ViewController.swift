@@ -49,6 +49,11 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
     
     var memes: [Meme]!
     
+    // var editingMeme:Meme!
+    var editingIndex:Int!
+    
+    var isEditing = false
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -285,12 +290,21 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
     func save(activityType:String!, completed: Bool, returnedItems: [AnyObject]!, error: NSError!) {
         //Create the meme
         if completed {
+            
             var meme = Meme(topText: topTextField.text, bottomText: bottomTextField.text, original: imageView.image!, meme: memeImg)
             
             // Add it to the memes array in the Application Delegate
             let object = UIApplication.sharedApplication().delegate
             let appDelegate = object as AppDelegate
-            appDelegate.memes.append(meme)
+            
+            if(!isEditing){
+                appDelegate.memes.append(meme)
+            }
+            else
+            {
+                appDelegate.memes[editingIndex] = meme
+                isEditing = false
+            }
             
             goToTabBarView()
         }

@@ -51,6 +51,7 @@ class TableViewController: UITableViewController, UITableViewDataSource {
         if(!isEditing){
             let detailController = self.storyboard!.instantiateViewControllerWithIdentifier("DetailViewController")! as DetailViewController
             detailController.meme = self.memes[indexPath.row]
+            detailController.index = indexPath.row
             presentViewController(detailController, animated: true, completion: nil)
         }
         else {

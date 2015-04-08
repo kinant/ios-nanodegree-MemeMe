@@ -288,7 +288,11 @@
                                                 </segue>
                                             </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" title="Edit" id="bDL-gE-0fs"/>
+                                        <barButtonItem key="rightBarButtonItem" title="Edit" id="bDL-gE-0fs">
+                                            <connections>
+                                                <action selector="editMeme:" destination="1YX-k5-890" id="RRx-nT-AWe"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
