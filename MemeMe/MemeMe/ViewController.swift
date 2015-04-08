@@ -435,10 +435,18 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
         presentViewController(detailedViewController, animated: true, completion: nil)
     }
     
+    func rotated(){
+        setTextFieldPosition()
+    }
+    
     func showAlert(){
         let alertController = UIAlertController(title: "Error", message:
             "You Must Select an Image First!", preferredStyle: UIAlertControllerStyle.Alert)
         alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default, handler: nil))
         self.presentViewController(alertController, animated: true, completion: nil)
+    }
+    
+    override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation) {
+        setTextFieldPosition()
     }
 }

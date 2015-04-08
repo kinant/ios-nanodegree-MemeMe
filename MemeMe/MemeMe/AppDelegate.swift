@@ -49,6 +49,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //
         // var test = UIImagePickerController.appearance()
         
+        // NSNotificationCenter.defaultCenter().addObserver(self, selector: "rotated", name: UIDeviceOrientationDidChangeNotification, object: nil)
+        
+        // UIDevice.currentDevice().beginGeneratingDeviceOrientationNotifications()
+        
+        // NSNotificationCenter.defaultCenter().addObserver(self, selector: "rotated", name: UIDeviceOrientationDidChangeNotification, object: nil)
+        
         return true
     }
 
