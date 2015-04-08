@@ -267,8 +267,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="IyN-fB-zN0">
+                                <rect key="frame" x="0.0" y="64" width="600" height="492"/>
+                            </imageView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xsw-vk-tK4">
+                                <rect key="frame" x="0.0" y="556" width="600" height="44"/>
+                                <items>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="k2q-ni-sQ4"/>
+                                    <barButtonItem systemItem="trash" id="brQ-0g-c3F"/>
+                                </items>
+                            </toolbar>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kcd-UY-3gr">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="20" width="600" height="44"/>
                                 <items>
                                     <navigationItem title="Title" id="Pgk-aB-TTU">
                                         <barButtonItem key="leftBarButtonItem" title="Back" id="Gmq-UL-XKw">
@@ -282,20 +292,28 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="IyN-fB-zN0">
-                                <rect key="frame" x="0.0" y="44" width="600" height="556"/>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="kcd-UY-3gr" firstAttribute="top" secondItem="qUZ-qF-rEg" secondAttribute="top" id="AQp-OW-7f8"/>
-                            <constraint firstItem="kcd-UY-3gr" firstAttribute="leading" secondItem="qUZ-qF-rEg" secondAttribute="leading" id="BsA-Kc-cud"/>
-                            <constraint firstItem="kcd-UY-3gr" firstAttribute="trailing" secondItem="IyN-fB-zN0" secondAttribute="trailing" id="h64-HL-QkZ"/>
-                            <constraint firstAttribute="trailing" secondItem="kcd-UY-3gr" secondAttribute="trailing" id="hr9-nB-H5u"/>
-                            <constraint firstItem="kcd-UY-3gr" firstAttribute="leading" secondItem="IyN-fB-zN0" secondAttribute="leading" id="iXq-Xw-4T5"/>
-                            <constraint firstItem="IyN-fB-zN0" firstAttribute="bottom" secondItem="Fi0-ZP-VtE" secondAttribute="top" id="u3Z-Y1-mxR"/>
-                            <constraint firstItem="kcd-UY-3gr" firstAttribute="bottom" secondItem="IyN-fB-zN0" secondAttribute="top" id="wzN-uU-4o5"/>
+                            <constraint firstItem="kcd-UY-3gr" firstAttribute="leading" secondItem="qUZ-qF-rEg" secondAttribute="leading" id="3uW-LB-x2r"/>
+                            <constraint firstItem="kcd-UY-3gr" firstAttribute="trailing" secondItem="qUZ-qF-rEg" secondAttribute="trailing" id="8CO-0x-VG3"/>
+                            <constraint firstItem="IyN-fB-zN0" firstAttribute="top" secondItem="kcd-UY-3gr" secondAttribute="bottom" id="8Mt-B1-xnB"/>
+                            <constraint firstItem="xsw-vk-tK4" firstAttribute="top" secondItem="IyN-fB-zN0" secondAttribute="bottom" id="8cU-1W-Q0A"/>
+                            <constraint firstItem="Fi0-ZP-VtE" firstAttribute="top" secondItem="IyN-fB-zN0" secondAttribute="bottom" constant="44" id="DTm-xa-x7f"/>
+                            <constraint firstItem="Fi0-ZP-VtE" firstAttribute="top" secondItem="xsw-vk-tK4" secondAttribute="bottom" id="EDg-Wu-g1b"/>
+                            <constraint firstItem="IyN-fB-zN0" firstAttribute="top" secondItem="Lrc-c5-TjP" secondAttribute="bottom" constant="44" id="Qd5-tB-7Xi"/>
+                            <constraint firstItem="IyN-fB-zN0" firstAttribute="leading" secondItem="qUZ-qF-rEg" secondAttribute="leading" id="R3D-o4-n14"/>
+                            <constraint firstItem="xsw-vk-tK4" firstAttribute="leading" secondItem="qUZ-qF-rEg" secondAttribute="leading" id="WTe-XE-f7j"/>
+                            <constraint firstItem="xsw-vk-tK4" firstAttribute="trailing" secondItem="qUZ-qF-rEg" secondAttribute="trailing" id="XYr-iq-rv7"/>
+                            <constraint firstItem="IyN-fB-zN0" firstAttribute="trailing" secondItem="qUZ-qF-rEg" secondAttribute="trailing" id="iJu-aQ-PYM"/>
+                            <constraint firstItem="kcd-UY-3gr" firstAttribute="top" secondItem="Lrc-c5-TjP" secondAttribute="bottom" id="xeY-3Q-qKt"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="8Mt-B1-xnB"/>
+                                <exclude reference="8cU-1W-Q0A"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <outlet property="imageView" destination="IyN-fB-zN0" id="2gy-Au-vfB"/>
