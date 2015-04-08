@@ -321,7 +321,7 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
         mainToolbar.hidden = true
         navigationBar.hidden = true
         
-        var frame = frameFromImage(imageView.image!, imageView: imageView)
+        let frame = frameFromImage(imageView.image!, imageView: imageView)!
         
         UIGraphicsBeginImageContext(frame.size)
         
@@ -338,15 +338,23 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
     }
     
     @IBAction func shareMeme(sender: UIBarButtonItem) {
-        memeImg = generateMemedImage()
-        let objectsToShare = [memeImg]
-        let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
-        self.presentViewController(activityVC, animated: true, completion: nil)
         
-        activityVC.completionWithItemsHandler = save
+        if let testForImage = imageView.image {
+            memeImg = generateMemedImage()
+            let objectsToShare = [memeImg]
+            let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+            self.presentViewController(activityVC, animated: true, completion: nil)
+        
+            activityVC.completionWithItemsHandler = save
+        }
+        else {
+            showAlert()
+        }
     }
     
-    func frameFromImage(image: UIImage, imageView: UIImageView)->CGRect {
+    func frameFromImage(image2: UIImage?, imageView: UIImageView)->CGRect? {
+        
+        if let image = image2? {
         var imageRatio = image.size.width / image.size.height;
         
         var viewRatio = imageView.frame.size.width / imageView.frame.size.height;
@@ -371,6 +379,10 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
             
             return CGRectMake(0, topLeftY, imageView.frame.size.width, height);
         }
+        }
+        else{
+            return nil
+        }
     }
     
     func setTextFieldPosition(){
@@ -378,7 +390,15 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
         view.removeConstraint(topTextFieldConstraintY)
         view.removeConstraint(bottomTextFieldConstraintY)
 
-        var frame = frameFromImage(imageView.image!, imageView: imageView)
+        var frame : CGRect!
+        
+        if let tryFrame = frameFromImage(imageView.image?, imageView: imageView) {
+            frame = tryFrame
+        }
+        else
+        {
+            frame = CGRectMake(0, 84, self.view.frame.width, self.view.frame.height - 250);
+        }
         
         var topL = self.topLayoutGuide
         
@@ -387,5 +407,12 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
         
         bottomTextFieldConstraintY = NSLayoutConstraint(item: bottomTextField, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: self.topLayoutGuide, attribute: NSLayoutAttribute.Bottom, multiplier: 1, constant: (frame.origin.y + frame.height + 30))
         view.addConstraint(bottomTextFieldConstraintY)
+    }
+    
+    func showAlert(){
+        let alertController = UIAlertController(title: "Error", message:
+            "You Must Select an Image First!", preferredStyle: UIAlertControllerStyle.Alert)
+        alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default, handler: nil))
+        self.presentViewController(alertController, animated: true, completion: nil)
     }
 }
