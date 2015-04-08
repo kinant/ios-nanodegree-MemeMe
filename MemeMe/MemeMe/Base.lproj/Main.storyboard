@@ -5,10 +5,10 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--editView-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="ViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="editView" title="editView" id="vXZ-lx-hvc" customClass="ViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
@@ -372,10 +372,11 @@
                             <outlet property="delegate" destination="1ry-KL-jC0" id="7OH-0z-2bJ"/>
                         </connections>
                     </tableView>
+                    <toolbarItems/>
                     <navigationItem key="navigationItem" title="Saved Memes" id="O4x-Ae-pF9">
                         <barButtonItem key="leftBarButtonItem" title="Back" id="53F-tI-aPJ">
                             <connections>
-                                <segue destination="vXZ-lx-hvc" kind="presentation" id="yHN-Dh-TSk"/>
+                                <action selector="leftNavBarButtonAction:" destination="1ry-KL-jC0" id="GrG-dR-KSe"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="edit" id="mau-ge-p4o">
@@ -384,8 +385,11 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="leftBarButton" destination="53F-tI-aPJ" id="WST-oC-ddx"/>
                         <outlet property="memeTableView" destination="Gm6-yi-6Ub" id="Yie-bl-DCF"/>
+                        <outlet property="rightBarButton" destination="mau-ge-p4o" id="a7L-nR-tpT"/>
                         <outlet property="tableView" destination="Gm6-yi-6Ub" id="QHM-hN-v5X"/>
                     </connections>
                 </tableViewController>

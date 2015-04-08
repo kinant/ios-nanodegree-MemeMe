@@ -17,6 +17,9 @@ class TableViewController: UITableViewController, UITableViewDataSource {
     var isEditing = false
     // MARK: Table View Data Source
     
+    @IBOutlet weak var leftBarButton: UIBarButtonItem!
+    @IBOutlet weak var rightBarButton: UIBarButtonItem!
+    
     @IBOutlet var memeTableView: UITableView!
     
     override func viewWillAppear(animated: Bool) {
@@ -24,6 +27,7 @@ class TableViewController: UITableViewController, UITableViewDataSource {
         let object = UIApplication.sharedApplication().delegate
         let appDelegate = object as AppDelegate
         memes = appDelegate.memes
+        //delete.hidden = true
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -44,7 +48,6 @@ class TableViewController: UITableViewController, UITableViewDataSource {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-    
         if(!isEditing){
             let detailController = self.storyboard!.instantiateViewControllerWithIdentifier("DetailViewController")! as DetailViewController
             detailController.meme = self.memes[indexPath.row]
@@ -53,6 +56,7 @@ class TableViewController: UITableViewController, UITableViewDataSource {
         else {
             let cell = tableView.cellForRowAtIndexPath(indexPath) as CustomTableViewCell
             cell.checkMark.hidden = false
+            cell.isSelected = true
         }
     }
     
@@ -60,21 +64,25 @@ class TableViewController: UITableViewController, UITableViewDataSource {
         if editingStyle == UITableViewCellEditingStyle.Delete {
             let object = UIApplication.sharedApplication().delegate
             let appDelegate = object as AppDelegate
-            appDelegate.memes.removeAtIndex(indexPath.row)
             memes.removeAtIndex(indexPath.row)
+            appDelegate.memes.removeAtIndex(indexPath.row)
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+            // could be simpler
         }
     }
     
     override func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath){
         let cell = tableView.cellForRowAtIndexPath(indexPath) as CustomTableViewCell
         cell.checkMark.hidden = true
+        cell.isSelected = false
     }
     
     @IBAction func editMemeTableView(sender: UIBarButtonItem) {
         isEditing = true
         memeTableView.allowsMultipleSelection = true
         setTabBarVisible(false, animated: false)
+        leftBarButton.title = "Delete"
+        rightBarButton.title = "Cancel"
     }
     
     func setTabBarVisible(visible:Bool, animated:Bool) {
@@ -103,4 +111,36 @@ class TableViewController: UITableViewController, UITableViewDataSource {
     
     func tabBarIsVisible() ->Bool {
         return self.tabBarController?.tabBar.frame.origin.y < CGRectGetMaxY(self.view.frame)
-    }}
+    }
+    
+    func deleteMemes(){
+        
+        if let indexPaths = tableView.indexPathsForSelectedRows() {
+            for(var i = indexPaths.count - 1; i >= 0; i--){
+                var indexPath = indexPaths[i] as NSIndexPath
+                let object = UIApplication.sharedApplication().delegate
+                let appDelegate = object as AppDelegate
+                appDelegate.memes.removeAtIndex(indexPath.row)
+                memes.removeAtIndex(indexPath.row)
+                memeTableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+            }
+        }
+    }
+    
+    @IBAction func leftNavBarButtonAction(sender: UIBarButtonItem) {
+        if(isEditing){
+            deleteMemes()
+            isEditing = false
+            leftBarButton.title = "Back"
+        }
+        else {
+            let editVC = storyboard?.instantiateViewControllerWithIdentifier("editView") as ViewController
+            presentViewController(editVC, animated: true, completion: nil)
+        }
+    }
+    
+    func deleteMeme(indexPath: NSIndexPath){
+        memes.removeAtIndex(indexPath.row)
+        memeTableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+    }
+}
