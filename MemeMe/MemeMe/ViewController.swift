@@ -127,6 +127,11 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
         NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
     }
     
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+            textField.text = textField.text.uppercaseString
+        return true
+    }
+    
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
@@ -155,6 +160,7 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
                 textField.text = "TOP"
             }
         }
+        textField.text = textField.text.uppercaseString
         textField.resignFirstResponder()
     }
     
