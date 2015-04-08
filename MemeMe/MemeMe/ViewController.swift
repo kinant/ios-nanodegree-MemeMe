@@ -54,6 +54,8 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
     
     var isEditing = false
     
+    @IBOutlet weak var cancelEdit: UIBarButtonItem!
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -413,6 +415,18 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
         
         bottomTextFieldConstraintY = NSLayoutConstraint(item: bottomTextField, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: self.topLayoutGuide, attribute: NSLayoutAttribute.Bottom, multiplier: 1, constant: (frame.origin.y + frame.height + 30))
         view.addConstraint(bottomTextFieldConstraintY)
+    }
+    
+    
+    @IBAction func cancelEdit(sender: UIBarButtonItem) {
+        
+        cancelEdit.title = ""
+        
+        let detailedViewController = storyboard?.instantiateViewControllerWithIdentifier("DetailViewController") as DetailViewController
+        
+        detailedViewController.meme = memes[editingIndex]
+        detailedViewController.index = editingIndex
+        presentViewController(detailedViewController, animated: true, completion: nil)
     }
     
     func showAlert(){

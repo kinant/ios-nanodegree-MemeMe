@@ -27,6 +27,11 @@
                                                 <action selector="shareMeme:" destination="vXZ-lx-hvc" id="R2a-nI-Hzx"/>
                                             </connections>
                                         </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="Cancel" id="9ob-xn-7eR">
+                                            <connections>
+                                                <action selector="cancelEdit:" destination="vXZ-lx-hvc" id="wrE-sa-jb1"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
@@ -126,6 +131,7 @@
                     <connections>
                         <outlet property="bottomTextField" destination="GYt-Tg-l8i" id="Prb-CO-Uci"/>
                         <outlet property="cameraButton" destination="Ino-BO-Az2" id="d4l-UQ-8gB"/>
+                        <outlet property="cancelEdit" destination="9ob-xn-7eR" id="IlZ-lO-21u"/>
                         <outlet property="colorPick" destination="7cM-7c-hha" id="VW6-wp-raN"/>
                         <outlet property="imageView" destination="oZI-VL-U0M" id="adM-5t-iYw"/>
                         <outlet property="mainToolbar" destination="V94-HD-W9Y" id="ScS-dN-6AZ"/>

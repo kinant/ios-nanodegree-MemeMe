@@ -29,6 +29,7 @@ class DetailViewController: UIViewController {
             editVC.imageView.image = self.meme.originalImg
             editVC.isEditing = true
             editVC.editingIndex = self.index
+            editVC.cancelEdit.title = "Cancel"
         })
     }
 }
