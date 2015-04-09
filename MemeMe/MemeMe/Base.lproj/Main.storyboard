@@ -13,7 +13,7 @@
                         <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
+                    <view key="view" autoresizesSubviews="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="kh9-bI-dsS">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
@@ -109,22 +109,28 @@
                         <constraints>
                             <constraint firstItem="gpa-lN-4jH" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="3He-Y3-xoz"/>
                             <constraint firstItem="gpa-lN-4jH" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="5Ew-7h-eWM"/>
+                            <constraint firstItem="oZI-VL-U0M" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="topMargin" constant="64" id="8Q2-oc-vN5"/>
                             <constraint firstItem="V94-HD-W9Y" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailing" id="Ago-wr-O1q"/>
                             <constraint firstItem="V94-HD-W9Y" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="Asw-Ds-3To"/>
                             <constraint firstItem="gpa-lN-4jH" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailing" id="BMK-7s-wDA"/>
                             <constraint firstItem="V94-HD-W9Y" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="2fi-mo-0CV" secondAttribute="top" id="Otn-J3-S6N"/>
                             <constraint firstItem="oZI-VL-U0M" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="ct7-oh-cUv"/>
                             <constraint firstAttribute="centerX" secondItem="gpa-lN-4jH" secondAttribute="centerX" id="e95-Ri-c1U"/>
-                            <constraint firstItem="oZI-VL-U0M" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="44" id="hrD-Zk-meo"/>
+                            <constraint firstItem="GYt-Tg-l8i" firstAttribute="leading" secondItem="oZI-VL-U0M" secondAttribute="trailing" constant="-600" id="hwo-Wh-LmW"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="oZI-VL-U0M" secondAttribute="bottom" constant="44" id="j4s-s1-pa0"/>
                             <constraint firstItem="oZI-VL-U0M" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailing" id="l0L-gx-SD0"/>
                             <constraint firstItem="oZI-VL-U0M" firstAttribute="bottom" secondItem="2fi-mo-0CV" secondAttribute="top" constant="-44" id="pEf-sh-3Ov"/>
                             <constraint firstItem="mch-OI-r7G" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="pJr-UF-95N"/>
+                            <constraint firstItem="oZI-VL-U0M" firstAttribute="top" secondItem="gpa-lN-4jH" secondAttribute="bottom" id="qhv-yE-bAw"/>
                             <constraint firstItem="GYt-Tg-l8i" firstAttribute="bottom" secondItem="2fi-mo-0CV" secondAttribute="top" constant="-50" id="tVM-DN-nnU"/>
                             <constraint firstItem="GYt-Tg-l8i" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" constant="0.5" id="zAH-6d-rUS"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="hwo-Wh-LmW"/>
                                 <exclude reference="tVM-DN-nnU"/>
+                                <exclude reference="pEf-sh-3Ov"/>
+                                <exclude reference="qhv-yE-bAw"/>
                             </mask>
                         </variation>
                     </view>

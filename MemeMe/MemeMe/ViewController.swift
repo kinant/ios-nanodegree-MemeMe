@@ -416,10 +416,10 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
         
         var topL = self.topLayoutGuide
         
-        topTextFieldConstraintY = NSLayoutConstraint(item: topTextField, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: self.topLayoutGuide, attribute: NSLayoutAttribute.Bottom, multiplier: 1, constant: (frame.origin.y + 50))
+        topTextFieldConstraintY = NSLayoutConstraint(item: topTextField, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: self.imageView, attribute: NSLayoutAttribute.Top, multiplier: 1, constant: frame.origin.y)
         view.addConstraint(topTextFieldConstraintY)
         
-        bottomTextFieldConstraintY = NSLayoutConstraint(item: bottomTextField, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: self.topLayoutGuide, attribute: NSLayoutAttribute.Bottom, multiplier: 1, constant: (frame.origin.y + frame.height + 30))
+        bottomTextFieldConstraintY = NSLayoutConstraint(item: bottomTextField, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: self.imageView, attribute: NSLayoutAttribute.Top, multiplier: 1, constant: (frame.origin.y + frame.height))
         view.addConstraint(bottomTextFieldConstraintY)
     }
     
