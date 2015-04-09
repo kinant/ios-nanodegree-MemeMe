@@ -13,8 +13,8 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
     
     @IBOutlet weak var navTitle: UINavigationItem!
     @IBOutlet weak var colorPick: UIButton!
-    @IBOutlet weak var topTextField: UITextField!
-    @IBOutlet weak var bottomTextField: UITextField!
+    var topTextField: UITextField!
+    var bottomTextField: UITextField!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
     @IBOutlet weak var mainToolbar: UIToolbar!
@@ -86,6 +86,10 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
             NSStrokeWidthAttributeName : NSNumber(float: -3.0)
         ]
         
+        var rectangle = CGRect(x: 0, y: 0, width: self.view.frame.width - 20, height: 40)
+        
+        self.topTextField = UITextField(frame: rectangle)
+        self.bottomTextField = UITextField(frame: rectangle)
         self.topTextField.defaultTextAttributes = memeTextAttributes
         self.bottomTextField.defaultTextAttributes = memeTextAttributes
         self.topTextField.text = "TOP"
@@ -97,11 +101,23 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
         self.topTextField.textAlignment = .Center
         self.bottomTextField.textAlignment = .Center
         
-        topTextFieldConstraintY = NSLayoutConstraint(item: topTextField, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: self.topLayoutGuide, attribute: NSLayoutAttribute.Top, multiplier: 1, constant: 150)
+        view.addSubview(topTextField)
+        view.addSubview(bottomTextField)
+        
+        topTextField.setTranslatesAutoresizingMaskIntoConstraints(false)
+        bottomTextField.setTranslatesAutoresizingMaskIntoConstraints(false)
+        
+        topTextFieldConstraintY = NSLayoutConstraint(item: topTextField, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: self.imageView, attribute: NSLayoutAttribute.Top, multiplier: 0, constant: 150)
         view.addConstraint(topTextFieldConstraintY)
         
-        bottomTextFieldConstraintY = NSLayoutConstraint(item: bottomTextField, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: self.bottomLayoutGuide, attribute: NSLayoutAttribute.Top, multiplier: 1, constant: -150)
+        bottomTextFieldConstraintY = NSLayoutConstraint(item: bottomTextField, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: self.view, attribute: NSLayoutAttribute.Bottom, multiplier: 1, constant: -150)
         view.addConstraint(bottomTextFieldConstraintY)
+        
+        var topTextFieldConstraintX = NSLayoutConstraint(item: topTextField, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: self.view, attribute: NSLayoutAttribute.CenterX, multiplier: 1, constant: 0)
+        view.addConstraint(topTextFieldConstraintX)
+        
+        var bottomTextFieldConstraintX = NSLayoutConstraint(item: bottomTextField, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: self.view, attribute: NSLayoutAttribute.CenterX, multiplier: 1, constant: 0)
+        view.addConstraint(bottomTextFieldConstraintX)
         
         // http://www.avocarrot.com/blog/implement-gesture-recognizers-swift/
         self.imageView.userInteractionEnabled = true
