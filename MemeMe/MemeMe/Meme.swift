@@ -14,11 +14,17 @@ struct Meme {
     var bottomText:String
     var originalImg:UIImage
     var memeImg:UIImage
+    var originalImgOriginX : CGFloat
+    var originalImgOriginY : CGFloat
+    var zoomScale: CGFloat
     
-    init(topText: String, bottomText: String, original: UIImage, meme: UIImage){
+    init(topText: String, bottomText: String, original: UIImage,originalX: CGFloat, originalY: CGFloat, zoom: CGFloat, meme: UIImage){
         self.topText = topText
         self.bottomText = bottomText
         self.originalImg = original
+        self.originalImgOriginX = originalX
+        self.originalImgOriginY = originalY
+        self.zoomScale = zoom
         self.memeImg = meme
     }
 }

@@ -208,23 +208,7 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrol
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             //imageView.contentMode = UIViewContentMode.ScaleAspectFill;
             self.imageView.image = image
-            imageView.contentMode = UIViewContentMode.Center
-            imageView.frame = CGRectMake(0, 0,image.size.width, image.size.height)
-            
-            scrollView.contentSize = image.size
-            
-            // zoom factors
-            let scrollViewFrame = scrollView.frame
-            let scaleWidth = scrollViewFrame.size.width / scrollView.contentSize.width
-            let scaleHeight = scrollViewFrame.size.height / scrollView.contentSize.height
-            
-            // get minimum scale
-            let minScale = min(scaleHeight, scaleWidth)
-            
-            scrollView.minimumZoomScale = minScale
-            scrollView.maximumZoomScale = 2
-            scrollView.zoomScale = minScale
-            
+            setScrollView()
             centerScrollViewContents()
             //setTextFieldPosition()
         }
@@ -232,11 +216,33 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrol
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
+    
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
+    func setScrollView(){
+        var image = imageView.image
+        imageView.contentMode = UIViewContentMode.Center
+        imageView.frame = CGRectMake(0, 0, image!.size.width, image!.size.height)
+        
+        scrollView.contentSize = image!.size
+        
+        // zoom factors
+        let scrollViewFrame = scrollView.frame
+        let scaleWidth = scrollViewFrame.size.width / scrollView.contentSize.width
+        let scaleHeight = scrollViewFrame.size.height / scrollView.contentSize.height
+        
+        // get minimum scale
+        let minScale = min(scaleHeight, scaleWidth)
+        
+        scrollView.minimumZoomScale = minScale
+        scrollView.maximumZoomScale = 2
+        scrollView.zoomScale = minScale
+    }
+    
     func centerScrollViewContents(){
+        
         let boundsSize = scrollView.bounds.size
         var contentsFrame = imageView.frame
         
@@ -347,7 +353,7 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrol
         //Create the meme
         if completed {
             
-            var meme = Meme(topText: topTextField.text, bottomText: bottomTextField.text, original: imageView.image!, meme: memeImg)
+            var meme = Meme(topText: topTextField.text, bottomText: bottomTextField.text, original: imageView.image!, originalX: imageView.frame.origin.x, originalY: imageView.frame.origin.y, zoom: self.scrollView.zoomScale, meme: memeImg)
             
             // Add it to the memes array in the Application Delegate
             let object = UIApplication.sharedApplication().delegate
@@ -381,7 +387,7 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrol
         
         UIGraphicsBeginImageContext(frame.size)
         
-        var rectangle = CGRectMake(self.scrollView.frame.origin.x, self.scrollView.frame.origin.y - 44 - 64 - 20, self.scrollView.frame.width, self.scrollView.frame.height + 64 + 44)
+        var rectangle = CGRectMake(self.scrollView.frame.origin.x, self.scrollView.frame.origin.y - 44 - additive - 20, self.scrollView.frame.width, self.scrollView.frame.height + 64 + 44)
         
         self.view.drawViewHierarchyInRect(rectangle, afterScreenUpdates: true)
         let memedImage : UIImage = UIGraphicsGetImageFromCurrentImageContext()
@@ -441,31 +447,6 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrol
         }
     }
     
-    func setTextFieldPosition(){
-        
-        view.removeConstraint(topTextFieldConstraintY)
-        view.removeConstraint(bottomTextFieldConstraintY)
-
-        var frame : CGRect!
-        
-        if let tryFrame = frameFromImage(imageView.image?, imageView: imageView) {
-            frame = tryFrame
-        }
-        else
-        {
-            frame = CGRectMake(0, 84, self.view.frame.width, self.view.frame.height - 250);
-        }
-        
-        var topL = self.topLayoutGuide
-        
-        topTextFieldConstraintY = NSLayoutConstraint(item: topTextField, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: self.imageView, attribute: NSLayoutAttribute.Top, multiplier: 1, constant: frame.origin.y)
-        view.addConstraint(topTextFieldConstraintY)
-        
-        bottomTextFieldConstraintY = NSLayoutConstraint(item: bottomTextField, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: self.imageView, attribute: NSLayoutAttribute.Top, multiplier: 1, constant: (frame.origin.y + frame.height))
-        view.addConstraint(bottomTextFieldConstraintY)
-    }
-    
-    
     @IBAction func cancelEdit(sender: UIBarButtonItem) {
         
         cancelEdit.title = ""
@@ -485,6 +466,6 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrol
     }
     
     override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation) {
-        setTextFieldPosition()
+        //setTextFieldPosition()
     }
 }

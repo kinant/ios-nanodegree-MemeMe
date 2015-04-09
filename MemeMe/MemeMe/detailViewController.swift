@@ -27,10 +27,19 @@ class DetailViewController: UIViewController {
             editVC.bottomTextField.text = self.meme.bottomText
             editVC.topTextField.text = self.meme.topText
             editVC.imageView.image = self.meme.originalImg
+            editVC.imageView.frame.origin.x = self.meme.originalImgOriginX
+            editVC.imageView.frame.origin.y = self.meme.originalImgOriginY
+            editVC.setScrollView()
+            editVC.scrollView.zoomScale = self.meme.zoomScale
             editVC.isEditing = true
             editVC.editingIndex = self.index
             editVC.cancelEdit.title = "Cancel"
-            editVC.setTextFieldPosition()
         })
+    }
+    
+    @IBAction func deleteMeme(){
+        let object = UIApplication.sharedApplication().delegate
+        let appDelegate = object as AppDelegate
+        appDelegate.memes.removeAtIndex(index)
     }
 }

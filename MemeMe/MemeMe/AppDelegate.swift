@@ -30,9 +30,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: true)
         
-        //var collectionViewAppearance = UICollectionView.appearance()
-        //collectionViewAppearance.backgroundColor = UIColor.orangeColor()
-        
         var tableViewAppearance = UITableView.appearance()
         tableViewAppearance.backgroundColor = UIColor.orangeColor()
         
@@ -41,19 +38,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         var collectionCellAppearance = UICollectionViewCell.appearance()
         collectionCellAppearance.backgroundColor = UIColor.clearColor()
-        
-        // var pickerViewAppearance = UIPickerView.appearance()
-        // pickerViewAppearance.tintColor = UIColor.orangeColor()
-        // pickerViewAppearance.backgroundColor = UIColor.orangeColor()
-        // pickerViewAppearance.opaque = true
-        //
-        // var test = UIImagePickerController.appearance()
-        
-        // NSNotificationCenter.defaultCenter().addObserver(self, selector: "rotated", name: UIDeviceOrientationDidChangeNotification, object: nil)
-        
-        // UIDevice.currentDevice().beginGeneratingDeviceOrientationNotifications()
-        
-        // NSNotificationCenter.defaultCenter().addObserver(self, selector: "rotated", name: UIDeviceOrientationDidChangeNotification, object: nil)
         
         return true
     }

@@ -93,16 +93,16 @@
                                 <rect key="frame" x="0.0" y="64" width="600" height="492"/>
                             </scrollView>
                         </subviews>
-                        <color key="backgroundColor" red="0.97647058823529409" green="0.36862745098039218" blue="0.082352941176470587" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="gpa-lN-4jH" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="3He-Y3-xoz"/>
                             <constraint firstItem="gpa-lN-4jH" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="5Ew-7h-eWM"/>
                             <constraint firstItem="V94-HD-W9Y" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailing" id="Ago-wr-O1q"/>
                             <constraint firstItem="V94-HD-W9Y" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="Asw-Ds-3To"/>
                             <constraint firstItem="gpa-lN-4jH" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailing" id="BMK-7s-wDA"/>
+                            <constraint firstItem="mqS-vY-OIl" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="44" id="INo-zv-hku"/>
                             <constraint firstItem="V94-HD-W9Y" firstAttribute="bottom" secondItem="2fi-mo-0CV" secondAttribute="top" id="Otn-J3-S6N"/>
                             <constraint firstAttribute="trailing" secondItem="mqS-vY-OIl" secondAttribute="trailing" id="QEq-ky-cdf"/>
-                            <constraint firstItem="mqS-vY-OIl" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" constant="64" id="aCf-IN-gMx"/>
                             <constraint firstAttribute="centerX" secondItem="gpa-lN-4jH" secondAttribute="centerX" id="e95-Ri-c1U"/>
                             <constraint firstItem="mqS-vY-OIl" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="nXh-NW-YDm"/>
                             <constraint firstAttribute="bottom" secondItem="mqS-vY-OIl" secondAttribute="bottom" constant="44" id="uRC-ek-eRp"/>
@@ -258,7 +258,11 @@
                                 <rect key="frame" x="0.0" y="556" width="600" height="44"/>
                                 <items>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="k2q-ni-sQ4"/>
-                                    <barButtonItem systemItem="trash" id="brQ-0g-c3F"/>
+                                    <barButtonItem systemItem="trash" id="brQ-0g-c3F">
+                                        <connections>
+                                            <action selector="deleteMeme" destination="1YX-k5-890" id="edr-3G-Xtx"/>
+                                        </connections>
+                                    </barButtonItem>
                                 </items>
                             </toolbar>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kcd-UY-3gr">
