@@ -86,7 +86,7 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
             NSStrokeWidthAttributeName : NSNumber(float: -3.0)
         ]
         
-        var rectangle = CGRect(x: 0, y: 0, width: self.view.frame.width - 20, height: 40)
+        var rectangle = CGRect(x: 0, y: 0, width: 200, height: 40)
         
         self.topTextField = UITextField(frame: rectangle)
         self.bottomTextField = UITextField(frame: rectangle)
@@ -100,6 +100,14 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
         self.bottomTextField.tag = 2
         self.topTextField.textAlignment = .Center
         self.bottomTextField.textAlignment = .Center
+        
+        topTextField.adjustsFontSizeToFitWidth = true
+        bottomTextField.adjustsFontSizeToFitWidth = true
+        
+        topTextField.minimumFontSize = 8
+        bottomTextField.minimumFontSize = 8
+        
+        println(topTextField.frame.width)
         
         view.addSubview(topTextField)
         view.addSubview(bottomTextField)
@@ -115,6 +123,14 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
         
         var topTextFieldConstraintX = NSLayoutConstraint(item: topTextField, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: self.view, attribute: NSLayoutAttribute.CenterX, multiplier: 1, constant: 0)
         view.addConstraint(topTextFieldConstraintX)
+        
+        // http://stackoverflow.com/questions/28252583/how-do-i-set-the-constraint-of-width-programmatically-in-swift
+        
+        var topTextFieldWidth = NSLayoutConstraint (item: topTextField, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute,multiplier: 1, constant: self.view.frame.width - 40)
+        self.view.addConstraint(topTextFieldWidth)
+        
+        var bottomTextFieldWidth = NSLayoutConstraint (item: bottomTextField, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute,multiplier: 1, constant: self.view.frame.width - 40)
+        self.view.addConstraint(bottomTextFieldWidth)
         
         var bottomTextFieldConstraintX = NSLayoutConstraint(item: bottomTextField, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: self.view, attribute: NSLayoutAttribute.CenterX, multiplier: 1, constant: 0)
         view.addConstraint(bottomTextFieldConstraintX)
