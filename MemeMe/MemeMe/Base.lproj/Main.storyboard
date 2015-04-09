@@ -89,33 +89,33 @@
                                 </items>
                                 <color key="barTintColor" red="0.97480529546737671" green="0.5722048282623291" blue="0.15989843010902405" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </toolbar>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oZI-VL-U0M">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mqS-vY-OIl">
                                 <rect key="frame" x="0.0" y="64" width="600" height="492"/>
-                            </imageView>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" red="0.97647058823529409" green="0.36862745098039218" blue="0.082352941176470587" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="gpa-lN-4jH" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="3He-Y3-xoz"/>
                             <constraint firstItem="gpa-lN-4jH" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="5Ew-7h-eWM"/>
-                            <constraint firstItem="oZI-VL-U0M" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="topMargin" constant="64" id="8Q2-oc-vN5"/>
                             <constraint firstItem="V94-HD-W9Y" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailing" id="Ago-wr-O1q"/>
                             <constraint firstItem="V94-HD-W9Y" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="Asw-Ds-3To"/>
                             <constraint firstItem="gpa-lN-4jH" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailing" id="BMK-7s-wDA"/>
                             <constraint firstItem="V94-HD-W9Y" firstAttribute="bottom" secondItem="2fi-mo-0CV" secondAttribute="top" id="Otn-J3-S6N"/>
-                            <constraint firstItem="oZI-VL-U0M" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="ct7-oh-cUv"/>
+                            <constraint firstAttribute="trailing" secondItem="mqS-vY-OIl" secondAttribute="trailing" id="QEq-ky-cdf"/>
+                            <constraint firstItem="mqS-vY-OIl" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" constant="64" id="aCf-IN-gMx"/>
                             <constraint firstAttribute="centerX" secondItem="gpa-lN-4jH" secondAttribute="centerX" id="e95-Ri-c1U"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="oZI-VL-U0M" secondAttribute="bottom" constant="44" id="j4s-s1-pa0"/>
-                            <constraint firstItem="oZI-VL-U0M" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailing" id="l0L-gx-SD0"/>
+                            <constraint firstItem="mqS-vY-OIl" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="nXh-NW-YDm"/>
+                            <constraint firstAttribute="bottom" secondItem="mqS-vY-OIl" secondAttribute="bottom" constant="44" id="uRC-ek-eRp"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="cameraButton" destination="Ino-BO-Az2" id="d4l-UQ-8gB"/>
                         <outlet property="cancelEdit" destination="9ob-xn-7eR" id="IlZ-lO-21u"/>
                         <outlet property="colorPick" destination="7cM-7c-hha" id="VW6-wp-raN"/>
-                        <outlet property="imageView" destination="oZI-VL-U0M" id="adM-5t-iYw"/>
                         <outlet property="mainToolbar" destination="V94-HD-W9Y" id="ScS-dN-6AZ"/>
                         <outlet property="navTitle" destination="02h-N6-CwV" id="31R-ym-thd"/>
                         <outlet property="navigationBar" destination="gpa-lN-4jH" id="u74-49-FfW"/>
+                        <outlet property="scrollView" destination="mqS-vY-OIl" id="8Og-cC-zj2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -335,13 +335,13 @@
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="chO-e8-bTJ">
-                                            <rect key="frame" x="128" y="34" width="479" height="27.5"/>
+                                            <rect key="frame" x="128" y="34" width="479" height="28"/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="23"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G9X-Ra-6A6">
-                                            <rect key="frame" x="128" y="79.5" width="479" height="27.5"/>
+                                            <rect key="frame" x="128" y="80" width="479" height="28"/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="23"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>

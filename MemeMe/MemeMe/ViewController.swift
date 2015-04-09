@@ -9,30 +9,21 @@
 import UIKit
 
 class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate,
-UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
+UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrollViewDelegate {
     
     @IBOutlet weak var navTitle: UINavigationItem!
     @IBOutlet weak var colorPick: UIButton!
     var topTextField: UITextField!
     var bottomTextField: UITextField!
-    @IBOutlet weak var imageView: UIImageView!
+    var imageView = UIImageView()
     @IBOutlet weak var cameraButton: UIBarButtonItem!
     @IBOutlet weak var mainToolbar: UIToolbar!
     @IBOutlet weak var navigationBar: UINavigationBar!
     
+    @IBOutlet weak var scrollView: UIScrollView!
+    
     let swipeRecRight = UISwipeGestureRecognizer()
     let swipeRecLeft = UISwipeGestureRecognizer()
-    
-    let templateImages = [
-        "t1.jpg",
-        "t2.jpg",
-        "t3.jpg",
-        "t4.jpg",
-        "t5.jpg",
-        "t6.jpg"
-    ]
-    
-    var templateIndex = 0
     
     var editingBottom = false
     
@@ -76,9 +67,16 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        originalH = imageView.frame.height
-        originalW = imageView.frame.width
+        scrollView.delegate = self
         
+        // add imageView
+        imageView.frame = CGRectMake(0, 0, scrollView.frame.size.width, scrollView.frame.size.width)
+        
+        imageView.userInteractionEnabled = true
+        
+        scrollView.addSubview(imageView)
+        
+        // add text fields
         let memeTextAttributes = [
             NSStrokeColorAttributeName : UIColor.blackColor(),
             NSForegroundColorAttributeName :UIColor.whiteColor(),
@@ -107,8 +105,6 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
         topTextField.minimumFontSize = 8
         bottomTextField.minimumFontSize = 8
         
-        println(topTextField.frame.width)
-        
         view.addSubview(topTextField)
         view.addSubview(bottomTextField)
         
@@ -135,23 +131,9 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
         var bottomTextFieldConstraintX = NSLayoutConstraint(item: bottomTextField, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: self.view, attribute: NSLayoutAttribute.CenterX, multiplier: 1, constant: 0)
         view.addConstraint(bottomTextFieldConstraintX)
         
-        // http://www.avocarrot.com/blog/implement-gesture-recognizers-swift/
-        self.imageView.userInteractionEnabled = true
-        
-        self.imageView.addGestureRecognizer(swipeRecRight)
-        swipeRecRight.direction = UISwipeGestureRecognizerDirection.Right
-        swipeRecRight.addTarget(self, action: "swipeRight")
-        
-        self.imageView.addGestureRecognizer(swipeRecLeft)
-        swipeRecLeft.direction = UISwipeGestureRecognizerDirection.Left
-        swipeRecLeft.addTarget(self, action: "swipeLeft")
-        
         navTitle.title = "MemeMe"
-        // self.navigationBar.barTintColor = UIColor.orangeColor()
-        // self.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         
         cancelEdit.title = ""
-        // cancelEdit.enabled = false
         
     }
     
@@ -226,7 +208,25 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             //imageView.contentMode = UIViewContentMode.ScaleAspectFill;
             self.imageView.image = image
-            setTextFieldPosition()
+            imageView.contentMode = UIViewContentMode.Center
+            imageView.frame = CGRectMake(0, 0,image.size.width, image.size.height)
+            
+            scrollView.contentSize = image.size
+            
+            // zoom factors
+            let scrollViewFrame = scrollView.frame
+            let scaleWidth = scrollViewFrame.size.width / scrollView.contentSize.width
+            let scaleHeight = scrollViewFrame.size.height / scrollView.contentSize.height
+            
+            // get minimum scale
+            let minScale = min(scaleHeight, scaleWidth)
+            
+            scrollView.minimumZoomScale = minScale
+            scrollView.maximumZoomScale = 2
+            scrollView.zoomScale = minScale
+            
+            centerScrollViewContents()
+            //setTextFieldPosition()
         }
         
         self.dismissViewControllerAnimated(true, completion: nil)
@@ -234,6 +234,36 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
     
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
         self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func centerScrollViewContents(){
+        let boundsSize = scrollView.bounds.size
+        var contentsFrame = imageView.frame
+        
+        if(contentsFrame.size.width < boundsSize.width){
+            contentsFrame.origin.x = (boundsSize.width - contentsFrame.size.width) / 2
+        }
+        else {
+            contentsFrame.origin.x = 0
+        }
+        
+        if(contentsFrame.size.height < boundsSize.height){
+            contentsFrame.origin.y = (boundsSize.height - contentsFrame.size.height) / 2
+        }
+        else {
+            contentsFrame.origin.y = 0
+        }
+        
+        imageView.frame = contentsFrame
+        
+    }
+    
+    func scrollViewDidZoom(scrollView: UIScrollView) {
+        centerScrollViewContents()
+    }
+    
+    func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
+        return imageView
     }
     
     @IBAction func pickImage(sender: UIBarButtonItem) {
@@ -308,26 +338,6 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
         bottomTextField.font = font
     }
     
-    func swipeLeft(){
-        ++templateIndex
-        if(templateIndex > templateImages.count){
-            templateIndex = 0
-        }
-        imageView.image = UIImage(named: "t\(templateIndex).jpg")
-        setTextFieldPosition()
-    }
-    
-    func swipeRight(){
-        --templateIndex
-        
-        if(templateIndex < 0){
-            templateIndex = templateImages.count
-        }
-        
-        imageView.image = UIImage(named: "t\(templateIndex).jpg")
-        setTextFieldPosition()
-    }
-    
     func goToTabBarView(){
         let tabBarVC = storyboard?.instantiateViewControllerWithIdentifier("tabBarView") as UITabBarController
         presentViewController(tabBarVC, animated: false, completion: nil)
@@ -367,11 +377,11 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
         mainToolbar.hidden = true
         navigationBar.hidden = true
         
-        let frame = frameFromImage(imageView.image!, imageView: imageView)!
+        let frame = scrollView.frame
         
         UIGraphicsBeginImageContext(frame.size)
         
-        var rectangle = CGRectMake(self.view.frame.origin.x - frame.origin.x, self.view.frame.origin.y - frame.origin.y - additive, self.view.frame.width, self.view.frame.height)
+        var rectangle = CGRectMake(self.scrollView.frame.origin.x, self.scrollView.frame.origin.y - 44 - 64 - 20, self.scrollView.frame.width, self.scrollView.frame.height + 64 + 44)
         
         self.view.drawViewHierarchyInRect(rectangle, afterScreenUpdates: true)
         let memedImage : UIImage = UIGraphicsGetImageFromCurrentImageContext()
@@ -465,10 +475,6 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
         detailedViewController.meme = memes[editingIndex]
         detailedViewController.index = editingIndex
         presentViewController(detailedViewController, animated: true, completion: nil)
-    }
-    
-    func rotated(){
-        setTextFieldPosition()
     }
     
     func showAlert(){
