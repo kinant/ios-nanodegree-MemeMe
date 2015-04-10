@@ -67,6 +67,8 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrol
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        fillTemplates()
+        
         scrollView.delegate = self
         
         // add imageView
@@ -463,6 +465,13 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrol
             "You Must Select an Image First!", preferredStyle: UIAlertControllerStyle.Alert)
         alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default, handler: nil))
         self.presentViewController(alertController, animated: true, completion: nil)
+    }
+    
+    
+    @IBAction func viewTemplates(sender: UIBarButtonItem) {
+        let templateVC = storyboard?.instantiateViewControllerWithIdentifier("TemplatesTableView") as TemplatesTableViewController
+        
+        self.presentViewController(templateVC, animated: true, completion: nil)
     }
     
     override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation) {
