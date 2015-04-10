@@ -16,11 +16,19 @@ class DetailViewController: UIViewController {
     
     var meme:Meme!
     var index:Int!
+    var tabBar: CustomTabBar!
     
     override func viewDidLoad() {
         self.imageView.image = meme.memeImg;
+        tabBar.setTabBarVisible(false, animated: true)
+        // self.tabBarController?.setTabBarVisible()
     }
     
+    @IBAction func goBack() {
+        navigationController?.popToRootViewControllerAnimated(true)
+        tabBar.setTabBarVisible(true, animated: true)
+    }
+
     @IBAction func editMeme(sender: UIBarButtonItem) {
         let editVC = storyboard!.instantiateViewControllerWithIdentifier("editView") as ViewController
         self.presentViewController(editVC, animated: true, completion: {
@@ -41,5 +49,6 @@ class DetailViewController: UIViewController {
         let object = UIApplication.sharedApplication().delegate
         let appDelegate = object as AppDelegate
         appDelegate.memes.removeAtIndex(index)
+        goBack()
     }
 }

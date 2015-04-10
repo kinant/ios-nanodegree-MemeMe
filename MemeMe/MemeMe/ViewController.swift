@@ -20,6 +20,8 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrol
     @IBOutlet weak var mainToolbar: UIToolbar!
     @IBOutlet weak var navigationBar: UINavigationBar!
     
+    @IBOutlet weak var leftBarButton: UIBarButtonItem!
+    
     @IBOutlet weak var scrollView: UIScrollView!
     
     let swipeRecRight = UISwipeGestureRecognizer()
@@ -29,11 +31,11 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrol
     
     var memeImg: UIImage!
     
-    var originalH:CGFloat!
-    var originalW:CGFloat!
+    // var originalH:CGFloat!
+    // var originalW:CGFloat!
     
-    var bottomTextFieldConstraintY:NSLayoutConstraint!
-    var topTextFieldConstraintY:NSLayoutConstraint!
+    // var bottomTextFieldConstraintY:NSLayoutConstraint!
+    // var topTextFieldConstraintY:NSLayoutConstraint!
     
     var ranOnce = false;
     var setConstraints: NSArray!
@@ -66,6 +68,10 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrol
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let object = UIApplication.sharedApplication().delegate
+        let appDelegate = object as AppDelegate
+        memes = appDelegate.memes
         
         fillTemplates()
         
@@ -113,10 +119,10 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrol
         topTextField.setTranslatesAutoresizingMaskIntoConstraints(false)
         bottomTextField.setTranslatesAutoresizingMaskIntoConstraints(false)
         
-        topTextFieldConstraintY = NSLayoutConstraint(item: topTextField, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: self.imageView, attribute: NSLayoutAttribute.Top, multiplier: 0, constant: 150)
+        var topTextFieldConstraintY = NSLayoutConstraint(item: topTextField, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: self.imageView, attribute: NSLayoutAttribute.Top, multiplier: 0, constant: 150)
         view.addConstraint(topTextFieldConstraintY)
         
-        bottomTextFieldConstraintY = NSLayoutConstraint(item: bottomTextField, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: self.view, attribute: NSLayoutAttribute.Bottom, multiplier: 1, constant: -150)
+        var bottomTextFieldConstraintY = NSLayoutConstraint(item: bottomTextField, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: self.view, attribute: NSLayoutAttribute.Bottom, multiplier: 1, constant: -150)
         view.addConstraint(bottomTextFieldConstraintY)
         
         var topTextFieldConstraintX = NSLayoutConstraint(item: topTextField, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: self.view, attribute: NSLayoutAttribute.CenterX, multiplier: 1, constant: 0)
@@ -137,6 +143,11 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrol
         
         cancelEdit.title = ""
         
+        println(memes.count)
+        
+        if(memes.count == 0) {
+            leftBarButton.enabled = false
+        }
     }
     
     func subscribeToKeyboardNotifications() {
@@ -212,6 +223,7 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrol
             self.imageView.image = image
             setScrollView()
             centerScrollViewContents()
+            leftBarButton.enabled = true
             //setTextFieldPosition()
         }
         
@@ -410,6 +422,7 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrol
             self.presentViewController(activityVC, animated: true, completion: nil)
         
             activityVC.completionWithItemsHandler = save
+            
         }
         else {
             showAlert()

@@ -27,6 +27,7 @@ class TableViewController: UITableViewController, UITableViewDataSource {
         let object = UIApplication.sharedApplication().delegate
         let appDelegate = object as AppDelegate
         memes = appDelegate.memes
+        
         //delete.hidden = true
     }
     
@@ -35,7 +36,7 @@ class TableViewController: UITableViewController, UITableViewDataSource {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
+        println("in table view!!!")
         let cell = tableView.dequeueReusableCellWithIdentifier("MemeTableCell") as CustomTableViewCell
         let meme = self.memes[indexPath.row]
         
@@ -49,10 +50,7 @@ class TableViewController: UITableViewController, UITableViewDataSource {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if(!isEditing){
-            let detailController = self.storyboard!.instantiateViewControllerWithIdentifier("DetailViewController")! as DetailViewController
-            detailController.meme = self.memes[indexPath.row]
-            detailController.index = indexPath.row
-            presentViewController(detailController, animated: true, completion: nil)
+            showDetailViewA(indexPath.row)
         }
         else {
             let cell = tableView.cellForRowAtIndexPath(indexPath) as CustomTableViewCell
@@ -78,12 +76,29 @@ class TableViewController: UITableViewController, UITableViewDataSource {
         cell.isSelected = false
     }
     
-    @IBAction func editMemeTableView(sender: UIBarButtonItem) {
-        isEditing = true
-        memeTableView.allowsMultipleSelection = true
-        setTabBarVisible(false, animated: false)
-        leftBarButton.title = "Delete"
-        rightBarButton.title = "Cancel"
+    @IBAction func rightNavBarButtonAction(sender: UIBarButtonItem) {
+        if(!isEditing){
+            isEditing = true
+            memeTableView.allowsMultipleSelection = true
+            setTabBarVisible(false, animated: true)
+            leftBarButton.title = "Delete"
+            rightBarButton.title = "Cancel"
+        }
+        else {
+            rightBarButton.title = "Edit"
+            leftBarButton.title = "Back"
+            setTabBarVisible(true, animated: true)
+            isEditing = false
+        }
+    }
+    
+    func showDetailViewA(index: Int){
+        println("IN HERE 1")
+        let detailController = self.storyboard!.instantiateViewControllerWithIdentifier("DetailViewController")! as DetailViewController
+        detailController.meme = memes[index]
+        detailController.index = index
+        detailController.tabBar = self.tabBarController?.tabBar as CustomTabBar
+        self.navigationController?.pushViewController(detailController, animated: true)
     }
     
     func setTabBarVisible(visible:Bool, animated:Bool) {
@@ -137,6 +152,7 @@ class TableViewController: UITableViewController, UITableViewDataSource {
         else {
             let editVC = storyboard?.instantiateViewControllerWithIdentifier("editView") as ViewController
             presentViewController(editVC, animated: true, completion: nil)
+            // self.navigationController?.popToRootViewControllerAnimated(true)
         }
     }
     

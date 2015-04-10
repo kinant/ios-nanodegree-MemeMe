@@ -43,6 +43,7 @@
 		C9BCA4CA1AD7454A00AB380F /* t19.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C9BCA4B61AD7454A00AB380F /* t19.jpg */; };
 		C9BCA4CB1AD7454A00AB380F /* t20.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C9BCA4B71AD7454A00AB380F /* t20.jpg */; };
 		C9BCA4CD1AD745F900AB380F /* TemplatesTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9BCA4CC1AD745F900AB380F /* TemplatesTableView.swift */; };
+		C9C047DA1AD876D90009AFD8 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C047D91AD876D90009AFD8 /* CustomTabBar.swift */; };
 		C9D466491ACB250500FFEF39 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9D466481ACB250500FFEF39 /* TableViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -97,6 +98,7 @@
 		C9BCA4B61AD7454A00AB380F /* t19.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = t19.jpg; sourceTree = "<group>"; };
 		C9BCA4B71AD7454A00AB380F /* t20.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = t20.jpg; sourceTree = "<group>"; };
 		C9BCA4CC1AD745F900AB380F /* TemplatesTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TemplatesTableView.swift; sourceTree = "<group>"; };
+		C9C047D91AD876D90009AFD8 /* CustomTabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
 		C9D466481ACB250500FFEF39 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -147,6 +149,7 @@
 				C94CE8171AC536E000384C9E /* Meme.swift */,
 				C9BCA4A21AD73D2000AB380F /* Helper.swift */,
 				C94DDDCE1AC4AC820039E51F /* Main.storyboard */,
+				C9C047D91AD876D90009AFD8 /* CustomTabBar.swift */,
 				C90F422E1ACB4B9900C01F82 /* CustomTableViewCell.swift */,
 				C90F42361ACBA91700C01F82 /* CustomCollectionViewCell.swift */,
 				C9D466481ACB250500FFEF39 /* TableViewController.swift */,
@@ -330,6 +333,7 @@
 				C9BCA4A31AD73D2000AB380F /* Helper.swift in Sources */,
 				C90F42351ACBA79A00C01F82 /* CollectionViewController.swift in Sources */,
 				C90F42371ACBA91700C01F82 /* CustomCollectionViewCell.swift in Sources */,
+				C9C047DA1AD876D90009AFD8 /* CustomTabBar.swift in Sources */,
 				C94DDDCD1AC4AC820039E51F /* ViewController.swift in Sources */,
 				C9D466491ACB250500FFEF39 /* TableViewController.swift in Sources */,
 				C9BCA4CD1AD745F900AB380F /* TemplatesTableView.swift in Sources */,
