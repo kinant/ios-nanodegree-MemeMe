@@ -143,8 +143,6 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrol
         
         cancelEdit.title = ""
         
-        println(memes.count)
-        
         if(memes.count == 0) {
             leftBarButton.enabled = false
         }
@@ -367,7 +365,7 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrol
         //Create the meme
         if completed {
             
-            var meme = Meme(topText: topTextField.text, bottomText: bottomTextField.text, original: imageView.image!, originalX: imageView.frame.origin.x, originalY: imageView.frame.origin.y, zoom: self.scrollView.zoomScale, meme: memeImg)
+            var meme = Meme(topText: topTextField.text, bottomText: bottomTextField.text, original: imageView.image!, originalX: imageView.frame.origin.x, originalY: imageView.frame.origin.y, zoom: self.scrollView.zoomScale, meme: memeImg, font: topTextField.font, fontColor: topTextField.textColor)
             
             // Add it to the memes array in the Application Delegate
             let object = UIApplication.sharedApplication().delegate
@@ -463,14 +461,8 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrol
     }
     
     @IBAction func cancelEdit(sender: UIBarButtonItem) {
-        
         cancelEdit.title = ""
-        
-        let detailedViewController = storyboard?.instantiateViewControllerWithIdentifier("DetailViewController") as DetailViewController
-        
-        detailedViewController.meme = memes[editingIndex]
-        detailedViewController.index = editingIndex
-        presentViewController(detailedViewController, animated: true, completion: nil)
+        goToTabBarView()
     }
     
     func showAlert(){

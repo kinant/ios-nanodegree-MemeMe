@@ -389,7 +389,7 @@
                         <outlet property="memeTableView" destination="Gm6-yi-6Ub" id="Yie-bl-DCF"/>
                         <outlet property="rightBarButton" destination="mau-ge-p4o" id="a7L-nR-tpT"/>
                         <outlet property="tableView" destination="Gm6-yi-6Ub" id="QHM-hN-v5X"/>
-                        <segue destination="1YX-k5-890" kind="show" identifier="showDetailViewA" id="18G-Z3-MJC"/>
+                        <segue destination="1YX-k5-890" kind="show" identifier="showDetailView" id="18G-Z3-MJC"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="miS-JF-Cyx" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -479,7 +479,7 @@
                         <outlet property="leftBarButton" destination="EWx-xD-QFR" id="K42-l8-mh3"/>
                         <outlet property="memeCollectionView" destination="H9q-oD-ROW" id="HAg-Gj-833"/>
                         <outlet property="rightBarButton" destination="gGb-0W-P9Z" id="on8-bI-3oS"/>
-                        <segue destination="1YX-k5-890" kind="push" identifier="showDetailViewA" id="umS-GW-SHF"/>
+                        <segue destination="1YX-k5-890" kind="show" identifier="showDetailView" id="umS-GW-SHF"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oOb-M4-SaY" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -586,6 +586,6 @@
         <image name="t1.jpg" width="568" height="335"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="umS-GW-SHF"/>
+        <segue reference="18G-Z3-MJC"/>
     </inferredMetricsTieBreakers>
 </document>

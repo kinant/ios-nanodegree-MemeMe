@@ -17,16 +17,23 @@ class DetailViewController: UIViewController {
     var meme:Meme!
     var index:Int!
     var tabBar: CustomTabBar!
+    var senderIsEditView = false
+    var navController: UINavigationBar!
     
     override func viewDidLoad() {
         self.imageView.image = meme.memeImg;
-        tabBar.setTabBarVisible(false, animated: true)
+        
+        if(!senderIsEditView){
+            tabBar.setTabBarVisible(false, animated: true)
+        }
         // self.tabBarController?.setTabBarVisible()
     }
     
     @IBAction func goBack() {
         navigationController?.popToRootViewControllerAnimated(true)
-        tabBar.setTabBarVisible(true, animated: true)
+        if(!senderIsEditView){
+            tabBar.setTabBarVisible(true, animated: true)
+        }
     }
 
     @IBAction func editMeme(sender: UIBarButtonItem) {
@@ -42,6 +49,8 @@ class DetailViewController: UIViewController {
             editVC.isEditing = true
             editVC.editingIndex = self.index
             editVC.cancelEdit.title = "Cancel"
+            editVC.setTextFont(self.meme.font)
+            editVC.setButtonColor(self.meme.fontColor)
         })
     }
     

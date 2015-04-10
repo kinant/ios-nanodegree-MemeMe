@@ -48,7 +48,6 @@ struct Template {
 
 func fillTemplates(){
     for(var i = 0; i < titles.count; i++){
-        println("processing: \(titles[i]) t\(i + 1).jpg")
         var image = UIImage(named: "t\(i + 1).jpg")
         var template = Template(image: image!, title: titles[i])
         templates.append(template)

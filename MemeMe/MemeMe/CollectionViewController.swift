@@ -46,10 +46,7 @@ class CollectionViewController: UICollectionViewController, UICollectionViewData
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath:NSIndexPath)
     {
         if(!isEditing){
-            let detailController = self.storyboard!.instantiateViewControllerWithIdentifier("DetailViewController")! as DetailViewController
-            detailController.meme = self.memes[indexPath.item]
-            detailController.index = indexPath.item
-            presentViewController(detailController, animated: true, completion: nil)
+            showDetailView(indexPath.row)
         }
         else {
             let cell = collectionView.cellForItemAtIndexPath(indexPath) as CustomCollectionViewCell
@@ -75,6 +72,14 @@ class CollectionViewController: UICollectionViewController, UICollectionViewData
                 collectionView?.deleteItemsAtIndexPaths([indexPath])
             }
         }
+    }
+    
+    func showDetailView(index: Int){
+        let detailController = self.storyboard!.instantiateViewControllerWithIdentifier("DetailViewController")! as DetailViewController
+        detailController.meme = memes[index]
+        detailController.index = index
+        detailController.tabBar = self.tabBarController?.tabBar as CustomTabBar
+        self.navigationController?.pushViewController(detailController, animated: true)
     }
     
     @IBAction func editMemeTableView(sender: UIBarButtonItem) {

@@ -36,7 +36,6 @@ class TableViewController: UITableViewController, UITableViewDataSource {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        println("in table view!!!")
         let cell = tableView.dequeueReusableCellWithIdentifier("MemeTableCell") as CustomTableViewCell
         let meme = self.memes[indexPath.row]
         
@@ -50,7 +49,7 @@ class TableViewController: UITableViewController, UITableViewDataSource {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if(!isEditing){
-            showDetailViewA(indexPath.row)
+            showDetailView(indexPath.row)
         }
         else {
             let cell = tableView.cellForRowAtIndexPath(indexPath) as CustomTableViewCell
@@ -66,7 +65,6 @@ class TableViewController: UITableViewController, UITableViewDataSource {
             memes.removeAtIndex(indexPath.row)
             appDelegate.memes.removeAtIndex(indexPath.row)
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
-            // could be simpler
         }
     }
     
@@ -92,8 +90,7 @@ class TableViewController: UITableViewController, UITableViewDataSource {
         }
     }
     
-    func showDetailViewA(index: Int){
-        println("IN HERE 1")
+    func showDetailView(index: Int){
         let detailController = self.storyboard!.instantiateViewControllerWithIdentifier("DetailViewController")! as DetailViewController
         detailController.meme = memes[index]
         detailController.index = index
