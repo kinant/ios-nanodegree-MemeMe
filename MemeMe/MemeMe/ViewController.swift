@@ -291,6 +291,7 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrol
         return imageView
     }
     
+    // http://www.ioscreator.com/tutorials/action-sheet-tutorial-ios8-swift
     @IBAction func pickImageChoices(){
         var pickAlert = UIAlertController(title: "Choose Source", message: "", preferredStyle: UIAlertControllerStyle.ActionSheet)
         
