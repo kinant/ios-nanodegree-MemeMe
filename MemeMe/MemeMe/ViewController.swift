@@ -291,7 +291,21 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrol
         return imageView
     }
     
-    @IBAction func pickImage(sender: UIBarButtonItem) {
+    @IBAction func pickImageChoices(){
+        var pickAlert = UIAlertController(title: "Choose Source", message: "", preferredStyle: UIAlertControllerStyle.ActionSheet)
+        
+        pickAlert.addAction(UIAlertAction(title: "Photo Album", style: .Default, handler: { (action: UIAlertAction!) in
+            self.pickImage()
+        }))
+        
+        pickAlert.addAction(UIAlertAction(title: "Meme Templates", style: .Default, handler: { (action: UIAlertAction!) in
+            self.viewTemplates()
+        }))
+        
+        presentViewController(pickAlert, animated: true, completion: nil)
+    }
+    
+    func pickImage() {
         
         let pickerController = UIImagePickerController()
         // pickerController.navigationBar.tintColor = UIColor.orangeColor()
@@ -500,7 +514,7 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrol
         self.presentViewController(alertController, animated: true, completion: nil)
     }
     
-    @IBAction func viewTemplates(sender: UIBarButtonItem) {
+    func viewTemplates() {
         let templatesVC = storyboard?.instantiateViewControllerWithIdentifier("TemplatesTableView") as TemplatesTableViewController
         templatesVC.delegate = self
         presentViewController(templatesVC, animated: false, completion: nil)
