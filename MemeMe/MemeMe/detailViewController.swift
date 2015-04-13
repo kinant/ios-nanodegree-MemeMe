@@ -24,34 +24,30 @@ class DetailViewController: UIViewController {
         self.imageView.image = meme.memeImg;
         
         if(!senderIsEditView){
-            tabBar.setTabBarVisible(false, animated: true)
+            // tabBar.setTabBarVisible(false, animated: true)
         }
         // self.tabBarController?.setTabBarVisible()
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        //Notice that this code works for both Scissors and Paper
+        //let controller = segue.destinationViewController as ViewController
+        //controller.setForEditing(self.meme, index: self.index)
     }
     
     @IBAction func goBack() {
         navigationController?.popToRootViewControllerAnimated(true)
         if(!senderIsEditView){
-            tabBar.setTabBarVisible(true, animated: true)
+            // tabBar.setTabBarVisible(true, animated: true)
         }
     }
 
     @IBAction func editMeme(sender: UIBarButtonItem) {
-        let editVC = storyboard!.instantiateViewControllerWithIdentifier("editView") as ViewController
-        self.presentViewController(editVC, animated: true, completion: {
-            editVC.bottomTextField.text = self.meme.bottomText
-            editVC.topTextField.text = self.meme.topText
-            editVC.imageView.image = self.meme.originalImg
-            editVC.imageView.frame.origin.x = self.meme.originalImgOriginX
-            editVC.imageView.frame.origin.y = self.meme.originalImgOriginY
-            editVC.setScrollView()
-            editVC.scrollView.zoomScale = self.meme.zoomScale
-            editVC.isEditing = true
-            editVC.editingIndex = self.index
-            editVC.cancelEdit.title = "Cancel"
-            editVC.setTextFont(self.meme.font)
-            editVC.setButtonColor(self.meme.fontColor)
-        })
+        // var storyboard = UIStoryboard (name: "Main", bundle: nil)
+        // var resultVC = storyboard.instantiateViewControllerWithIdentifier("EditView") as ViewController
+        // performSegueWithIdentifier(<#identifier: String?#>, sender: <#AnyObject?#>)
+        var editVC = storyboard?.instantiateViewControllerWithIdentifier("EditView") as ViewController
+        presentViewController(editVC, animated: true, completion: {editVC.setForEditing(self.meme, index: self.index)})
     }
     
     @IBAction func deleteMeme(){

@@ -35,11 +35,16 @@ class TemplatesTableViewController: UITableViewController, UITableViewDataSource
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let editVC = storyboard!.instantiateViewControllerWithIdentifier("editView") as ViewController
-        self.presentViewController(editVC, animated: true, completion: {
-            editVC.imageView.image = templates[indexPath.row].image
-            editVC.setScrollView()
-        })
+        //let editVC = storyboard!.instantiateViewControllerWithIdentifier("EditView") as ViewController
+          //  self.presentViewController(editVC, animated: true, completion: {
+           // editVC.imageView.image = templates[indexPath.row].image
+           // editVC.setScrollView()
+        //})
+        
+        //println(templates[indexPath.row].title)
+        delegate?.leftBarButton.enabled = true
+        delegate?.showTemplate(templates[indexPath.row].image)
+        self.dismissViewControllerAnimated(false, completion: nil)
+        // self.navigationController?.popViewControllerAnimated(true)
     }
-    
 }

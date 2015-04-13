@@ -97,7 +97,7 @@ class CollectionViewController: UICollectionViewController, UICollectionViewData
             leftBarButton.title = "Back"
         }
         else {
-            let editVC = storyboard?.instantiateViewControllerWithIdentifier("editView") as ViewController
+            let editVC = storyboard?.instantiateViewControllerWithIdentifier("EditView") as ViewController
             presentViewController(editVC, animated: true, completion: nil)
         }
     }

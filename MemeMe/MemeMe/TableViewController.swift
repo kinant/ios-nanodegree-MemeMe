@@ -28,6 +28,17 @@ class TableViewController: UITableViewController, UITableViewDataSource {
         let appDelegate = object as AppDelegate
         memes = appDelegate.memes
         
+        if(memes.count == 0){
+            println("going to edit view");
+            if let hostView = self.view {
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.goToEditView()
+                }
+            } else {
+                // handle nil hostView 
+            }
+            // goToEditView()
+        }
         //delete.hidden = true
     }
     
@@ -147,10 +158,28 @@ class TableViewController: UITableViewController, UITableViewDataSource {
             leftBarButton.title = "Back"
         }
         else {
-            let editVC = storyboard?.instantiateViewControllerWithIdentifier("editView") as ViewController
-            presentViewController(editVC, animated: true, completion: nil)
+            goToEditView()
             // self.navigationController?.popToRootViewControllerAnimated(true)
         }
+    }
+    
+    func goToEditView(){
+        let editVC = storyboard?.instantiateViewControllerWithIdentifier("EditView") as ViewController
+        // presentViewController(editVC, animated: true, completion: nil)
+        // self.navigationController?.popToRootViewControllerAnimated(false)
+        // http://stackoverflow.com/questions/19890761/warning-presenting-view-controllers-on-detached-view-controllers-is-discourage
+        // http://stackoverflow.com/questions/8563473/unbalanced-calls-to-begin-end-appearance-transitions-for-uitabbarcontroller        
+        
+        dispatch_async(dispatch_get_main_queue()) {
+            // self.navigationController?.tabBarController?.presentViewController(editVC, animated: false, completion: nil)
+            self.presentViewController(editVC, animated: false, completion: nil)
+        }
+        
+        // self.tabBarController?.presentViewController(editVC, animated: false, completion: nil)
+        // self.dismissViewControllerAnimated(true, completion: nil)
+        // performSegueWithIdentifier("editView", sender: self)
+        // self.navigationController?.pushViewController(editVC, animated: true)
+        
     }
     
     func deleteMeme(indexPath: NSIndexPath){

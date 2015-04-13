@@ -21,6 +21,7 @@
 		C94DDDD21AC4AC820039E51F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C94DDDD11AC4AC820039E51F /* Images.xcassets */; };
 		C94DDDD51AC4AC820039E51F /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = C94DDDD31AC4AC820039E51F /* LaunchScreen.xib */; };
 		C94DDDE11AC4AC820039E51F /* MemeMeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C94DDDE01AC4AC820039E51F /* MemeMeTests.swift */; };
+		C97435341ADC2E640015A5D2 /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97435331ADC2E640015A5D2 /* CustomTabBarController.swift */; };
 		C9BCA4A31AD73D2000AB380F /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9BCA4A21AD73D2000AB380F /* Helper.swift */; };
 		C9BCA4B81AD7454A00AB380F /* t1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C9BCA4A41AD7454A00AB380F /* t1.jpg */; };
 		C9BCA4B91AD7454A00AB380F /* t2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C9BCA4A51AD7454A00AB380F /* t2.jpg */; };
@@ -76,6 +77,7 @@
 		C94DDDDA1AC4AC820039E51F /* MemeMeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MemeMeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C94DDDDF1AC4AC820039E51F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C94DDDE01AC4AC820039E51F /* MemeMeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeMeTests.swift; sourceTree = "<group>"; };
+		C97435331ADC2E640015A5D2 /* CustomTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
 		C9BCA4A21AD73D2000AB380F /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		C9BCA4A41AD7454A00AB380F /* t1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = t1.jpg; sourceTree = "<group>"; };
 		C9BCA4A51AD7454A00AB380F /* t2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = t2.jpg; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 				C94CE8171AC536E000384C9E /* Meme.swift */,
 				C9BCA4A21AD73D2000AB380F /* Helper.swift */,
 				C94DDDCE1AC4AC820039E51F /* Main.storyboard */,
+				C97435331ADC2E640015A5D2 /* CustomTabBarController.swift */,
 				C9C047D91AD876D90009AFD8 /* CustomTabBar.swift */,
 				C90F422E1ACB4B9900C01F82 /* CustomTableViewCell.swift */,
 				C90F42361ACBA91700C01F82 /* CustomCollectionViewCell.swift */,
@@ -338,6 +341,7 @@
 				C9D466491ACB250500FFEF39 /* TableViewController.swift in Sources */,
 				C9BCA4CD1AD745F900AB380F /* TemplatesTableView.swift in Sources */,
 				C94CE8051AC50B7D00384C9E /* FontPickerViewController.swift in Sources */,
+				C97435341ADC2E640015A5D2 /* CustomTabBarController.swift in Sources */,
 				C90F422F1ACB4B9900C01F82 /* CustomTableViewCell.swift in Sources */,
 				C94DDDCB1AC4AC820039E51F /* AppDelegate.swift in Sources */,
 				C94CE8041AC50B7D00384C9E /* ColorPickerViewController.swift in Sources */,

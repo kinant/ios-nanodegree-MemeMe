@@ -57,7 +57,7 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrol
         memes = appDelegate.memes
         
         self.subscribeToKeyboardNotifications()
-        
+        // self.dismissViewControllerAnimated(true, completion: nil)
         cameraButton.enabled = UIImagePickerController.isSourceTypeAvailable    (UIImagePickerControllerSourceType.Camera)
     }
     
@@ -68,6 +68,12 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrol
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // var tabBar = self.navigationController?.tabBarController?.tabBar as CustomTabBar
+        // tabBar.hidden = true
+        
+        // var navBar = self.navigationController?.navigationBar
+        // navBar?.hidden = true
         
         let object = UIApplication.sharedApplication().delegate
         let appDelegate = object as AppDelegate
@@ -146,6 +152,8 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrol
         if(memes.count == 0) {
             leftBarButton.enabled = false
         }
+        
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     func subscribeToKeyboardNotifications() {
@@ -225,7 +233,7 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrol
             //setTextFieldPosition()
         }
         
-        self.dismissViewControllerAnimated(true, completion: nil)
+        // self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     
@@ -460,6 +468,27 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrol
         }
     }
     
+    func showTemplate(image: UIImage){
+        self.imageView.image = image
+        self.setScrollView()
+    }
+    
+    func setForEditing(meme2: Meme, index: Int){
+        // var meme = memes[0]
+        self.bottomTextField.text = meme2.bottomText
+        self.topTextField.text = meme2.topText
+        self.imageView.image = meme2.originalImg
+        self.imageView.frame.origin.x = meme2.originalImgOriginX
+        self.imageView.frame.origin.y = meme2.originalImgOriginY
+        self.setScrollView()
+        self.scrollView.zoomScale = meme2.zoomScale
+        self.isEditing = true
+        self.editingIndex = index
+        self.cancelEdit.title = "Cancel"
+        self.setTextFont(meme2.font)
+        self.setButtonColor(meme2.fontColor)
+    }
+    
     @IBAction func cancelEdit(sender: UIBarButtonItem) {
         cancelEdit.title = ""
         goToTabBarView()
@@ -472,11 +501,10 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrol
         self.presentViewController(alertController, animated: true, completion: nil)
     }
     
-    
     @IBAction func viewTemplates(sender: UIBarButtonItem) {
-        let templateVC = storyboard?.instantiateViewControllerWithIdentifier("TemplatesTableView") as TemplatesTableViewController
-        
-        self.presentViewController(templateVC, animated: true, completion: nil)
+        let templatesVC = storyboard?.instantiateViewControllerWithIdentifier("TemplatesTableView") as TemplatesTableViewController
+        templatesVC.delegate = self
+        presentViewController(templatesVC, animated: false, completion: nil)
     }
     
     override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation) {
