@@ -125,10 +125,10 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrol
         topTextField.setTranslatesAutoresizingMaskIntoConstraints(false)
         bottomTextField.setTranslatesAutoresizingMaskIntoConstraints(false)
         
-        var topTextFieldConstraintY = NSLayoutConstraint(item: topTextField, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: self.imageView, attribute: NSLayoutAttribute.Top, multiplier: 0, constant: 150)
+        var topTextFieldConstraintY = NSLayoutConstraint(item: topTextField, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: self.imageView, attribute: NSLayoutAttribute.Top, multiplier: 0, constant: 90)
         view.addConstraint(topTextFieldConstraintY)
         
-        var bottomTextFieldConstraintY = NSLayoutConstraint(item: bottomTextField, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: self.view, attribute: NSLayoutAttribute.Bottom, multiplier: 1, constant: -150)
+        var bottomTextFieldConstraintY = NSLayoutConstraint(item: bottomTextField, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: self.view, attribute: NSLayoutAttribute.Bottom, multiplier: 1, constant: -80)
         view.addConstraint(bottomTextFieldConstraintY)
         
         var topTextFieldConstraintX = NSLayoutConstraint(item: topTextField, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: self.view, attribute: NSLayoutAttribute.CenterX, multiplier: 1, constant: 0)
@@ -233,9 +233,8 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrol
             //setTextFieldPosition()
         }
         
-        // self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
-    
     
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
         self.dismissViewControllerAnimated(true, completion: nil)

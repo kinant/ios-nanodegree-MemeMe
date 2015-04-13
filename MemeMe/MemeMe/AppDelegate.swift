@@ -24,11 +24,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         navigationBarAppearance.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.whiteColor()]
         
+        // var viewAppearance = UIView.appearance()
+        // viewAppearance.tintColor = UIColor.whiteColor()
+        // viewAppearance.backgroundColor = UIColor.orangeColor()
+        
         var tabBarAppearance = UITabBar.appearance()
         tabBarAppearance.tintColor = UIColor.whiteColor()
         tabBarAppearance.barTintColor = UIColor.orangeColor()
         
-        UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: true)
+        UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.Default, animated: true)
         
         var tableViewAppearance = UITableView.appearance()
         tableViewAppearance.backgroundColor = UIColor.orangeColor()
