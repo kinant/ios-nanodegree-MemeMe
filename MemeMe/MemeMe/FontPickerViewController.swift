@@ -9,31 +9,25 @@
 import Foundation
 import UIKit
 
+/* This class handles the font picking table view. I copied and modified the ColorPickerController
+*/
 class FontPickerViewController : UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var delegate: ViewController? = nil
     var font = UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)
     
-    // Get ahold of some villains, for the table
-    // This is an array of Villain instances
-    let fonts1 = [
-        "Georgia Bold",
-        "Arial Bold",
-        "Cochin Bold",
-        "American Typewriter Bold"
-    ]
-    
+    // get an array of all the fonts
+    // from: http://giordanoscalzo.tumblr.com/post/95900320382/print-all-ios-fonts-in-swift
     let fonts = UIFont.familyNames()
     
     // MARK: Table View Data Source
-    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.fonts.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("FontCell") as UITableViewCell
-        // Set the name and image
+        // Set the text
         if let textValue = (self.fonts[indexPath.row] as? String) {
             cell.textLabel?.text = textValue
         }

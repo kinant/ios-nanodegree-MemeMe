@@ -9,8 +9,13 @@
 import Foundation
 import UIKit
 
-var templates = [Template]()
+/* Helper swift file for the declaration of the templates Template array
+ * and the functions used to fill it up
+*/
 
+var templates = [Template]() // the array of template objects
+
+// an array of all the template titles
 var titles = [
     "One Does Not Simply",
     "Ancient Aliens",
@@ -33,12 +38,13 @@ var titles = [
     "Overly Attached Girlfriend",
     "Liam Neeson Taken"
 ]
-
+ // array that will contain the paths to all the images
 var images = [String]()
 
+// definie the Template Struct
 struct Template {
-    var image: UIImage
-    var title: String
+    var image: UIImage // image of the template
+    var title: String // template's title
     
     init(image: UIImage, title: String){
         self.image = image
@@ -46,10 +52,19 @@ struct Template {
     }
 }
 
+// function to fill the templates array
+// this is much quicker than doing each template by itself
 func fillTemplates(){
+    // iterates over each title, creates a new template and appends it to the array
     for(var i = 0; i < titles.count; i++){
+        
+        // set the image
         var image = UIImage(named: "t\(i + 1).jpg")
+        
+        // create the template
         var template = Template(image: image!, title: titles[i])
+        
+        // append
         templates.append(template)
     }
 }

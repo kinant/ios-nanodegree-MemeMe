@@ -8,89 +8,87 @@
 
 import UIKit
 
+/* This class is used for the Edit View screen. 
+ * The edit view screen allows the user to pick an image to be memed from 3 sources:
+ * 1) Photo Album
+ * 2) Templates
+ * 3) From Camera
+ *
+ * Once the image is picked, the user can enlarge (zoom) and pan the image so that it fits the screen
+ * A scroll view is used for this. This way, the image is cropped to the user's liking.
+ * This was created following video at: https://www.youtube.com/watch?v=hz9pMw4Y2Lk
+ * 
+ * The user can also change change the font and the color of the text fields. They can then share the meme.
+ * Sharing the meme also temporarly saves it.
+ *
+ * This ViewController is also used when editing a previously saved meme.
+*/
+
 class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate,
 UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrollViewDelegate {
     
+    // Outlets
     @IBOutlet weak var navTitle: UINavigationItem!
     @IBOutlet weak var colorPick: UIButton!
-    var topTextField: UITextField!
-    var bottomTextField: UITextField!
-    var imageView = UIImageView()
     @IBOutlet weak var cameraButton: UIBarButtonItem!
     @IBOutlet weak var mainToolbar: UIToolbar!
     @IBOutlet weak var navigationBar: UINavigationBar!
-    
     @IBOutlet weak var leftBarButton: UIBarButtonItem!
-    
     @IBOutlet weak var scrollView: UIScrollView!
-    
-    let swipeRecRight = UISwipeGestureRecognizer()
-    let swipeRecLeft = UISwipeGestureRecognizer()
-    
-    var editingBottom = false
-    
-    var memeImg: UIImage!
-    
-    // var originalH:CGFloat!
-    // var originalW:CGFloat!
-    
-    // var bottomTextFieldConstraintY:NSLayoutConstraint!
-    // var topTextFieldConstraintY:NSLayoutConstraint!
-    
-    var ranOnce = false;
-    var setConstraints: NSArray!
-    
-    var memes: [Meme]!
-    
-    // var editingMeme:Meme!
-    var editingIndex:Int!
-    
-    var isEditing = false
-    
     @IBOutlet weak var cancelEdit: UIBarButtonItem!
     
+    // Variables
+    var editingBottom = false // flag for when editing the bottom text
+    var memeImg: UIImage! // the meme image
+    var memes: [Meme]! // array of memes
+    var editingIndex:Int! // index for determining what meme is being edited from detail view
+    var isEditing = false // flag to know if we are editing
+    var topTextField: UITextField! // top textfield
+    var bottomTextField: UITextField! // bottom textfield
+    var imageView = UIImageView() // the image view to display the selected image
+    
+    // =======================================================================================================================
+    // MARK: Overriden View Functions
+    // BELOW ARE ALL THE FUNCTIONS THAT ARE RELATED TO THE VIEW
+    // =======================================================================================================================
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        let object = UIApplication.sharedApplication().delegate
-        let appDelegate = object as AppDelegate
-        memes = appDelegate.memes
-        
+        // subscribe to keyboard notifications
         self.subscribeToKeyboardNotifications()
-        // self.dismissViewControllerAnimated(true, completion: nil)
-        cameraButton.enabled = UIImagePickerController.isSourceTypeAvailable    (UIImagePickerControllerSourceType.Camera)
+        
+        // disable camera button in simulator
+        cameraButton.enabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)
     }
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
+        
+        // unsubscribe from keyboard functions
         self.unsubscribeFromKeyboardNotifications()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // var tabBar = self.navigationController?.tabBarController?.tabBar as CustomTabBar
-        // tabBar.hidden = true
-        
-        // var navBar = self.navigationController?.navigationBar
-        // navBar?.hidden = true
-        
+        // get memes array from AppDelegate
         let object = UIApplication.sharedApplication().delegate
         let appDelegate = object as AppDelegate
         memes = appDelegate.memes
         
-        fillTemplates()
-        
+        // set the scrollView delegate
         scrollView.delegate = self
         
-        // add imageView
+        // add imageView to the scrollView
         imageView.frame = CGRectMake(0, 0, scrollView.frame.size.width, scrollView.frame.size.width)
         
+        // enable user interactions
         imageView.userInteractionEnabled = true
         
+        // add imageView
         scrollView.addSubview(imageView)
         
-        // add text fields
+        // set text field attributes
         let memeTextAttributes = [
             NSStrokeColorAttributeName : UIColor.blackColor(),
             NSForegroundColorAttributeName :UIColor.whiteColor(),
@@ -98,8 +96,10 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrol
             NSStrokeWidthAttributeName : NSNumber(float: -3.0)
         ]
         
+        // rectangle frame for the textfields
         var rectangle = CGRect(x: 0, y: 0, width: 200, height: 40)
         
+        // set texfield properties
         self.topTextField = UITextField(frame: rectangle)
         self.bottomTextField = UITextField(frame: rectangle)
         self.topTextField.defaultTextAttributes = memeTextAttributes
@@ -119,9 +119,12 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrol
         topTextField.minimumFontSize = 8
         bottomTextField.minimumFontSize = 8
         
+        // add texfields to subview
         view.addSubview(topTextField)
         view.addSubview(bottomTextField)
         
+        // Set the textfield constrains programatically
+        // from: http://stackoverflow.com/questions/26180822/swift-adding-constraints-programmatically
         topTextField.setTranslatesAutoresizingMaskIntoConstraints(false)
         bottomTextField.setTranslatesAutoresizingMaskIntoConstraints(false)
         
@@ -134,6 +137,7 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrol
         var topTextFieldConstraintX = NSLayoutConstraint(item: topTextField, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: self.view, attribute: NSLayoutAttribute.CenterX, multiplier: 1, constant: 0)
         view.addConstraint(topTextFieldConstraintX)
         
+        // For width constraint, used help from:
         // http://stackoverflow.com/questions/28252583/how-do-i-set-the-constraint-of-width-programmatically-in-swift
         
         var topTextFieldWidth = NSLayoutConstraint (item: topTextField, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute,multiplier: 1, constant: self.view.frame.width - 40)
@@ -145,101 +149,24 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrol
         var bottomTextFieldConstraintX = NSLayoutConstraint(item: bottomTextField, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: self.view, attribute: NSLayoutAttribute.CenterX, multiplier: 1, constant: 0)
         view.addConstraint(bottomTextFieldConstraintX)
         
+        // set nav bar titles and button states
         navTitle.title = "MemeMe"
-        
         cancelEdit.title = ""
         
+        // disable share button if no memes are present
         if(memes.count == 0) {
             leftBarButton.enabled = false
         }
-        
-        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
-    func subscribeToKeyboardNotifications() {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:"    , name: UIKeyboardWillShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:"    , name: UIKeyboardWillHideNotification, object: nil)
-    }
+    // =======================================================================================================================
+    // MARK: ScrollView Related Functions
+    // BELOW ARE ALL THE FUNCTIONS THAT ARE RELATED TO THE SCROLL VIEW
+    // MOST CODE WAS OBTAINED AND MODIFIED FROM LOOKING AT: https://www.youtube.com/watch?v=hz9pMw4Y2Lk
+    // =======================================================================================================================
     
-    func unsubscribeFromKeyboardNotifications() {
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
-    }
-    
-    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
-            textField.text = textField.text.uppercaseString
-        return true
-    }
-    
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
-    }
-    
-    func textFieldDidBeginEditing(textField: UITextField) {
-        
-        if(textField.text == "TOP"){
-            textField.text = ""
-        }
-        else if(textField.text == "BOTTOM"){
-            textField.text = ""
-        }
-        
-        if(textField.tag == 2){
-            editingBottom = true
-        }
-    }
-    
-    func textFieldDidEndEditing(textField: UITextField) {
-        if(textField.text == ""){
-            
-            textField.text = "BOTTOM"
-            
-            if(textField.tag == 1){
-                textField.text = "TOP"
-            }
-        }
-        textField.text = textField.text.uppercaseString
-        textField.resignFirstResponder()
-    }
-    
-    func keyboardWillShow(notification: NSNotification) {
-        if(editingBottom){
-            self.view.frame.origin.y -= getKeyboardHeight(notification)
-        }
-    }
-    
-    func keyboardWillHide(notification: NSNotification) {
-        if(editingBottom){
-            self.view.frame.origin.y += getKeyboardHeight(notification)
-        }
-        editingBottom = false
-    }
-    
-    func getKeyboardHeight(notification: NSNotification) -> CGFloat {
-        let userInfo = notification.userInfo
-        let keyboardSize = userInfo![UIKeyboardFrameEndUserInfoKey] as NSValue // of CGRect
-        return keyboardSize.CGRectValue().height
-    }
-    
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]){
-        
-        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            //imageView.contentMode = UIViewContentMode.ScaleAspectFill;
-            self.imageView.image = image
-            setScrollView()
-            centerScrollViewContents()
-            leftBarButton.enabled = true
-            //setTextFieldPosition()
-        }
-        
-        self.dismissViewControllerAnimated(true, completion: nil)
-    }
-    
-    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
-        self.dismissViewControllerAnimated(true, completion: nil)
-    }
-    
+    // set the scrollView
+    // this function sets the various properties of the scrollview (for zooming and content size) based on the image that the imageView is displaying.
     func setScrollView(){
         var image = imageView.image
         imageView.contentMode = UIViewContentMode.Center
@@ -260,8 +187,10 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrol
         scrollView.zoomScale = minScale
     }
     
+    // center the scroll view contents
     func centerScrollViewContents(){
         
+        // get the bounds and the frame of the contents
         let boundsSize = scrollView.bounds.size
         var contentsFrame = imageView.frame
         
@@ -291,31 +220,322 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrol
         return imageView
     }
     
-    // http://www.ioscreator.com/tutorials/action-sheet-tutorial-ios8-swift
-    @IBAction func pickImageChoices(){
-        var pickAlert = UIAlertController(title: "Choose Source", message: "", preferredStyle: UIAlertControllerStyle.ActionSheet)
-        
-        pickAlert.addAction(UIAlertAction(title: "Photo Album", style: .Default, handler: { (action: UIAlertAction!) in
-            self.pickImage()
-        }))
-        
-        pickAlert.addAction(UIAlertAction(title: "Meme Templates", style: .Default, handler: { (action: UIAlertAction!) in
-            self.viewTemplates()
-        }))
-        
-        presentViewController(pickAlert, animated: true, completion: nil)
+    // =======================================================================================================================
+    // MARK: Keyboard Related Functions
+    // BELOW ARE ALL THE FUNCTIONS THAT ARE RELATED TO THE KEYBOARD
+    // =======================================================================================================================
+    
+    // subscribe to keyboard notifications
+    func subscribeToKeyboardNotifications() {
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:"    , name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:"    , name: UIKeyboardWillHideNotification, object: nil)
     }
     
-    func pickImage() {
+    // unsubscribe to keyboard notifications
+    func unsubscribeFromKeyboardNotifications() {
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
+    }
+    
+    // function to move the view and its contents up when the keyboard is shown
+    func keyboardWillShow(notification: NSNotification) {
         
+        // check that we are only editing the bottom textfield
+        if(editingBottom){
+            
+            // move view up
+            self.view.frame.origin.y -= getKeyboardHeight(notification)
+        }
+    }
+    
+    // function that moves the view and its contents back down when the keyboard is hidden
+    func keyboardWillHide(notification: NSNotification) {
+        
+        // check that we are only editing the bottom textfield
+        if(editingBottom){
+            
+            // move view down
+            self.view.frame.origin.y += getKeyboardHeight(notification)
+        }
+        
+        // reset flag
+        editingBottom = false
+    }
+    
+    // function that gets the height of the keyboard
+    func getKeyboardHeight(notification: NSNotification) -> CGFloat {
+        let userInfo = notification.userInfo
+        let keyboardSize = userInfo![UIKeyboardFrameEndUserInfoKey] as NSValue // of CGRect
+        return keyboardSize.CGRectValue().height
+    }
+    
+    // =======================================================================================================================
+    // MARK: Textfield Protocol Functions
+    // BELOW ARE ALL THE FUNCTIONS THAT ARE RELATED TO THE TEXTFIELDS
+    // =======================================================================================================================
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+            textField.text = textField.text.uppercaseString
+        return true
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    func textFieldDidBeginEditing(textField: UITextField) {
+        
+        // If the text is either TOP of BOTTOM, remove when editing
+        if(textField.text == "TOP"){
+            textField.text = ""
+        }
+        else if(textField.text == "BOTTOM"){
+            textField.text = ""
+        }
+        
+        // set editing bottom flag to true when editing bottom textfield
+        if(textField.tag == 2){
+            editingBottom = true
+        }
+    }
+    
+    func textFieldDidEndEditing(textField: UITextField) {
+        
+        // If text fields are left empty after editing, replace contents with default text
+        if(textField.text == ""){
+            
+            textField.text = "BOTTOM"
+            
+            if(textField.tag == 1){
+                textField.text = "TOP"
+            }
+        }
+        
+        // make sure text is uppercase
+        textField.text = textField.text.uppercaseString
+        
+        textField.resignFirstResponder()
+    }
+    
+    // =======================================================================================================================
+    // MARK: Image Picking Functions
+    // BELOW ARE ALL THE FUNCTIONS THAT ARE RELATED TO PICKING IMAGES
+    // =======================================================================================================================
+    
+    // function for the imagePicker controller
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]){
+        
+        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            self.imageView.image = image
+            setScrollView()
+            centerScrollViewContents()
+            leftBarButton.enabled = true
+        }
+        
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    // pick image from photo library
+    func pickImage() {
         let pickerController = UIImagePickerController()
-        // pickerController.navigationBar.tintColor = UIColor.orangeColor()
-        // pickerController.view.backgroundColor = UIColor.orangeColor()
         pickerController.delegate = self
         pickerController.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
         self.presentViewController(pickerController, animated: true, completion: nil)
     }
+
+    // =======================================================================================================================
+    // MARK: Generating and Saving Memes Functions
+    // BELOW ARE ALL THE FUNCTIONS THAT ARE RELATED TO GENERATING AND SAVING MEMES
+    // =======================================================================================================================
+    func save(activityType:String!, completed: Bool, returnedItems: [AnyObject]!, error: NSError!) {
+        //Create the meme
+        if completed {
+            
+            // create the meme
+            var meme = Meme(topText: topTextField.text, bottomText: bottomTextField.text, original: imageView.image!, originalX: imageView.frame.origin.x, originalY: imageView.frame.origin.y, zoom: self.scrollView.zoomScale, meme: memeImg, font: topTextField.font, fontColor: topTextField.textColor)
+            
+            // Add it to the memes array in the Application Delegate
+            let object = UIApplication.sharedApplication().delegate
+            let appDelegate = object as AppDelegate
+            
+            // check if this is not a meme that was previously saved and we are editing
+            if(!isEditing){
+                // if not editing, append
+                appDelegate.memes.append(meme)
+            }
+            else
+            {
+                // if editing, replace the previous meme with this new edited one
+                appDelegate.memes[editingIndex] = meme
+                
+                // set the editing flag to false
+                isEditing = false
+            }
+            
+            // go to the tab bar view
+            goToTabBarView()
+        }
+    }
     
+    // generate the memed image
+    func generateMemedImage() -> UIImage {
+        
+        // this additive variable is based on the screen orientation
+        var additive = CGFloat(64.0)
+        
+        if(UIDeviceOrientationIsLandscape(UIDevice.currentDevice().orientation)){
+            additive = 44
+        }
+        
+        // hide nav bar and tool bar
+        mainToolbar.hidden = true
+        navigationBar.hidden = true
+        
+        // get the scroll views frame
+        let frame = scrollView.frame
+        
+        // generate the memed image to be saved
+        UIGraphicsBeginImageContext(frame.size)
+        
+        // this rectangle will only cover the parts of the screen that we want as an image
+        var rectangle = CGRectMake(self.scrollView.frame.origin.x, self.scrollView.frame.origin.y - 44 - additive - 20, self.scrollView.frame.width, self.scrollView.frame.height + 64 + 44)
+        
+        self.view.drawViewHierarchyInRect(rectangle, afterScreenUpdates: true)
+        let memedImage : UIImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        
+        // show the toolbar and nav bar
+        mainToolbar.hidden = false
+        navigationBar.hidden = false
+        
+        return memedImage
+    }
+    
+    // MARK: Functions When Editing a Saved Meme
+    
+    // function to set the screen with the meme to be edited
+    func setForEditing(meme: Meme, index: Int){
+        
+        // set the image and textfields
+        self.bottomTextField.text = meme.bottomText
+        self.topTextField.text = meme.topText
+        self.imageView.image = meme.originalImg
+        self.setTextFont(meme.font)
+        self.setTextColor(meme.fontColor)
+        
+        // set the image to display correctly in the scroll view
+        self.imageView.frame.origin.x = meme.originalImgOriginX
+        self.imageView.frame.origin.y = meme.originalImgOriginY
+        self.setScrollView()
+        self.scrollView.zoomScale = meme.zoomScale
+        
+        // set the editing flag and the index for the meme being edited
+        self.isEditing = true
+        self.editingIndex = index
+        
+        // set the button to display cancel, if the user wants to cancel editing
+        self.cancelEdit.title = "Cancel"
+
+    }
+    
+    // =======================================================================================================================
+    // MARK: Other Functions
+    // BELOW ARE ALL THE OTHER FUNCTIONS USED
+    // =======================================================================================================================
+    
+    // Override the iPhone behavior that presents a popover as fullscreen
+    // Used with the font and color pickers
+    // From: https://github.com/EthanStrider/iOS-Projects/tree/master/ColorPickerExample
+    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController!) -> UIModalPresentationStyle {
+        // Return no adaptive presentation style, use default presentation behaviour
+        return .None
+    }
+    
+    // set the color of the textfields and the color picker button
+    func setTextColor (color: UIColor) {
+        
+        // set texfield colors
+        self.topTextField.textColor = color
+        self.bottomTextField.textColor  = color
+        
+        // set the color of the colorpicker button
+        colorPick.setTitleColor(color, forState: UIControlState.Normal)
+    }
+    
+    // set the textfield fonts
+    func setTextFont(font: UIFont){
+        topTextField.font = font
+        bottomTextField.font = font
+    }
+    
+    // go to the tab view
+    func goToTabBarView(){
+        let tabBarVC = storyboard?.instantiateViewControllerWithIdentifier("tabBarView") as UITabBarController
+        presentViewController(tabBarVC, animated: false, completion: nil)
+    }
+    
+    // show a template image in the image view
+    func showTemplate(image: UIImage){
+        self.imageView.image = image
+        self.setScrollView()
+    }
+    
+    // view the templates picker table view
+    func viewTemplates() {
+        let templatesVC = storyboard?.instantiateViewControllerWithIdentifier("TemplatesTableView") as TemplatesTableViewController
+        templatesVC.delegate = self
+        presentViewController(templatesVC, animated: false, completion: nil)
+    }
+    
+    // show an alert
+    func showAlert(){
+        let alertController = UIAlertController(title: "Error", message:
+            "You Must Select an Image First!", preferredStyle: UIAlertControllerStyle.Alert)
+        alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default, handler: nil))
+        self.presentViewController(alertController, animated: true, completion: nil)
+    }
+    
+    // =======================================================================================================================
+    // MARK: @IBAction Functions
+    // BELOW ARE ALL THE IBACTION FUNCTIONS
+    // =======================================================================================================================
+    
+    // handle the cancel edit button when canceling the editing of a saved meme
+    @IBAction func cancelEdit(sender: UIBarButtonItem) {
+        // set title and go back to the tab bar view
+        cancelEdit.title = ""
+        goToTabBarView()
+    }
+    
+    // show the pick image choice when the album button is pressed
+    // http://www.ioscreator.com/tutorials/action-sheet-tutorial-ios8-swift
+    @IBAction func pickImageChoices(){
+        
+        // create a new action sheet alert
+        var pickAlert = UIAlertController(title: "Choose Source", message: "", preferredStyle: UIAlertControllerStyle.ActionSheet)
+        
+        // photo album choice
+        pickAlert.addAction(UIAlertAction(title: "Photo Album", style: .Default, handler: { (action: UIAlertAction!) in
+            // show the photo album
+            self.pickImage()
+        }))
+        
+        // template image choice
+        pickAlert.addAction(UIAlertAction(title: "Meme Templates", style: .Default, handler: { (action: UIAlertAction!) in
+            // show templates table view
+            self.viewTemplates()
+        }))
+        
+        // present the action sheet
+        presentViewController(pickAlert, animated: true, completion: nil)
+    }
+    
+    // pick image from camera when camera button is pressed
     @IBAction func pickAnImageFromCamera (sender: UIBarButtonItem) {
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
@@ -323,6 +543,8 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrol
         self.presentViewController(imagePicker, animated: true, completion: nil)
     }
     
+    // handle the color picker button
+    // from: https://github.com/EthanStrider/iOS-Projects/tree/master/ColorPickerExample
     @IBAction func colorPickerButton(sender: UIButton) {
         
         let popoverVC = storyboard?.instantiateViewControllerWithIdentifier("colorPickerPopover") as ColorPickerViewController
@@ -338,11 +560,13 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrol
             popoverController.delegate = self
             popoverVC.delegate = self
         }
-
+        
         presentViewController(popoverVC, animated: false, completion: nil)
         
     }
     
+    // handle font picker button
+    // used modified code from: https://github.com/EthanStrider/iOS-Projects/tree/master/ColorPickerExample
     @IBAction func fontPickerButton(sender: UIButton) {
         
         let popoverVC = storyboard?.instantiateViewControllerWithIdentifier("fontPickerPopover") as FontPickerViewController
@@ -361,167 +585,29 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrol
         presentViewController(popoverVC, animated: false, completion: nil)
     }
     
-    // Override the iPhone behavior that presents a popover as fullscreen
-    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController!) -> UIModalPresentationStyle {
-        // Return no adaptive presentation style, use default presentation behaviour
-        return .None
-    }
-    
-    func setButtonColor (color: UIColor) {
-        self.topTextField.textColor = color
-        self.bottomTextField.textColor  = color
-        colorPick.setTitleColor(color, forState: UIControlState.Normal)
-    }
-    
-    func setTextFont(font: UIFont){
-        topTextField.font = font
-        bottomTextField.font = font
-    }
-    
-    func goToTabBarView(){
-        let tabBarVC = storyboard?.instantiateViewControllerWithIdentifier("tabBarView") as UITabBarController
-        presentViewController(tabBarVC, animated: false, completion: nil)
-    }
-    
-    func save(activityType:String!, completed: Bool, returnedItems: [AnyObject]!, error: NSError!) {
-        //Create the meme
-        if completed {
-            
-            var meme = Meme(topText: topTextField.text, bottomText: bottomTextField.text, original: imageView.image!, originalX: imageView.frame.origin.x, originalY: imageView.frame.origin.y, zoom: self.scrollView.zoomScale, meme: memeImg, font: topTextField.font, fontColor: topTextField.textColor)
-            
-            // Add it to the memes array in the Application Delegate
-            let object = UIApplication.sharedApplication().delegate
-            let appDelegate = object as AppDelegate
-            
-            if(!isEditing){
-                appDelegate.memes.append(meme)
-            }
-            else
-            {
-                appDelegate.memes[editingIndex] = meme
-                isEditing = false
-            }
-            
-            goToTabBarView()
-        }
-    }
-    
-    func generateMemedImage() -> UIImage {
-        
-        var additive = CGFloat(64.0)
-        
-        if(UIDeviceOrientationIsLandscape(UIDevice.currentDevice().orientation)){
-            additive = 44
-        }
-
-        mainToolbar.hidden = true
-        navigationBar.hidden = true
-        
-        let frame = scrollView.frame
-        
-        UIGraphicsBeginImageContext(frame.size)
-        
-        var rectangle = CGRectMake(self.scrollView.frame.origin.x, self.scrollView.frame.origin.y - 44 - additive - 20, self.scrollView.frame.width, self.scrollView.frame.height + 64 + 44)
-        
-        self.view.drawViewHierarchyInRect(rectangle, afterScreenUpdates: true)
-        let memedImage : UIImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
-        mainToolbar.hidden = false
-        navigationBar.hidden = false
-        
-        return memedImage
-    }
-    
+    // handle the share memes button
     @IBAction func shareMeme(sender: UIBarButtonItem) {
         
+        // check if there is an image present
         if let testForImage = imageView.image {
+            
+            // share the meme image
+            
+            // 1) first we generate the image
             memeImg = generateMemedImage()
+            
+            // 2) next we present the activity view controller
             let objectsToShare = [memeImg]
             let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
             self.presentViewController(activityVC, animated: true, completion: nil)
-        
+            
+            // 3) and last, we save the image
             activityVC.completionWithItemsHandler = save
             
         }
         else {
+            // no image present, show alert
             showAlert()
         }
-    }
-    
-    func frameFromImage(image2: UIImage?, imageView: UIImageView)->CGRect? {
-        
-        if let image = image2? {
-        var imageRatio = image.size.width / image.size.height;
-        
-        var viewRatio = imageView.frame.size.width / imageView.frame.size.height;
-        
-        if(imageRatio < viewRatio)
-        {
-            var scale = imageView.frame.size.height / image.size.height;
-            
-            var width = scale * image.size.width;
-            
-            var topLeftX = (imageView.frame.size.width - width) * 0.5;
-            
-            return CGRectMake(topLeftX, 0, width, imageView.frame.size.height);
-        }
-        else
-        {
-            var scale = imageView.frame.size.width / image.size.width;
-            
-            var height = scale * image.size.height;
-            
-            var topLeftY = (imageView.frame.size.height - height) * 0.5;
-            
-            return CGRectMake(0, topLeftY, imageView.frame.size.width, height);
-        }
-        }
-        else{
-            return nil
-        }
-    }
-    
-    func showTemplate(image: UIImage){
-        self.imageView.image = image
-        self.setScrollView()
-    }
-    
-    func setForEditing(meme2: Meme, index: Int){
-        // var meme = memes[0]
-        self.bottomTextField.text = meme2.bottomText
-        self.topTextField.text = meme2.topText
-        self.imageView.image = meme2.originalImg
-        self.imageView.frame.origin.x = meme2.originalImgOriginX
-        self.imageView.frame.origin.y = meme2.originalImgOriginY
-        self.setScrollView()
-        self.scrollView.zoomScale = meme2.zoomScale
-        self.isEditing = true
-        self.editingIndex = index
-        self.cancelEdit.title = "Cancel"
-        self.setTextFont(meme2.font)
-        self.setButtonColor(meme2.fontColor)
-    }
-    
-    @IBAction func cancelEdit(sender: UIBarButtonItem) {
-        cancelEdit.title = ""
-        goToTabBarView()
-    }
-    
-    func showAlert(){
-        let alertController = UIAlertController(title: "Error", message:
-            "You Must Select an Image First!", preferredStyle: UIAlertControllerStyle.Alert)
-        alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default, handler: nil))
-        self.presentViewController(alertController, animated: true, completion: nil)
-    }
-    
-    func viewTemplates() {
-        let templatesVC = storyboard?.instantiateViewControllerWithIdentifier("TemplatesTableView") as TemplatesTableViewController
-        templatesVC.delegate = self
-        presentViewController(templatesVC, animated: false, completion: nil)
-    }
-    
-    override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation) {
-        //setTextFieldPosition()
     }
 }

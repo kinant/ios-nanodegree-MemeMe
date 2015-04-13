@@ -9,51 +9,54 @@
 import Foundation
 import UIKit
 
+/* This class is used for the Detailed View.
+*/
+
 class DetailViewController: UIViewController {
     
-    @IBOutlet weak var imageView: UIImageView!
-    var delegate: ViewController? = nil
+    // Outlets
+    @IBOutlet weak var imageView: UIImageView! // to display the Meme
     
-    var meme:Meme!
-    var index:Int!
-    var tabBar: CustomTabBar!
-    var senderIsEditView = false
-    var navController: UINavigationBar!
+    // Variables
+    var meme:Meme! // for the meme that will be displayed
+    var index:Int! // index for keeping track of the meme from the memes array
+
+    var navController: UINavigationBar! //
     
     override func viewDidLoad() {
+        // set the image
         self.imageView.image = meme.memeImg;
         
-        if(!senderIsEditView){
-            // tabBar.setTabBarVisible(false, animated: true)
-        }
-        // self.tabBarController?.setTabBarVisible()
+        // hide the tab bar
+        self.tabBarController?.tabBar.hidden = true
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        //Notice that this code works for both Scissors and Paper
-        //let controller = segue.destinationViewController as ViewController
-        //controller.setForEditing(self.meme, index: self.index)
-    }
-    
+    // handles back button being pressed
     @IBAction func goBack() {
+        // pop to the root view controller
         navigationController?.popToRootViewControllerAnimated(true)
-        if(!senderIsEditView){
-            // tabBar.setTabBarVisible(true, animated: true)
-        }
     }
 
+    // handles the edit button being pressed
     @IBAction func editMeme(sender: UIBarButtonItem) {
-        // var storyboard = UIStoryboard (name: "Main", bundle: nil)
-        // var resultVC = storyboard.instantiateViewControllerWithIdentifier("EditView") as ViewController
-        // performSegueWithIdentifier(<#identifier: String?#>, sender: <#AnyObject?#>)
+        
+        // instatiate and present the edit view controller
         var editVC = storyboard?.instantiateViewControllerWithIdentifier("EditView") as ViewController
-        presentViewController(editVC, animated: true, completion: {editVC.setForEditing(self.meme, index: self.index)})
+        presentViewController(editVC, animated: true, completion: {
+            // call the function to set the meme to be edited in the edit view
+            editVC.setForEditing(self.meme, index: self.index)
+        })
     }
     
+    // handles the trash button being pressed
     @IBAction func deleteMeme(){
+        
+        // obtain the memes object array from the AppDelegate
         let object = UIApplication.sharedApplication().delegate
         let appDelegate = object as AppDelegate
-        appDelegate.memes.removeAtIndex(index)
+        
+        // remove the meme and go back one screen
+        appDelegate.memes.removeAtIndex(self.index)
         goBack()
     }
 }

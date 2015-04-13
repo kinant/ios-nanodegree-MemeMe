@@ -226,7 +226,7 @@
             <objects>
                 <tabBarController storyboardIdentifier="tabBarView" id="dhS-Qh-BgO" sceneMemberID="viewController">
                     <nil key="simulatedBottomBarMetrics"/>
-                    <tabBar key="tabBar" contentMode="scaleToFill" id="jSe-kn-sRh" customClass="CustomTabBar" customModule="MemeMe" customModuleProvider="target">
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="jSe-kn-sRh">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>

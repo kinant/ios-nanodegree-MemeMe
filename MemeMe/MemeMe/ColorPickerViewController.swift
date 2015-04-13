@@ -28,6 +28,8 @@ THE SOFTWARE.
 
 */
 
+// From: 
+
 import UIKit
 
 class ColorPickerViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -96,7 +98,7 @@ class ColorPickerViewController: UIViewController, UICollectionViewDelegate, UIC
 			var cell: UICollectionViewCell  = collectionView.cellForItemAtIndexPath(indexPath)! as UICollectionViewCell
 			var hexString = colorPalette[cell.tag]
 			color = hexStringToUIColor(hexString)
-			delegate?.setButtonColor(color)
+			delegate?.setTextColor(color)
             self.dismissViewControllerAnimated(false, completion: nil)
 		}
 	}

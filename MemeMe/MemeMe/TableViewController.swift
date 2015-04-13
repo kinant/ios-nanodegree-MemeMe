@@ -8,49 +8,61 @@
 
 import UIKit
 
+/* This class is used for the Sent Memes Table View Controller
+*/
 class TableViewController: UITableViewController, UITableViewDataSource {
     
-    // Get ahold of some villains, for the table
-    // This is an array of Villain instances
-    var memes: [Meme]!
-    var delegate: ViewController? = nil
-    var isEditing = false
-    // MARK: Table View Data Source
+    // Outlets
+    @IBOutlet weak var leftBarButton: UIBarButtonItem! // left nav bar button
+    @IBOutlet weak var rightBarButton: UIBarButtonItem! // right nav bar button
+    @IBOutlet var memeTableView: UITableView! // the table view itself
     
-    @IBOutlet weak var leftBarButton: UIBarButtonItem!
-    @IBOutlet weak var rightBarButton: UIBarButtonItem!
+    var memes: [Meme]! // array of memes
+    var delegate: ViewController? = nil // the delegate will be the Edit View ViewController
+    var isEditing = false // flag to determine if in editing mode (for deletion of multiple memes)
     
-    @IBOutlet var memeTableView: UITableView!
+    // link to objects in AppDelegate
+    let object = UIApplication.sharedApplication().delegate
+    var appDelegate: AppDelegate!
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(false)
-        let object = UIApplication.sharedApplication().delegate
-        let appDelegate = object as AppDelegate
+        
+        // get the memes from app delegate
+        appDelegate = object as AppDelegate
         memes = appDelegate.memes
         
+        // if no memes are saved, go to edit view
         if(memes.count == 0){
-            println("going to edit view");
+            
+            // to remove a warning, we use dispatch_async
+            // this is because the TabBarController tries to display both the table view and then
+            // the edit view in such short time
+            // from: http://stackoverflow.com/questions/8563473/unbalanced-calls-to-begin-end-appearance-transitions-for-uitabbarcontroller
+            
             if let hostView = self.view {
                 dispatch_async(dispatch_get_main_queue()) {
                     self.goToEditView()
                 }
-            } else {
-                // handle nil hostView 
             }
-            // goToEditView()
         }
-        //delete.hidden = true
     }
     
+    // MARK: TableView Functions
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.memes.count
     }
     
+    // create the cells
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        // deque a cell using custom table view cell
         let cell = tableView.dequeueReusableCellWithIdentifier("MemeTableCell") as CustomTableViewCell
+        
+        // set the meme
         let meme = self.memes[indexPath.row]
         
-        // Set the name and image
+        // Set the text and image
         cell.topText.text = meme.topText
         cell.bottomText.text = meme.bottomText
         cell.memeImage.image = meme.memeImg
@@ -58,132 +70,149 @@ class TableViewController: UITableViewController, UITableViewDataSource {
         return cell
     }
     
+    // handle selection of a cell
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        // check flag, if not in editing mode (selectint multiple cells)
         if(!isEditing){
+            // show the detail view
             showDetailView(indexPath.row)
         }
         else {
+            // else, we are editing, unhide the cell's checkmark
             let cell = tableView.cellForRowAtIndexPath(indexPath) as CustomTableViewCell
             cell.checkMark.hidden = false
-            cell.isSelected = true
         }
     }
     
+    // this function handles the swipe to delete funcionality of a cell
+    // from: http://www.ioscreator.com/tutorials/delete-rows-table-view-ios8-swift
+    
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == UITableViewCellEditingStyle.Delete {
-            let object = UIApplication.sharedApplication().delegate
-            let appDelegate = object as AppDelegate
             memes.removeAtIndex(indexPath.row)
             appDelegate.memes.removeAtIndex(indexPath.row)
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
         }
     }
     
+    // hande deselection of rows
     override func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath){
+        
+        // hide the checkmark of deselected row
         let cell = tableView.cellForRowAtIndexPath(indexPath) as CustomTableViewCell
         cell.checkMark.hidden = true
-        cell.isSelected = false
     }
     
-    @IBAction func rightNavBarButtonAction(sender: UIBarButtonItem) {
-        if(!isEditing){
-            isEditing = true
-            memeTableView.allowsMultipleSelection = true
-            setTabBarVisible(false, animated: true)
-            leftBarButton.title = "Delete"
-            rightBarButton.title = "Cancel"
-        }
-        else {
-            rightBarButton.title = "Edit"
-            leftBarButton.title = "Back"
-            setTabBarVisible(true, animated: true)
-            isEditing = false
-        }
-    }
-    
+    // MARK: OTHER FUNCTIONS
+    // function to show the detailed view controller
     func showDetailView(index: Int){
-        let detailController = self.storyboard!.instantiateViewControllerWithIdentifier("DetailViewController")! as DetailViewController
+        
+        // intantiate the view controller
+        let detailController = self.storyboard?.instantiateViewControllerWithIdentifier("DetailViewController")! as DetailViewController
+        
+        // set the views properties
         detailController.meme = memes[index]
         detailController.index = index
-        detailController.tabBar = self.tabBarController?.tabBar as CustomTabBar
+        
+        // push the view
         self.navigationController?.pushViewController(detailController, animated: true)
     }
     
-    func setTabBarVisible(visible:Bool, animated:Bool) {
-        
-        //* This cannot be called before viewDidLayoutSubviews(), because the frame is not set before this time
-        
-        // bail if the current state matches the desired state
-        if (tabBarIsVisible() == visible) { return }
-        
-        // get a frame calculation ready
-        let frame = self.tabBarController?.tabBar.frame
-        let height = frame?.size.height
-        let offsetY = (visible ? -height! : height)
-        
-        // zero duration means no animation
-        let duration:NSTimeInterval = (animated ? 0.3 : 0.0)
-        
-        //  animate the tabBar
-        if frame != nil {
-            UIView.animateWithDuration(duration) {
-                self.tabBarController?.tabBar.frame = CGRectOffset(frame!, 0, offsetY!)
-                return
-            }
-        }
-    }
-    
-    func tabBarIsVisible() ->Bool {
-        return self.tabBarController?.tabBar.frame.origin.y < CGRectGetMaxY(self.view.frame)
-    }
-    
+    // function to delete multiple selection of memes
     func deleteMemes(){
         
+        // get all the index paths for selected rows
+        // figured it out after reading documentation at:
+        // https://developer.apple.com/library/ios/documentation/UIKit/Reference/UITableView_Class/
+        
         if let indexPaths = tableView.indexPathsForSelectedRows() {
+            
+            // iterate over each selected row
             for(var i = indexPaths.count - 1; i >= 0; i--){
+                
+                // get the index path
                 var indexPath = indexPaths[i] as NSIndexPath
-                let object = UIApplication.sharedApplication().delegate
-                let appDelegate = object as AppDelegate
+                
+                // remove from the saved memes array
                 appDelegate.memes.removeAtIndex(indexPath.row)
+                
+                // remove from the class's local memes array
                 memes.removeAtIndex(indexPath.row)
+                
+                // remove the row from the table view
                 memeTableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
             }
         }
     }
     
-    @IBAction func leftNavBarButtonAction(sender: UIBarButtonItem) {
-        if(isEditing){
-            deleteMemes()
-            isEditing = false
-            leftBarButton.title = "Back"
-        }
-        else {
-            goToEditView()
-            // self.navigationController?.popToRootViewControllerAnimated(true)
-        }
-    }
-    
+    // go to the edit view View Controller
     func goToEditView(){
         let editVC = storyboard?.instantiateViewControllerWithIdentifier("EditView") as ViewController
-        // presentViewController(editVC, animated: true, completion: nil)
-        // self.navigationController?.popToRootViewControllerAnimated(false)
+        
+        
+        // Had warnings when presenting the view controller, removed by reading:
         // http://stackoverflow.com/questions/19890761/warning-presenting-view-controllers-on-detached-view-controllers-is-discourage
-        // http://stackoverflow.com/questions/8563473/unbalanced-calls-to-begin-end-appearance-transitions-for-uitabbarcontroller        
+        // http://stackoverflow.com/questions/8563473/unbalanced-calls-to-begin-end-appearance-transitions-for-uitabbarcontroller
         
         dispatch_async(dispatch_get_main_queue()) {
             // self.navigationController?.tabBarController?.presentViewController(editVC, animated: false, completion: nil)
             self.presentViewController(editVC, animated: false, completion: nil)
         }
-        
-        // self.tabBarController?.presentViewController(editVC, animated: false, completion: nil)
-        // self.dismissViewControllerAnimated(true, completion: nil)
-        // performSegueWithIdentifier("editView", sender: self)
-        // self.navigationController?.pushViewController(editVC, animated: true)
-        
     }
     
-    func deleteMeme(indexPath: NSIndexPath){
-        memes.removeAtIndex(indexPath.row)
-        memeTableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+    // MARK: @IBAction Functions
+    // handle right nav bar button presses
+    // this is for when the "Edit Button is pressed"
+    @IBAction func rightNavBarButtonAction(sender: UIBarButtonItem) {
+        
+        // check if in editing mode or not
+        if(!isEditing){
+            
+            // if not in editing, then turn flag on
+            isEditing = true
+            memeTableView.allowsMultipleSelection = true
+            
+            // hide the tab bar
+            self.navigationController?.tabBarController?.tabBar.hidden = true
+            
+            // change button titles
+            leftBarButton.title = "Delete"
+            rightBarButton.title = "Cancel"
+        }
+        else {
+            // else, already in editing mode
+            
+            // reset the button titles
+            rightBarButton.title = "Edit"
+            leftBarButton.title = "Back"
+            
+            // unhide the tab bar
+            self.navigationController?.tabBarController?.tabBar.hidden = false
+            
+            // reset editing flag
+            isEditing = false
+        }
+    }
+    
+    // handles the left nav bar actions
+    @IBAction func leftNavBarButtonAction(sender: UIBarButtonItem) {
+        
+        // check if in editing mode
+        if(isEditing){
+            
+            // if editing, then delete the selected memes
+            deleteMemes()
+            
+            // turn flag off
+            isEditing = false
+            
+            // reset button title
+            leftBarButton.title = "Back"
+        }
+        else {
+            // else, "Back" is being displayed, so go back to Edit View
+            goToEditView()
+        }
     }
 }
