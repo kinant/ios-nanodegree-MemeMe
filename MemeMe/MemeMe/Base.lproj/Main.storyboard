@@ -29,7 +29,7 @@
                                         </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" title="Cancel" id="9ob-xn-7eR">
                                             <connections>
-                                                <action selector="cancelEdit:" destination="vXZ-lx-hvc" id="wrE-sa-jb1"/>
+                                                <action selector="handleRightBarButton:" destination="vXZ-lx-hvc" id="vLs-Bn-TPW"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -110,12 +110,12 @@
                     </view>
                     <connections>
                         <outlet property="cameraButton" destination="Ino-BO-Az2" id="d4l-UQ-8gB"/>
-                        <outlet property="cancelEdit" destination="9ob-xn-7eR" id="IlZ-lO-21u"/>
                         <outlet property="colorPick" destination="7cM-7c-hha" id="VW6-wp-raN"/>
                         <outlet property="leftBarButton" destination="C0X-IG-zfg" id="ZMD-xl-M3R"/>
                         <outlet property="mainToolbar" destination="V94-HD-W9Y" id="ScS-dN-6AZ"/>
                         <outlet property="navTitle" destination="02h-N6-CwV" id="31R-ym-thd"/>
                         <outlet property="navigationBar" destination="gpa-lN-4jH" id="u74-49-FfW"/>
+                        <outlet property="rightBarButton" destination="9ob-xn-7eR" id="veC-mZ-Dha"/>
                         <outlet property="scrollView" destination="mqS-vY-OIl" id="8Og-cC-zj2"/>
                     </connections>
                 </viewController>

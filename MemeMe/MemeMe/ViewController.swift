@@ -35,7 +35,7 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrol
     @IBOutlet weak var navigationBar: UINavigationBar!
     @IBOutlet weak var leftBarButton: UIBarButtonItem!
     @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var cancelEdit: UIBarButtonItem!
+    @IBOutlet weak var rightBarButton: UIBarButtonItem!
     
     // Variables
     var editingBottom = false // flag for when editing the bottom text
@@ -136,11 +136,12 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrol
         
         // set nav bar titles and button states
         navTitle.title = "MemeMe"
-        cancelEdit.title = ""
+        rightBarButton.title = "Back"
         
-        // disable share button if no memes are present
+        // disable share button and back button if no memes are present
         if(memes.count == 0) {
             leftBarButton.enabled = false
+            rightBarButton.enabled = false
         }
         
         // add gesture recogizers so that the textfields can me moved with the finger
@@ -493,7 +494,7 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrol
         editingIndex = index
         
         // set the button to display cancel, if the user wants to cancel editing
-        cancelEdit.title = "Cancel"
+        rightBarButton.title = "Cancel"
     }
     
     // =========================================================================
@@ -559,10 +560,9 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrol
     // BELOW ARE ALL THE IBACTION FUNCTIONS
     // =========================================================================
     
-    // handle the cancel edit button when canceling the editing of a saved meme
-    @IBAction func cancelEdit(sender: UIBarButtonItem) {
+    // handle the rigt bar button when canceling the editing of a saved meme
+    @IBAction func handleRightBarButton(sender: UIBarButtonItem) {
         // set title and go back to the tab bar view
-        cancelEdit.title = ""
         goToTabBarView()
     }
     
