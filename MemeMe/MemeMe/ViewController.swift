@@ -97,21 +97,21 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrol
         ]
         
         // rectangle frame for the textfields
-        var rectangle = CGRect(x: 0, y: 0, width: 200, height: 40)
+        let rectangle = CGRect(x: 0, y: 0, width: 200, height: 40)
         
         // set texfield properties
-        self.topTextField = UITextField(frame: rectangle)
-        self.bottomTextField = UITextField(frame: rectangle)
-        self.topTextField.defaultTextAttributes = memeTextAttributes
-        self.bottomTextField.defaultTextAttributes = memeTextAttributes
-        self.topTextField.text = "TOP"
-        self.bottomTextField.text = "BOTTOM"
-        self.topTextField.delegate = self
-        self.bottomTextField.delegate = self
-        self.topTextField.tag = 1
-        self.bottomTextField.tag = 2
-        self.topTextField.textAlignment = .Center
-        self.bottomTextField.textAlignment = .Center
+        topTextField = UITextField(frame: rectangle)
+        bottomTextField = UITextField(frame: rectangle)
+        topTextField.defaultTextAttributes = memeTextAttributes
+        bottomTextField.defaultTextAttributes = memeTextAttributes
+        topTextField.text = "TOP"
+        bottomTextField.text = "BOTTOM"
+        topTextField.delegate = self
+        bottomTextField.delegate = self
+        topTextField.tag = 1
+        bottomTextField.tag = 2
+        topTextField.textAlignment = .Center
+        bottomTextField.textAlignment = .Center
         
         topTextField.adjustsFontSizeToFitWidth = true
         bottomTextField.adjustsFontSizeToFitWidth = true
@@ -123,30 +123,88 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrol
         view.addSubview(topTextField)
         view.addSubview(bottomTextField)
         
-        // Set the textfield constrains programatically
-        // from: http://stackoverflow.com/questions/26180822/swift-adding-constraints-programmatically
+        /* Set the textfield constrains programatically
+         * from: http://stackoverflow.com/questions/26180822/swift-adding-constraints-programmatically
+         * NOTE: I know I could have done this using auto-layout, but my code previously had a function that 
+         * would automatically move the texfields based on the size of the image in the Image View. This was all
+         * before I added the scroll view functionallity. I've decided to keep it just in case I ever need to change
+         * the constraints while the program runs. Using autolayout will produce warnings about unsatisfied constraints.
+        */
         topTextField.setTranslatesAutoresizingMaskIntoConstraints(false)
         bottomTextField.setTranslatesAutoresizingMaskIntoConstraints(false)
         
-        var topTextFieldConstraintY = NSLayoutConstraint(item: topTextField, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: self.imageView, attribute: NSLayoutAttribute.Top, multiplier: 0, constant: 90)
-        view.addConstraint(topTextFieldConstraintY)
+        let topTextFieldConstraintY = NSLayoutConstraint(
+            item: topTextField,
+            attribute: NSLayoutAttribute.Top,
+            relatedBy: NSLayoutRelation.Equal,
+            toItem: self.imageView,
+            attribute: NSLayoutAttribute.Top,
+            multiplier: 0,
+            constant: 90
+        )
         
-        var bottomTextFieldConstraintY = NSLayoutConstraint(item: bottomTextField, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: self.view, attribute: NSLayoutAttribute.Bottom, multiplier: 1, constant: -80)
-        view.addConstraint(bottomTextFieldConstraintY)
+        self.view.addConstraint(topTextFieldConstraintY)
         
-        var topTextFieldConstraintX = NSLayoutConstraint(item: topTextField, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: self.view, attribute: NSLayoutAttribute.CenterX, multiplier: 1, constant: 0)
-        view.addConstraint(topTextFieldConstraintX)
+        let bottomTextFieldConstraintY = NSLayoutConstraint(
+            item: bottomTextField,
+            attribute: NSLayoutAttribute.Bottom,
+            relatedBy: NSLayoutRelation.Equal,
+            toItem: self.view,
+            attribute: NSLayoutAttribute.Bottom,
+            multiplier: 1,
+            constant: -80
+        )
+        
+        self.view.addConstraint(bottomTextFieldConstraintY)
+        
+        let topTextFieldConstraintX = NSLayoutConstraint(
+            item: topTextField,
+            attribute: NSLayoutAttribute.CenterX,
+            relatedBy: NSLayoutRelation.Equal,
+            toItem: self.view,
+            attribute: NSLayoutAttribute.CenterX,
+            multiplier: 1,
+            constant: 0
+        )
+        
+        self.view.addConstraint(topTextFieldConstraintX)
         
         // For width constraint, used help from:
         // http://stackoverflow.com/questions/28252583/how-do-i-set-the-constraint-of-width-programmatically-in-swift
         
-        var topTextFieldWidth = NSLayoutConstraint (item: topTextField, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute,multiplier: 1, constant: self.view.frame.width - 40)
+        let topTextFieldWidth = NSLayoutConstraint (
+            item: topTextField,
+            attribute: NSLayoutAttribute.Width,
+            relatedBy: NSLayoutRelation.Equal,
+            toItem: nil,
+            attribute: NSLayoutAttribute.NotAnAttribute,
+            multiplier: 1,
+            constant: self.view.frame.width - 40
+        )
+        
         self.view.addConstraint(topTextFieldWidth)
         
-        var bottomTextFieldWidth = NSLayoutConstraint (item: bottomTextField, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute,multiplier: 1, constant: self.view.frame.width - 40)
+        let bottomTextFieldWidth = NSLayoutConstraint (
+            item: bottomTextField,
+            attribute: NSLayoutAttribute.Width,
+            relatedBy: NSLayoutRelation.Equal,
+            toItem: nil,
+            attribute: NSLayoutAttribute.NotAnAttribute,
+            multiplier: 1,
+            constant: self.view.frame.width - 40
+        )
+        
         self.view.addConstraint(bottomTextFieldWidth)
         
-        var bottomTextFieldConstraintX = NSLayoutConstraint(item: bottomTextField, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: self.view, attribute: NSLayoutAttribute.CenterX, multiplier: 1, constant: 0)
+        let bottomTextFieldConstraintX = NSLayoutConstraint(
+            item: bottomTextField,
+            attribute: NSLayoutAttribute.CenterX,
+            relatedBy: NSLayoutRelation.Equal,
+            toItem: self.view,
+            attribute: NSLayoutAttribute.CenterX,
+            multiplier: 1,
+            constant: 0
+        )
         view.addConstraint(bottomTextFieldConstraintX)
         
         // set nav bar titles and button states
@@ -239,10 +297,8 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrol
     
     // function to move the view and its contents up when the keyboard is shown
     func keyboardWillShow(notification: NSNotification) {
-        
         // check that we are only editing the bottom textfield
         if(editingBottom){
-            
             // move view up
             self.view.frame.origin.y -= getKeyboardHeight(notification)
         }
@@ -250,14 +306,11 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrol
     
     // function that moves the view and its contents back down when the keyboard is hidden
     func keyboardWillHide(notification: NSNotification) {
-        
         // check that we are only editing the bottom textfield
         if(editingBottom){
-            
             // move view down
             self.view.frame.origin.y += getKeyboardHeight(notification)
         }
-        
         // reset flag
         editingBottom = false
     }
@@ -326,7 +379,7 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrol
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]){
         
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            self.imageView.image = image
+            imageView.image = image
             setScrollView()
             centerScrollViewContents()
             leftBarButton.enabled = true
@@ -356,7 +409,17 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrol
         if completed {
             
             // create the meme
-            var meme = Meme(topText: topTextField.text, bottomText: bottomTextField.text, original: imageView.image!, originalX: imageView.frame.origin.x, originalY: imageView.frame.origin.y, zoom: self.scrollView.zoomScale, meme: memeImg, font: topTextField.font, fontColor: topTextField.textColor)
+            let meme = Meme(
+                topText: topTextField.text,
+                bottomText: bottomTextField.text,
+                original: imageView.image!,
+                originalX: imageView.frame.origin.x,
+                originalY: imageView.frame.origin.y,
+                zoom: self.scrollView.zoomScale,
+                meme: memeImg,
+                font: topTextField.font,
+                fontColor: topTextField.textColor
+            )
             
             // Add it to the memes array in the Application Delegate
             let object = UIApplication.sharedApplication().delegate
@@ -402,12 +465,17 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrol
         UIGraphicsBeginImageContext(frame.size)
         
         // this rectangle will only cover the parts of the screen that we want as an image
-        var rectangle = CGRectMake(self.scrollView.frame.origin.x, self.scrollView.frame.origin.y - 44 - additive - 20, self.scrollView.frame.width, self.scrollView.frame.height + 64 + 44)
+        var rectangle = CGRectMake(
+            scrollView.frame.origin.x,
+            self.scrollView.frame.origin.y - 44 - additive - 20,
+            self.scrollView.frame.width,
+            self.scrollView.frame.height + additive + 44
+        )
         
         self.view.drawViewHierarchyInRect(rectangle, afterScreenUpdates: true)
+        
         let memedImage : UIImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        
         
         // show the toolbar and nav bar
         mainToolbar.hidden = false
@@ -420,27 +488,25 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrol
     
     // function to set the screen with the meme to be edited
     func setForEditing(meme: Meme, index: Int){
-        
         // set the image and textfields
-        self.bottomTextField.text = meme.bottomText
-        self.topTextField.text = meme.topText
-        self.imageView.image = meme.originalImg
-        self.setTextFont(meme.font)
-        self.setTextColor(meme.fontColor)
+        bottomTextField.text = meme.bottomText
+        topTextField.text = meme.topText
+        imageView.image = meme.originalImg
+        setTextFont(meme.font)
+        setTextColor(meme.fontColor)
         
         // set the image to display correctly in the scroll view
-        self.imageView.frame.origin.x = meme.originalImgOriginX
-        self.imageView.frame.origin.y = meme.originalImgOriginY
-        self.setScrollView()
-        self.scrollView.zoomScale = meme.zoomScale
+        imageView.frame.origin.x = meme.originalImgOriginX
+        imageView.frame.origin.y = meme.originalImgOriginY
+        setScrollView()
+        scrollView.zoomScale = meme.zoomScale
         
         // set the editing flag and the index for the meme being edited
-        self.isEditing = true
-        self.editingIndex = index
+        isEditing = true
+        editingIndex = index
         
         // set the button to display cancel, if the user wants to cancel editing
-        self.cancelEdit.title = "Cancel"
-
+        cancelEdit.title = "Cancel"
     }
     
     // =======================================================================================================================
@@ -458,10 +524,9 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrol
     
     // set the color of the textfields and the color picker button
     func setTextColor (color: UIColor) {
-        
         // set texfield colors
-        self.topTextField.textColor = color
-        self.bottomTextField.textColor  = color
+        topTextField.textColor = color
+        bottomTextField.textColor  = color
         
         // set the color of the colorpicker button
         colorPick.setTitleColor(color, forState: UIControlState.Normal)
@@ -481,8 +546,8 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrol
     
     // show a template image in the image view
     func showTemplate(image: UIImage){
-        self.imageView.image = image
-        self.setScrollView()
+        imageView.image = image
+        setScrollView()
     }
     
     // view the templates picker table view
@@ -493,10 +558,12 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrol
     }
     
     // show an alert
-    func showAlert(){
-        let alertController = UIAlertController(title: "Error", message:
-            "You Must Select an Image First!", preferredStyle: UIAlertControllerStyle.Alert)
+    func showAlert(title: String, message: String){
+        let alertController = UIAlertController(title: title, message:
+            message, preferredStyle: UIAlertControllerStyle.Alert)
+        
         alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default, handler: nil))
+        
         self.presentViewController(alertController, animated: true, completion: nil)
     }
     
@@ -607,7 +674,7 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrol
         }
         else {
             // no image present, show alert
-            showAlert()
+            showAlert("Error", message: "Must Select an Image First!")
         }
     }
 }

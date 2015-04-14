@@ -10,11 +10,12 @@ import Foundation
 import UIKit
 
 /* This class handles the font picking table view. I copied and modified the ColorPickerController
+ * Original code from: https://github.com/EthanStrider/iOS-Projects/tree/master/ColorPickerExample
 */
 class FontPickerViewController : UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var delegate: ViewController? = nil
-    var font = UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)
+    var font: UIFont!
     
     // get an array of all the fonts
     // from: http://giordanoscalzo.tumblr.com/post/95900320382/print-all-ios-fonts-in-swift

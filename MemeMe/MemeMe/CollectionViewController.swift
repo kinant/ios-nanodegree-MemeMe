@@ -18,7 +18,7 @@ class CollectionViewController: UICollectionViewController, UICollectionViewData
     @IBOutlet weak var rightBarButton: UIBarButtonItem! // right nav bar button
     @IBOutlet var memeCollectionView: UICollectionView! // the collection view itself
     
-    var memes:[Meme]! // array to hold all the saved memes
+    var memes: [Meme]! // array to hold all the saved memes
     var isEditing = false // flag for when editing memes (in this case just to delete one or more)
     
     override func viewWillAppear(animated: Bool) {
@@ -31,14 +31,14 @@ class CollectionViewController: UICollectionViewController, UICollectionViewData
     
     // MARK: Collection View Functions
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.memes.count
+        return memes.count
     }
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("MemeCollectionViewCell", forIndexPath: indexPath) as CustomCollectionViewCell
         
-        let meme = self.memes[indexPath.row]
+        let meme = memes[indexPath.row]
         cell.memeImage.image = meme.memeImg
         
         return cell
@@ -102,14 +102,14 @@ class CollectionViewController: UICollectionViewController, UICollectionViewData
     func showDetailView(index: Int){
         
         // instantiate the view, set the properties and push
-        let detailController = self.storyboard!.instantiateViewControllerWithIdentifier("DetailViewController")! as DetailViewController
+        let detailVC = self.storyboard?.instantiateViewControllerWithIdentifier("DetailViewController") as DetailViewController
         
         // set the meme to display and its index in the detailed view
-        detailController.meme = memes[index]
-        detailController.index = index
+        detailVC.meme = memes[index]
+        detailVC.index = index
         
         // push the view controller into the view
-        self.navigationController?.pushViewController(detailController, animated: true)
+        self.navigationController?.pushViewController(detailVC, animated: true)
     }
     
     // MARK: @IBAction Functions

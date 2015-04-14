@@ -109,7 +109,7 @@ class TableViewController: UITableViewController, UITableViewDataSource {
     func showDetailView(index: Int){
         
         // intantiate the view controller
-        let detailController = self.storyboard?.instantiateViewControllerWithIdentifier("DetailViewController")! as DetailViewController
+        let detailController = self.storyboard?.instantiateViewControllerWithIdentifier("DetailViewController") as DetailViewController
         
         // set the views properties
         detailController.meme = memes[index]
@@ -122,10 +122,11 @@ class TableViewController: UITableViewController, UITableViewDataSource {
     // function to delete multiple selection of memes
     func deleteMemes(){
         
-        // get all the index paths for selected rows
-        // figured it out after reading documentation at:
-        // https://developer.apple.com/library/ios/documentation/UIKit/Reference/UITableView_Class/
-        
+        /* get all the index paths for selected rows
+         * figured it out after reading documentation at:
+         * https://developer.apple.com/library/ios/documentation/UIKit/Reference/UITableView_Class/
+         * and: http://stackoverflow.com/questions/29387462/how-to-delete-a-cell-from-a-uitableview-with-multi-section-in-swift
+         */
         if let indexPaths = tableView.indexPathsForSelectedRows() {
             
             // iterate over each selected row
@@ -149,7 +150,6 @@ class TableViewController: UITableViewController, UITableViewDataSource {
     // go to the edit view View Controller
     func goToEditView(){
         let editVC = storyboard?.instantiateViewControllerWithIdentifier("EditView") as ViewController
-        
         
         // Had warnings when presenting the view controller, removed by reading:
         // http://stackoverflow.com/questions/19890761/warning-presenting-view-controllers-on-detached-view-controllers-is-discourage

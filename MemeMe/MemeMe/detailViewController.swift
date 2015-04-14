@@ -2,7 +2,7 @@
 //  DetailViewController.swift
 //  MemeMe
 //
-//  Created by Kinan Turjman on 3/31/15.
+//  Created by Kinan Turjman on 4/13/15.
 //  Copyright (c) 2015 Kinan Turjman. All rights reserved.
 //
 
@@ -18,14 +18,14 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var imageView: UIImageView! // to display the Meme
     
     // Variables
-    var meme:Meme! // for the meme that will be displayed
-    var index:Int! // index for keeping track of the meme from the memes array
-
+    var meme: Meme! // for the meme that will be displayed
+    var index: Int! // index for keeping track of the meme from the memes array
+    
     var navController: UINavigationBar! //
     
     override func viewDidLoad() {
         // set the image
-        self.imageView.image = meme.memeImg;
+        imageView.image = meme.memeImg;
         
         // hide the tab bar
         self.tabBarController?.tabBar.hidden = true
@@ -36,12 +36,12 @@ class DetailViewController: UIViewController {
         // pop to the root view controller
         navigationController?.popToRootViewControllerAnimated(true)
     }
-
+    
     // handles the edit button being pressed
     @IBAction func editMeme(sender: UIBarButtonItem) {
         
         // instatiate and present the edit view controller
-        var editVC = storyboard?.instantiateViewControllerWithIdentifier("EditView") as ViewController
+        let editVC = storyboard?.instantiateViewControllerWithIdentifier("EditView") as ViewController
         presentViewController(editVC, animated: true, completion: {
             // call the function to set the meme to be edited in the edit view
             editVC.setForEditing(self.meme, index: self.index)

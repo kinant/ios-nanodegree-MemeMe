@@ -28,7 +28,7 @@ THE SOFTWARE.
 
 */
 
-// From: 
+// From: https://github.com/EthanStrider/iOS-Projects/tree/master/ColorPickerExample
 
 import UIKit
 
