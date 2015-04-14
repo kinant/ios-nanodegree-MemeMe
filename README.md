@@ -26,4 +26,4 @@ Welcome to my Udacity IOS Nanodegree Project #2 page!
 3. To move textfields: use one finger to drag around screen (In the simulator, click and drag)
 
 # Noted Issues:
-- If Software Keyboard is not toggled before running the App, it will cause a bug were the entire view slides up. This bug will not occur if keyboard toggles on first use or if testing on a device. Have not figured out how to fix this issue. Disabling "Connect Hardware Keyboard" allows the keyboard to show up without this bug.
+- If Software Keyboard is not toggled before running the App, it will cause a bug were the entire view slides up and everything will go black. This bug will not occur if keyboard toggles on first use or if testing on a device. Have not figured out how to fix this issue. Disabling "Connect Hardware Keyboard" allows the keyboard to show up without this bug.
