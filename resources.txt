@@ -45,6 +45,12 @@ For Image Manipulation:
 For Keyboard Management:
 - http://creativecoefficient.net/swift/keyboard-management/
 
+For Gesture Recognizers:
+- http://stackoverflow.com/questions/5306240/iphone-dismiss-keyboard-when-touching-outside-of-uitextfield
+- http://stackoverflow.com/questions/24758671/swift-moving-and-releasing-object-with-touch
+- http://stackoverflow.com/questions/10292374/does-uigesturerecognizer-know-what-object-it-is-called-on
+-
+
 Adding Constraints Programmatically:
 - http://stackoverflow.com/questions/26180822/swift-adding-constraints-programmatically
 - http://stackoverflow.com/questions/28252583/how-do-i-set-the-constraint-of-width-programmatically-in-swift
