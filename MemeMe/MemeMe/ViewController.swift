@@ -46,6 +46,10 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrol
     var topTextField: UITextField! // top textfield
     var bottomTextField: UITextField! // bottom textfield
     var imageView = UIImageView() // the image view to display the selected image
+    var bottomTextLocation = CGPoint(x: 0, y: 0)
+    
+    
+    // MARK: Touch functions
     
     // =======================================================================================================================
     // MARK: Overriden View Functions
@@ -119,93 +123,14 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrol
         topTextField.minimumFontSize = 8
         bottomTextField.minimumFontSize = 8
         
+        topTextField.center.x = self.view.center.x
+        topTextField.center.y = self.view.frame.origin.y + 150
+        bottomTextField.center.x = self.view.center.x
+        bottomTextField.center.y = self.view.frame.origin.y + self.view.frame.height - 150
+        
         // add texfields to subview
         view.addSubview(topTextField)
         view.addSubview(bottomTextField)
-        
-        /* Set the textfield constrains programatically
-         * from: http://stackoverflow.com/questions/26180822/swift-adding-constraints-programmatically
-         * NOTE: I know I could have done this using auto-layout, but my code previously had a function that 
-         * would automatically move the texfields based on the size of the image in the Image View. This was all
-         * before I added the scroll view functionallity. I've decided to keep it just in case I ever need to change
-         * the constraints while the program runs. Using autolayout will produce warnings about unsatisfied constraints.
-        */
-        topTextField.setTranslatesAutoresizingMaskIntoConstraints(false)
-        bottomTextField.setTranslatesAutoresizingMaskIntoConstraints(false)
-        
-        let topTextFieldConstraintY = NSLayoutConstraint(
-            item: topTextField,
-            attribute: NSLayoutAttribute.Top,
-            relatedBy: NSLayoutRelation.Equal,
-            toItem: self.imageView,
-            attribute: NSLayoutAttribute.Top,
-            multiplier: 0,
-            constant: 90
-        )
-        
-        self.view.addConstraint(topTextFieldConstraintY)
-        
-        let bottomTextFieldConstraintY = NSLayoutConstraint(
-            item: bottomTextField,
-            attribute: NSLayoutAttribute.Bottom,
-            relatedBy: NSLayoutRelation.Equal,
-            toItem: self.view,
-            attribute: NSLayoutAttribute.Bottom,
-            multiplier: 1,
-            constant: -80
-        )
-        
-        self.view.addConstraint(bottomTextFieldConstraintY)
-        
-        let topTextFieldConstraintX = NSLayoutConstraint(
-            item: topTextField,
-            attribute: NSLayoutAttribute.CenterX,
-            relatedBy: NSLayoutRelation.Equal,
-            toItem: self.view,
-            attribute: NSLayoutAttribute.CenterX,
-            multiplier: 1,
-            constant: 0
-        )
-        
-        self.view.addConstraint(topTextFieldConstraintX)
-        
-        // For width constraint, used help from:
-        // http://stackoverflow.com/questions/28252583/how-do-i-set-the-constraint-of-width-programmatically-in-swift
-        
-        let topTextFieldWidth = NSLayoutConstraint (
-            item: topTextField,
-            attribute: NSLayoutAttribute.Width,
-            relatedBy: NSLayoutRelation.Equal,
-            toItem: nil,
-            attribute: NSLayoutAttribute.NotAnAttribute,
-            multiplier: 1,
-            constant: self.view.frame.width - 40
-        )
-        
-        self.view.addConstraint(topTextFieldWidth)
-        
-        let bottomTextFieldWidth = NSLayoutConstraint (
-            item: bottomTextField,
-            attribute: NSLayoutAttribute.Width,
-            relatedBy: NSLayoutRelation.Equal,
-            toItem: nil,
-            attribute: NSLayoutAttribute.NotAnAttribute,
-            multiplier: 1,
-            constant: self.view.frame.width - 40
-        )
-        
-        self.view.addConstraint(bottomTextFieldWidth)
-        
-        let bottomTextFieldConstraintX = NSLayoutConstraint(
-            item: bottomTextField,
-            attribute: NSLayoutAttribute.CenterX,
-            relatedBy: NSLayoutRelation.Equal,
-            toItem: self.view,
-            attribute: NSLayoutAttribute.CenterX,
-            multiplier: 1,
-            constant: 0
-        )
-        view.addConstraint(bottomTextFieldConstraintX)
         
         // set nav bar titles and button states
         navTitle.title = "MemeMe"
@@ -215,6 +140,34 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrol
         if(memes.count == 0) {
             leftBarButton.enabled = false
         }
+        
+        let dragBottomTextField = UIPanGestureRecognizer(target: self, action:"dragText:")
+        bottomTextField.addGestureRecognizer(dragBottomTextField)
+        
+        let dragTopTextField = UIPanGestureRecognizer(target: self, action:"dragText:")
+        topTextField.addGestureRecognizer(dragTopTextField)
+        
+        println("Bottom Text x: \(bottomTextField.center.x)")
+        println("Bottom Text y: \(bottomTextField.center.y)")
+        println("Top Text x: \(topTextField.center.x)")
+        println("Top Text y: \(topTextField.center.y)")
+        
+        let tapScreen = UITapGestureRecognizer(target: self, action: "tapScreen")
+        self.view.addGestureRecognizer(tapScreen)
+        
+    }
+    
+    func tapScreen(){
+        topTextField.resignFirstResponder()
+        bottomTextField.resignFirstResponder()
+    }
+    
+    func dragText(recognizer: UIPanGestureRecognizer) {
+        
+        let textField = (recognizer.view?.tag == 2) ? bottomTextField : topTextField
+        let point = recognizer.locationInView(self.view);
+        textField.center.x = point.x
+        textField.center.y = point.y
     }
     
     // =======================================================================================================================
