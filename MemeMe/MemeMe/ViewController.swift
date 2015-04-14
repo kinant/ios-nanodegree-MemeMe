@@ -180,7 +180,7 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrol
         let textField = (recognizer.view?.tag == 2) ? bottomTextField : topTextField
         
         // obtain the location of the recognizer as a point
-        let point = recognizer.locationInView(self.view);
+        let point = recognizer.locationInView(self.view)
         
         // set the textfield's location to this point
         textField.center.x = point.x
