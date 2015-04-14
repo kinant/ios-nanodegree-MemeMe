@@ -46,6 +46,14 @@ class TableViewController: UITableViewController, UITableViewDataSource {
                 }
             }
         }
+        
+        // set initial properties
+        rightBarButton.title = "Edit"
+        self.tabBarController?.tabBar.hidden = false
+        memeTableView.allowsMultipleSelection = false
+        
+        deselectAll()
+    
     }
     
     // MARK: TableView Functions
@@ -66,6 +74,7 @@ class TableViewController: UITableViewController, UITableViewDataSource {
         cell.topText.text = meme.topText
         cell.bottomText.text = meme.bottomText
         cell.memeImage.image = meme.memeImg
+        cell.checkMark.hidden = true
         
         return cell
     }
@@ -83,6 +92,8 @@ class TableViewController: UITableViewController, UITableViewDataSource {
             let cell = tableView.cellForRowAtIndexPath(indexPath) as CustomTableViewCell
             cell.checkMark.hidden = false
         }
+        
+        // memeTableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
     // this function handles the swipe to delete funcionality of a cell
@@ -161,6 +172,17 @@ class TableViewController: UITableViewController, UITableViewDataSource {
         }
     }
     
+    func deselectAll(){
+        
+        if let selectedRowPaths = memeTableView.indexPathsForSelectedRows() as? [NSIndexPath] {
+            for indexPath in selectedRowPaths {
+                let cell = memeTableView.cellForRowAtIndexPath(indexPath) as CustomTableViewCell
+                cell.checkMark.hidden = true
+                memeTableView.deselectRowAtIndexPath(indexPath, animated: false)
+            }
+        }
+    }
+    
     // MARK: @IBAction Functions
     // handle right nav bar button presses
     // this is for when the "Edit Button is pressed"
@@ -192,6 +214,8 @@ class TableViewController: UITableViewController, UITableViewDataSource {
             
             // reset editing flag
             isEditing = false
+            
+            deselectAll()
         }
     }
     
