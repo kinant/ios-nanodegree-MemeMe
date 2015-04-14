@@ -52,6 +52,7 @@ class TableViewController: UITableViewController, UITableViewDataSource {
         self.tabBarController?.tabBar.hidden = false
         memeTableView.allowsMultipleSelection = false
         
+        // deselect all selected rows
         deselectAll()
     
     }
@@ -172,10 +173,14 @@ class TableViewController: UITableViewController, UITableViewDataSource {
         }
     }
     
+    // function to deselect all the selected rows
     func deselectAll(){
         
+        // get all the index paths
         if let selectedRowPaths = memeTableView.indexPathsForSelectedRows() as? [NSIndexPath] {
+            // iterate over each index path
             for indexPath in selectedRowPaths {
+                // get the cell and deselect
                 let cell = memeTableView.cellForRowAtIndexPath(indexPath) as CustomTableViewCell
                 cell.checkMark.hidden = true
                 memeTableView.deselectRowAtIndexPath(indexPath, animated: false)
@@ -215,6 +220,7 @@ class TableViewController: UITableViewController, UITableViewDataSource {
             // reset editing flag
             isEditing = false
             
+            // deselect all selected rows
             deselectAll()
         }
     }

@@ -466,7 +466,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Edit" id="gGb-0W-P9Z">
                             <connections>
-                                <action selector="editMemeTableView:" destination="80d-pl-D7v" id="y3i-fB-PDR"/>
+                                <action selector="rightNavBarButtonAction:" destination="80d-pl-D7v" id="CQ3-Px-0wi"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -581,6 +581,6 @@
         <image name="t1.jpg" width="568" height="335"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="18G-Z3-MJC"/>
+        <segue reference="umS-GW-SHF"/>
     </inferredMetricsTieBreakers>
 </document>

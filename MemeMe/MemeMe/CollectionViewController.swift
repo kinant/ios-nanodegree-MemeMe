@@ -23,10 +23,22 @@ class CollectionViewController: UICollectionViewController, UICollectionViewData
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
+        
+        // get memes from AppDelegate
         let object = UIApplication.sharedApplication().delegate
         let appDelegate = object as AppDelegate
         memes = appDelegate.memes
+        
+        // set background color (had to be done here)
         memeCollectionView.backgroundColor = UIColor.orangeColor()
+        
+        // set initial properties
+        rightBarButton.title = "Edit"
+        self.tabBarController?.tabBar.hidden = false
+        memeCollectionView.allowsMultipleSelection = false
+        
+        // deselect all selected cells
+        deselectAll()
     }
     
     // MARK: Collection View Functions
@@ -114,17 +126,56 @@ class CollectionViewController: UICollectionViewController, UICollectionViewData
     
     // MARK: @IBAction Functions
     
-    // Handle the edit button being pressed
-    @IBAction func editMemeTableView(sender: UIBarButtonItem) {
-        // turn isEditing flag on
-        isEditing = true
+    // function to deselect all the selected rows
+    func deselectAll(){
         
-        // allow multiple selection of cells
-        memeCollectionView.allowsMultipleSelection = true
+        // get all the index paths
+        if let selectedRowPaths = memeCollectionView.indexPathsForSelectedItems() as? [NSIndexPath] {
+            // iterate over each index path
+            for indexPath in selectedRowPaths {
+                // get the cell and deselect
+                let cell = memeCollectionView.cellForItemAtIndexPath(indexPath) as CustomCollectionViewCell
+                cell.checkMark.hidden = true
+                memeCollectionView.deselectItemAtIndexPath(indexPath, animated: false)
+            }
+        }
+    }
+    
+    // MARK: @IBAction Functions
+    // handle right nav bar button presses
+    // this is for when the "Edit Button is pressed"
+    @IBAction func rightNavBarButtonAction(sender: UIBarButtonItem) {
         
-        // set the button titles
-        leftBarButton.title = "Delete"
-        rightBarButton.title = "Cancel"
+        // check if in editing mode or not
+        if(!isEditing){
+            
+            // if not in editing, then turn flag on
+            isEditing = true
+            memeCollectionView.allowsMultipleSelection = true
+            
+            // hide the tab bar
+            self.navigationController?.tabBarController?.tabBar.hidden = true
+            
+            // change button titles
+            leftBarButton.title = "Delete"
+            rightBarButton.title = "Cancel"
+        }
+        else {
+            // else, already in editing mode
+            
+            // reset the button titles
+            rightBarButton.title = "Edit"
+            leftBarButton.title = "Back"
+            
+            // unhide the tab bar
+            self.navigationController?.tabBarController?.tabBar.hidden = false
+            
+            // reset editing flag
+            isEditing = false
+            
+            // deselect all selected rows
+            deselectAll()
+        }
     }
     
     // handle the left navigation button being pressed
