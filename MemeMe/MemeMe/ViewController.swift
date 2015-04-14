@@ -28,14 +28,14 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
 UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrollViewDelegate {
     
     // Outlets
-    @IBOutlet weak var navTitle: UINavigationItem!
-    @IBOutlet weak var colorPick: UIButton!
-    @IBOutlet weak var cameraButton: UIBarButtonItem!
-    @IBOutlet weak var mainToolbar: UIToolbar!
-    @IBOutlet weak var navigationBar: UINavigationBar!
-    @IBOutlet weak var leftBarButton: UIBarButtonItem!
-    @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var rightBarButton: UIBarButtonItem!
+    @IBOutlet weak var navTitle: UINavigationItem! // nav bar title
+    @IBOutlet weak var colorPick: UIButton! // color picker button
+    @IBOutlet weak var cameraButton: UIBarButtonItem! // camera picker button
+    @IBOutlet weak var mainToolbar: UIToolbar! // bottom tool bar
+    @IBOutlet weak var navigationBar: UINavigationBar! // navigation bar
+    @IBOutlet weak var leftBarButton: UIBarButtonItem! // left nav bar button
+    @IBOutlet weak var rightBarButton: UIBarButtonItem! // right nav bar button
+    @IBOutlet weak var scrollView: UIScrollView! // the scroll view
     
     // Variables
     var editingBottom = false // flag for when editing the bottom text
@@ -494,6 +494,7 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrol
         
         // set contents offset so that image in imageView is at "same"
         // position as the original saved image
+        // from: https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIScrollView_Class/#//apple_ref/occ/instp/UIScrollView/contentOffset
         scrollView.contentOffset = meme.originalContentOffset
         
         // set the editing flag and the index for the meme being edited

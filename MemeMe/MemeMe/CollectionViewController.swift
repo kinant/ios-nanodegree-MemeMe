@@ -110,6 +110,8 @@ class CollectionViewController: UICollectionViewController, UICollectionViewData
         }
     }
     
+    // MARK: OTHER FUNCTIONS
+    
     // function to show the detailed view controller
     func showDetailView(index: Int){
         
@@ -123,8 +125,6 @@ class CollectionViewController: UICollectionViewController, UICollectionViewData
         // push the view controller into the view
         self.navigationController?.pushViewController(detailVC, animated: true)
     }
-    
-    // MARK: @IBAction Functions
     
     // function to deselect all the selected rows
     func deselectAll(){
