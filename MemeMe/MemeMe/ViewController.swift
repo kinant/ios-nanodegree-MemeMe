@@ -48,13 +48,10 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrol
     var imageView = UIImageView() // the image view to display the selected image
     var bottomTextLocation = CGPoint(x: 0, y: 0)
     
-    
-    // MARK: Touch functions
-    
-    // =======================================================================================================================
+    // =========================================================================
     // MARK: Overriden View Functions
     // BELOW ARE ALL THE FUNCTIONS THAT ARE RELATED TO THE VIEW
-    // =======================================================================================================================
+    // =========================================================================
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -141,40 +138,54 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrol
             leftBarButton.enabled = false
         }
         
+        // add gesture recogizers so that the textfields can me moved with the finger
+        // from: http://stackoverflow.com/questions/24758671/swift-moving-and-releasing-object-with-touch
         let dragBottomTextField = UIPanGestureRecognizer(target: self, action:"dragText:")
         bottomTextField.addGestureRecognizer(dragBottomTextField)
         
         let dragTopTextField = UIPanGestureRecognizer(target: self, action:"dragText:")
         topTextField.addGestureRecognizer(dragTopTextField)
         
-        println("Bottom Text x: \(bottomTextField.center.x)")
-        println("Bottom Text y: \(bottomTextField.center.y)")
-        println("Top Text x: \(topTextField.center.x)")
-        println("Top Text y: \(topTextField.center.y)")
-        
+        // add gesture recognizer for tapping the screen. This is to dismiss the keyboard when 
+        // tapping. This will also be used to stop editing a texfield when screen is tapped. 
+        // from: http://stackoverflow.com/questions/5306240/iphone-dismiss-keyboard-when-touching-outside-of-uitextfield
         let tapScreen = UITapGestureRecognizer(target: self, action: "tapScreen")
         self.view.addGestureRecognizer(tapScreen)
         
     }
     
+    // =========================================================================
+    // MARK: Gesture Recognizer Related Functions
+    // BELOW ARE ALL THE FUNCTIONS THAT ARE RELATED TO THE GESTURE RECOGNIZERS
+    // =========================================================================
+    
+    // handle the tapped screen
+    // from: http://stackoverflow.com/questions/5306240/iphone-dismiss-keyboard-when-touching-outside-of-uitextfield
     func tapScreen(){
         topTextField.resignFirstResponder()
         bottomTextField.resignFirstResponder()
     }
     
+    // handle the dragging of text
+    // from: http://stackoverflow.com/questions/24758671/swift-moving-and-releasing-object-with-touch
     func dragText(recognizer: UIPanGestureRecognizer) {
         
+        // determine what texfield was dragged and set it to textField
         let textField = (recognizer.view?.tag == 2) ? bottomTextField : topTextField
+        
+        // obtain the location of the recognizer as a point
         let point = recognizer.locationInView(self.view);
+        
+        // set the textfield's location to this point
         textField.center.x = point.x
         textField.center.y = point.y
     }
     
-    // =======================================================================================================================
+    // =========================================================================
     // MARK: ScrollView Related Functions
     // BELOW ARE ALL THE FUNCTIONS THAT ARE RELATED TO THE SCROLL VIEW
     // MOST CODE WAS OBTAINED AND MODIFIED FROM LOOKING AT: https://www.youtube.com/watch?v=hz9pMw4Y2Lk
-    // =======================================================================================================================
+    // =========================================================================
     
     // set the scrollView
     // this function sets the various properties of the scrollview (for zooming and content size) based on the image that the imageView is displaying.
@@ -231,10 +242,10 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrol
         return imageView
     }
     
-    // =======================================================================================================================
+    // =========================================================================
     // MARK: Keyboard Related Functions
     // BELOW ARE ALL THE FUNCTIONS THAT ARE RELATED TO THE KEYBOARD
-    // =======================================================================================================================
+    // =========================================================================
     
     // subscribe to keyboard notifications
     func subscribeToKeyboardNotifications() {
@@ -275,10 +286,11 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrol
         return keyboardSize.CGRectValue().height
     }
     
-    // =======================================================================================================================
+    // =========================================================================
     // MARK: Textfield Protocol Functions
     // BELOW ARE ALL THE FUNCTIONS THAT ARE RELATED TO THE TEXTFIELDS
-    // =======================================================================================================================
+    // =========================================================================
+    
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
             textField.text = textField.text.uppercaseString
         return true
@@ -323,10 +335,10 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrol
         textField.resignFirstResponder()
     }
     
-    // =======================================================================================================================
+    // =========================================================================
     // MARK: Image Picking Functions
     // BELOW ARE ALL THE FUNCTIONS THAT ARE RELATED TO PICKING IMAGES
-    // =======================================================================================================================
+    // =========================================================================
     
     // function for the imagePicker controller
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]){
@@ -353,10 +365,11 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrol
         self.presentViewController(pickerController, animated: true, completion: nil)
     }
 
-    // =======================================================================================================================
+    // =========================================================================
     // MARK: Generating and Saving Memes Functions
     // BELOW ARE ALL THE FUNCTIONS THAT ARE RELATED TO GENERATING AND SAVING MEMES
-    // =======================================================================================================================
+    // =========================================================================
+    
     func save(activityType:String!, completed: Bool, returnedItems: [AnyObject]!, error: NSError!) {
         //Create the meme
         if completed {
@@ -437,8 +450,9 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrol
         return memedImage
     }
     
+    // =========================================================================
     // MARK: Functions When Editing a Saved Meme
-    
+    // =========================================================================
     // function to set the screen with the meme to be edited
     func setForEditing(meme: Meme, index: Int){
         // set the image and textfields
@@ -462,10 +476,10 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrol
         cancelEdit.title = "Cancel"
     }
     
-    // =======================================================================================================================
+    // =========================================================================
     // MARK: Other Functions
     // BELOW ARE ALL THE OTHER FUNCTIONS USED
-    // =======================================================================================================================
+    // =========================================================================
     
     // Override the iPhone behavior that presents a popover as fullscreen
     // Used with the font and color pickers
@@ -520,10 +534,10 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrol
         self.presentViewController(alertController, animated: true, completion: nil)
     }
     
-    // =======================================================================================================================
+    // =========================================================================
     // MARK: @IBAction Functions
     // BELOW ARE ALL THE IBACTION FUNCTIONS
-    // =======================================================================================================================
+    // =========================================================================
     
     // handle the cancel edit button when canceling the editing of a saved meme
     @IBAction func cancelEdit(sender: UIBarButtonItem) {
