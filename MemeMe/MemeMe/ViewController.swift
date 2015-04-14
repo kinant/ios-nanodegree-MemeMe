@@ -395,12 +395,6 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrol
         //Create the meme
         if completed {
             
-            var insets1 = scrollView.contentInset
-            var insets2 = scrollView.scrollIndicatorInsets
-            
-            println(insets1)
-            println(insets2)
-            
             // create the meme
             let meme = Meme(
                 topText: topTextField.text,

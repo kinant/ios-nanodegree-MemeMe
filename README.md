@@ -13,9 +13,11 @@ Welcome to my Udacity IOS Nanodegree Project #2 page!
 - Color Picker to pick the text color
 - Font Picker to pick the font
 - Zoom and Pan Images (Pinch to zoom)
+- Ability to Move Textfields with finger to position on Meme
 - Template Memes Library Picker
 - Custom UI Elementes
 - Custom App Icon
+- Custom Launch Screen
 - Multiple Meme Selection for Deletion
 
 # Noted Issues:

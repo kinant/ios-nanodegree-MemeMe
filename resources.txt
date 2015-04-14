@@ -3,6 +3,11 @@ Resources Used For This Project:
 For Blank Meme Templates:
 - https://imgflip.com/memetemplates
 
+For Upper Case Only Text in TextFields:
+- http://stackoverflow.com/questions/21092182/uppercase-characters-in-uitextfield
+- http://stackoverflow.com/questions/25241188/get-a-range-from-a-string
+- http://oleb.net/blog/2014/07/swift-strings/
+
 For UIActivityViewController:
 - http://www.codingexplorer.com/sharing-swift-app-uiactivityviewcontroller/
 
@@ -52,7 +57,6 @@ For Gesture Recognizers:
 - http://stackoverflow.com/questions/5306240/iphone-dismiss-keyboard-when-touching-outside-of-uitextfield
 - http://stackoverflow.com/questions/24758671/swift-moving-and-releasing-object-with-touch
 - http://stackoverflow.com/questions/10292374/does-uigesturerecognizer-know-what-object-it-is-called-on
--
 
 Adding Constraints Programmatically:
 - http://stackoverflow.com/questions/26180822/swift-adding-constraints-programmatically
