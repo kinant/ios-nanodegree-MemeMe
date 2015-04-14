@@ -120,6 +120,11 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrol
         topTextField.minimumFontSize = 8
         bottomTextField.minimumFontSize = 8
         
+        // set autocapitalization for textfields
+        // from: http://stackoverflow.com/questions/21092182/uppercase-characters-in-uitextfield
+        topTextField.autocapitalizationType = UITextAutocapitalizationType.AllCharacters
+        topTextField.autocapitalizationType = UITextAutocapitalizationType.AllCharacters
+
         topTextField.center.x = self.view.center.x
         topTextField.center.y = self.view.frame.origin.y + 150
         bottomTextField.center.x = self.view.center.x
@@ -292,8 +297,23 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrol
     // =========================================================================
     
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
-            textField.text = textField.text.uppercaseString
-        return true
+        
+        // Force only upper case letters
+        // Used a combination of the following sources:
+        // Source for basic code : http://stackoverflow.com/questions/21092182/uppercase-characters-in-uitextfield
+        // Source for help with swift code: http://stackoverflow.com/questions/25241188/get-a-range-from-a-string
+        // Source that helped with using NSString: http://oleb.net/blog/2014/07/swift-strings/
+        
+        let textFieldText = textField.text as NSString
+        
+        if let lowCharRange = string.rangeOfCharacterFromSet(NSCharacterSet.lowercaseLetterCharacterSet()) {
+            textField.text = textFieldText.stringByReplacingCharactersInRange(range, withString: string.uppercaseString)
+            
+            return false
+        }
+        else {
+            return true
+        }
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
