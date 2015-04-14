@@ -21,9 +21,9 @@ Welcome to my Udacity IOS Nanodegree Project #2 page!
 - Multiple Meme Selection for Deletion
 
 # Some Instructions:
-1. To Zoom Image: Use two fingers and pinch-and-zoom
-2. To Pan Image: Use one finger
-3. To move textfields: use one finger to drag around screen
+1. To Zoom Image: Use two fingers and pinch-and-zoom (In the simulator, hold the Option Key and click)
+2. To Pan Image: Use one finger (In the simulator, click)
+3. To move textfields: use one finger to drag around screen (In the simulator, click and drag)
 
 # Noted Issues:
 - If Software Keyboard is not toggled before running the App, it will cause a bug were the entire view slides up. This bug will not occur if keyboard toggles on first use or if testing on a device. Have not figured out how to fix this issue. Disabling "Connect Hardware Keyboard" allows the keyboard to show up without this bug.
