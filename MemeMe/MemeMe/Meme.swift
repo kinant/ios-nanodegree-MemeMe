@@ -19,9 +19,11 @@ struct Meme {
     var fontColor: UIColor // for the text color (for editing)
     var zoomScale: CGFloat // the zoom scale that was applied (for editing)
     var originalContentOffset: CGPoint // the content offset of the image in the scroll view (for editing)
+    var bottomTextFieldCenter: CGPoint // center location of the bottom textfield (for editing)
+    var topTextFieldCenter: CGPoint // center location of the top textfield (for editing)
     
     // initializer function
-    init(topText: String, bottomText: String, original: UIImage, zoom: CGFloat, meme: UIImage, font: UIFont, fontColor: UIColor, offset: CGPoint){
+    init(topText: String, bottomText: String, original: UIImage, zoom: CGFloat, meme: UIImage, font: UIFont, fontColor: UIColor, offset: CGPoint, bottomTextCenter: CGPoint, topTextCenter: CGPoint){
         // set all the properties
         self.topText = topText
         self.bottomText = bottomText
@@ -31,5 +33,7 @@ struct Meme {
         self.fontColor = fontColor
         self.font = font
         self.originalContentOffset = offset
+        self.bottomTextFieldCenter = bottomTextCenter
+        self.topTextFieldCenter = topTextCenter
     }
 }

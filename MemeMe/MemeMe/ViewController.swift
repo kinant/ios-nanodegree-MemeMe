@@ -410,7 +410,9 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrol
                 meme: memeImg,
                 font: topTextField.font,
                 fontColor: topTextField.textColor,
-                offset: scrollView.contentOffset
+                offset: scrollView.contentOffset,
+                bottomTextCenter: bottomTextField.center,
+                topTextCenter: topTextField.center
             )
             
             // Add it to the memes array in the Application Delegate
@@ -482,11 +484,15 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrol
     // function to set the screen with the meme to be edited
     func setForEditing(meme: Meme, index: Int){
         // set the image and textfields
-        bottomTextField.text = meme.bottomText
-        topTextField.text = meme.topText
         imageView.image = meme.originalImg
         setTextFont(meme.font)
         setTextColor(meme.fontColor)
+        bottomTextField.text = meme.bottomText
+        topTextField.text = meme.topText
+        
+        // set textfield locations
+        bottomTextField.center = meme.bottomTextFieldCenter
+        topTextField.center = meme.topTextFieldCenter
         
         // set the image to display correctly in the scroll view
         setScrollView()

@@ -392,11 +392,11 @@
             </objects>
             <point key="canvasLocation" x="1258" y="132"/>
         </scene>
-        <!--Item-->
+        <!--Navigation Controller-->
         <scene sceneID="w1s-Bp-Q4E">
             <objects>
                 <navigationController id="Tsk-uN-XHK" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="EOc-G9-b5H"/>
+                    <tabBarItem key="tabBarItem" title="" image="collection" id="EOc-G9-b5H"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="SoE-kw-QhQ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -482,11 +482,11 @@
             </objects>
             <point key="canvasLocation" x="1138" y="-640"/>
         </scene>
-        <!--Item-->
+        <!--Navigation Controller-->
         <scene sceneID="JPk-qR-7re">
             <objects>
                 <navigationController id="vEj-WW-iQ7" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="OCh-69-PeW"/>
+                    <tabBarItem key="tabBarItem" title="" image="table" id="OCh-69-PeW"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="g93-f9-wkC">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -578,8 +578,10 @@
         <image name="album" width="25" height="25"/>
         <image name="camera" width="25" height="25"/>
         <image name="check" width="40" height="40"/>
+        <image name="collection" width="30" height="30"/>
         <image name="palette" width="268" height="430"/>
         <image name="t1.jpg" width="568" height="335"/>
+        <image name="table" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="umS-GW-SHF"/>
