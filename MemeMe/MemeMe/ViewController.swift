@@ -395,17 +395,22 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrol
         //Create the meme
         if completed {
             
+            var insets1 = scrollView.contentInset
+            var insets2 = scrollView.scrollIndicatorInsets
+            
+            println(insets1)
+            println(insets2)
+            
             // create the meme
             let meme = Meme(
                 topText: topTextField.text,
                 bottomText: bottomTextField.text,
                 original: imageView.image!,
-                originalX: imageView.frame.origin.x,
-                originalY: imageView.frame.origin.y,
                 zoom: self.scrollView.zoomScale,
                 meme: memeImg,
                 font: topTextField.font,
-                fontColor: topTextField.textColor
+                fontColor: topTextField.textColor,
+                offset: scrollView.contentOffset
             )
             
             // Add it to the memes array in the Application Delegate
@@ -484,10 +489,12 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrol
         setTextColor(meme.fontColor)
         
         // set the image to display correctly in the scroll view
-        imageView.frame.origin.x = meme.originalImgOriginX
-        imageView.frame.origin.y = meme.originalImgOriginY
         setScrollView()
         scrollView.zoomScale = meme.zoomScale
+        
+        // set contents offset so that image in imageView is at "same"
+        // position as the original saved image
+        scrollView.contentOffset = meme.originalContentOffset
         
         // set the editing flag and the index for the meme being edited
         isEditing = true
