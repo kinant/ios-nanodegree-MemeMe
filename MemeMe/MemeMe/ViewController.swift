@@ -184,7 +184,11 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrol
         
         // set the textfield's location to this point
         textField.center.x = point.x
-        textField.center.y = point.y
+        
+        // only allow textfields to move in between the nav bar and the tool bar
+        if(!(point.y > self.view.frame.height - 64) && !(point.y < 84)){
+            textField.center.y = point.y
+        }
     }
     
     // =========================================================================
