@@ -1,0 +1,71 @@
+Resources Used For This Project:
+
+For Blank Meme Templates:
+- https://imgflip.com/memetemplates
+
+For UIActivityViewController:
+- http://www.codingexplorer.com/sharing-swift-app-uiactivityviewcontroller/
+
+For the Color Picker:
+- https://github.com/EthanStrider/iOS-Projects/tree/master/ColorPickerExample
+
+For UIPickerView, UITableView, UICollectionView
+- Udacity UIKit Fundamentals Course
+- http://nscookbook.com/2014/11/ios-programming-recipe-35-implementing-the-common-views-uipickerview-uitableview-and-uicollectionview/
+
+For Custom Cells:
+- https://developer.apple.com/library/ios/documentation/UserExperience/Conceptual/TableView_iPhone/TableViewCells/TableViewCells.html
+- http://www.raywenderlich.com/87975/dynamic-table-view-cell-height-ios-8-swift
+- http://www.ioscreator.com/tutorials/customizing-table-view-tutorial-in-ios8-with-swift
+- http://stackoverflow.com/questions/25541786/custom-uitableviewcell-from-nib-in-swift
+
+For TableCell Swipe Delete:
+- http://timbroder.com/2014/08/uitableviewcell-action-swiping-in-ios8-and-swift.html
+- http://www.ioscreator.com/tutorials/delete-rows-table-view-ios8-swift
+
+For Multiple TableView Deletes:
+- http://stackoverflow.com/questions/29387462/how-to-delete-a-cell-from-a-uitableview-with-multi-section-in-swift
+
+For Multiple TableView Selections:
+- http://stackoverflow.com/questions/26261015/tableview-allowsmultipleselection-still-allowing-multiple-selections
+
+For rounded images:
+- http://stackoverflow.com/questions/25587713/how-to-set-imageview-in-circle-like-imagecontacts-in-swift-correctly
+
+For taking the screenshot:
+- Udacity UIKit Fundamentals Course
+- http://stackoverflow.com/questions/25448879/how-to-take-full-screen-screenshot-in-swift
+
+For Zooming, Panning and Cropping Image:
+- https://www.youtube.com/watch?v=hz9pMw4Y2Lk
+
+For Image Manipulation:
+- http://stackoverflow.com/questions/185652/how-to-scale-a-uiimageview-proportionally
+
+For Keyboard Management:
+- http://creativecoefficient.net/swift/keyboard-management/
+
+Adding Constraints Programmatically:
+- http://stackoverflow.com/questions/26180822/swift-adding-constraints-programmatically
+- http://stackoverflow.com/questions/28252583/how-do-i-set-the-constraint-of-width-programmatically-in-swift
+
+For Navigation, Switching Screens and Segues:
+- Udacity UIKit Fundamentals Course
+- http://makeapppie.com/2014/09/15/swift-swift-programmatic-navigation-view-controllers-in-swift/
+- http://www.codingexplorer.com/segue-swift-view-controllers/
+- http://www.raywenderlich.com/81880/storyboards-tutorial-swift-part-2
+- http://stackoverflow.com/questions/25401889/presenting-view-controllers-on-detached-view-controllers
+- http://stackoverflow.com/questions/8563473/unbalanced-calls-to-begin-end-appearance-transitions-for-uitabbarcontroller
+
+For Custom Navigation Bar Appearance:
+- https://coderwall.com/p/dyqrfa/customize-navigation-bar-appearance-with-swift
+
+For AlertView and ActionSheets:
+- http://www.ioscreator.com/tutorials/display-an-alert-view-in-ios8-with-swift
+- http://stackoverflow.com/questions/25511945/swift-alert-view-ios8-with-ok-and-cancel-button-which-button-tapped
+
+For Organizing Code:
+- http://www.learnswiftonline.com/reference-guides/organizing-your-swift-code/
+
+I also looked at the discussion forums for some items:
+- http://discussions.udacity.com/t/nsforegroundcolorattributename-doesnt-seem-to-work/10362
