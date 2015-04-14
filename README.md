@@ -22,7 +22,7 @@ Welcome to my Udacity IOS Nanodegree Project #2 page!
 
 # Some Instructions:
 1. To Zoom Image: Use two fingers and pinch-and-zoom (In the simulator, hold the Option Key and click)
-2. To Pan Image: Use one finger (In the simulator, click)
+2. To Pan Image: Use one finger (In the simulator, click and drag)
 3. To move textfields: use one finger to drag around screen (In the simulator, click and drag)
 
 # Noted Issues:
