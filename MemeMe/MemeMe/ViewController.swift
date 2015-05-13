@@ -42,7 +42,7 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrol
     var memeImg: UIImage! // the meme image
     var memes: [Meme]! // array of memes
     var editingIndex:Int! // index for determining what meme is being edited from detail view
-    var isEditing = false // flag to know if we are editing
+    var isEditingMeme = false // flag to know if we are editing
     var topTextField: UITextField! // top textfield
     var bottomTextField: UITextField! // bottom textfield
     var imageView = UIImageView() // the image view to display the selected image
@@ -74,7 +74,7 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrol
         
         // get memes array from AppDelegate
         let object = UIApplication.sharedApplication().delegate
-        let appDelegate = object as AppDelegate
+        let appDelegate = object as! AppDelegate
         memes = appDelegate.memes
         
         // set the scrollView delegate
@@ -292,7 +292,7 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrol
     // function that gets the height of the keyboard
     func getKeyboardHeight(notification: NSNotification) -> CGFloat {
         let userInfo = notification.userInfo
-        let keyboardSize = userInfo![UIKeyboardFrameEndUserInfoKey] as NSValue // of CGRect
+        let keyboardSize = userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue // of CGRect
         return keyboardSize.CGRectValue().height
     }
     
@@ -415,10 +415,10 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrol
             
             // Add it to the memes array in the Application Delegate
             let object = UIApplication.sharedApplication().delegate
-            let appDelegate = object as AppDelegate
+            let appDelegate = object as! AppDelegate
             
             // check if this is not a meme that was previously saved and we are editing
-            if(!isEditing){
+            if(!isEditingMeme){
                 // if not editing, append
                 appDelegate.memes.append(meme)
             }
@@ -428,7 +428,7 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrol
                 appDelegate.memes[editingIndex] = meme
                 
                 // set the editing flag to false
-                isEditing = false
+                isEditingMeme = false
             }
             
             // go to the tab bar view
@@ -502,7 +502,7 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrol
         scrollView.contentOffset = meme.originalContentOffset
         
         // set the editing flag and the index for the meme being edited
-        isEditing = true
+        isEditingMeme = true
         editingIndex = index
         
         // set the button to display cancel, if the user wants to cancel editing
@@ -517,7 +517,7 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrol
     // Override the iPhone behavior that presents a popover as fullscreen
     // Used with the font and color pickers
     // From: https://github.com/EthanStrider/iOS-Projects/tree/master/ColorPickerExample
-    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController!) -> UIModalPresentationStyle {
+    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
         // Return no adaptive presentation style, use default presentation behaviour
         return .None
     }
@@ -540,7 +540,7 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrol
     
     // go to the tab view
     func goToTabBarView(){
-        let tabBarVC = storyboard?.instantiateViewControllerWithIdentifier("tabBarView") as UITabBarController
+        let tabBarVC = storyboard?.instantiateViewControllerWithIdentifier("tabBarView") as! UITabBarController
         presentViewController(tabBarVC, animated: false, completion: nil)
     }
     
@@ -552,7 +552,7 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrol
     
     // view the templates picker table view
     func viewTemplates() {
-        let templatesVC = storyboard?.instantiateViewControllerWithIdentifier("TemplatesTableView") as TemplatesTableViewController
+        let templatesVC = storyboard?.instantiateViewControllerWithIdentifier("TemplatesTableView") as! TemplatesTableViewController
         templatesVC.delegate = self
         presentViewController(templatesVC, animated: false, completion: nil)
     }
@@ -613,7 +613,7 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrol
     // from: https://github.com/EthanStrider/iOS-Projects/tree/master/ColorPickerExample
     @IBAction func colorPickerButton(sender: UIButton) {
         
-        let popoverVC = storyboard?.instantiateViewControllerWithIdentifier("colorPickerPopover") as ColorPickerViewController
+        let popoverVC = storyboard?.instantiateViewControllerWithIdentifier("colorPickerPopover") as! ColorPickerViewController
         
         popoverVC.modalPresentationStyle = .Popover
         
@@ -635,7 +635,7 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrol
     // used modified code from: https://github.com/EthanStrider/iOS-Projects/tree/master/ColorPickerExample
     @IBAction func fontPickerButton(sender: UIButton) {
         
-        let popoverVC = storyboard?.instantiateViewControllerWithIdentifier("fontPickerPopover") as FontPickerViewController
+        let popoverVC = storyboard?.instantiateViewControllerWithIdentifier("fontPickerPopover") as! FontPickerViewController
         
         popoverVC.modalPresentationStyle = .Popover
         

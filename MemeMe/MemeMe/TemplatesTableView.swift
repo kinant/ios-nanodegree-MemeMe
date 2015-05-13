@@ -72,7 +72,7 @@ class TemplatesTableViewController: UITableViewController, UITableViewDataSource
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         // deque the cell as a custom table view cell
-        let cell = tableView.dequeueReusableCellWithIdentifier("MemeTableCell") as CustomTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("MemeTableCell") as! CustomTableViewCell
         
         // create a template
         let template = templates[indexPath.row]

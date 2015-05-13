@@ -41,7 +41,7 @@ class DetailViewController: UIViewController {
     @IBAction func editMeme(sender: UIBarButtonItem) {
         
         // instatiate and present the edit view controller
-        let editVC = storyboard?.instantiateViewControllerWithIdentifier("EditView") as ViewController
+        let editVC = storyboard?.instantiateViewControllerWithIdentifier("EditView") as! ViewController
         presentViewController(editVC, animated: true, completion: {
             // call the function to set the meme to be edited in the edit view
             editVC.setForEditing(self.meme, index: self.index)
@@ -53,7 +53,7 @@ class DetailViewController: UIViewController {
         
         // obtain the memes object array from the AppDelegate
         let object = UIApplication.sharedApplication().delegate
-        let appDelegate = object as AppDelegate
+        let appDelegate = object as! AppDelegate
         
         // remove the meme and go back one screen
         appDelegate.memes.removeAtIndex(self.index)

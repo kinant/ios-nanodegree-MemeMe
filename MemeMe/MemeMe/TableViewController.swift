@@ -19,7 +19,7 @@ class TableViewController: UITableViewController, UITableViewDataSource {
     
     var memes: [Meme]! // array of memes
     var delegate: ViewController? = nil // the delegate will be the Edit View ViewController
-    var isEditing = false // flag to determine if in editing mode (for deletion of multiple memes)
+    var isEditingMeme = false // flag to determine if in editing mode (for deletion of multiple memes)
     
     // link to objects in AppDelegate
     let object = UIApplication.sharedApplication().delegate
@@ -29,7 +29,7 @@ class TableViewController: UITableViewController, UITableViewDataSource {
         super.viewWillAppear(false)
         
         // get the memes from app delegate
-        appDelegate = object as AppDelegate
+        appDelegate = object as! AppDelegate
         memes = appDelegate.memes
         
         // if no memes are saved, go to edit view
@@ -66,7 +66,7 @@ class TableViewController: UITableViewController, UITableViewDataSource {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         // deque a cell using custom table view cell
-        let cell = tableView.dequeueReusableCellWithIdentifier("MemeTableCell") as CustomTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("MemeTableCell") as! CustomTableViewCell
         
         // set the meme
         let meme = self.memes[indexPath.row]
@@ -84,13 +84,13 @@ class TableViewController: UITableViewController, UITableViewDataSource {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         // check flag, if not in editing mode (selectint multiple cells)
-        if(!isEditing){
+        if(!isEditingMeme){
             // show the detail view
             showDetailView(indexPath.row)
         }
         else {
             // else, we are editing, unhide the cell's checkmark
-            let cell = tableView.cellForRowAtIndexPath(indexPath) as CustomTableViewCell
+            let cell = tableView.cellForRowAtIndexPath(indexPath) as! CustomTableViewCell
             cell.checkMark.hidden = false
         }
         
@@ -112,7 +112,7 @@ class TableViewController: UITableViewController, UITableViewDataSource {
     override func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath){
         
         // hide the checkmark of deselected row
-        let cell = tableView.cellForRowAtIndexPath(indexPath) as CustomTableViewCell
+        let cell = tableView.cellForRowAtIndexPath(indexPath) as! CustomTableViewCell
         cell.checkMark.hidden = true
     }
     
@@ -121,7 +121,7 @@ class TableViewController: UITableViewController, UITableViewDataSource {
     func showDetailView(index: Int){
         
         // intantiate the view controller
-        let detailController = self.storyboard?.instantiateViewControllerWithIdentifier("DetailViewController") as DetailViewController
+        let detailController = self.storyboard?.instantiateViewControllerWithIdentifier("DetailViewController") as! DetailViewController
         
         // set the views properties
         detailController.meme = memes[index]
@@ -145,7 +145,7 @@ class TableViewController: UITableViewController, UITableViewDataSource {
             for(var i = indexPaths.count - 1; i >= 0; i--){
                 
                 // get the index path
-                var indexPath = indexPaths[i] as NSIndexPath
+                var indexPath = indexPaths[i] as! NSIndexPath
                 
                 // remove from the saved memes array
                 appDelegate.memes.removeAtIndex(indexPath.row)
@@ -161,7 +161,7 @@ class TableViewController: UITableViewController, UITableViewDataSource {
     
     // go to the edit view View Controller
     func goToEditView(){
-        let editVC = storyboard?.instantiateViewControllerWithIdentifier("EditView") as ViewController
+        let editVC = storyboard?.instantiateViewControllerWithIdentifier("EditView") as! ViewController
         
         // Had warnings when presenting the view controller, removed by reading:
         // http://stackoverflow.com/questions/19890761/warning-presenting-view-controllers-on-detached-view-controllers-is-discourage
@@ -181,7 +181,7 @@ class TableViewController: UITableViewController, UITableViewDataSource {
             // iterate over each index path
             for indexPath in selectedRowPaths {
                 // get the cell and deselect
-                let cell = memeTableView.cellForRowAtIndexPath(indexPath) as CustomTableViewCell
+                let cell = memeTableView.cellForRowAtIndexPath(indexPath) as! CustomTableViewCell
                 cell.checkMark.hidden = true
                 memeTableView.deselectRowAtIndexPath(indexPath, animated: false)
             }
@@ -194,10 +194,10 @@ class TableViewController: UITableViewController, UITableViewDataSource {
     @IBAction func rightNavBarButtonAction(sender: UIBarButtonItem) {
         
         // check if in editing mode or not
-        if(!isEditing){
+        if(!isEditingMeme){
             
             // if not in editing, then turn flag on
-            isEditing = true
+            isEditingMeme = true
             memeTableView.allowsMultipleSelection = true
             
             // hide the tab bar
@@ -218,7 +218,7 @@ class TableViewController: UITableViewController, UITableViewDataSource {
             self.navigationController?.tabBarController?.tabBar.hidden = false
             
             // reset editing flag
-            isEditing = false
+            isEditingMeme = false
             
             // deselect all selected rows
             deselectAll()
@@ -229,13 +229,13 @@ class TableViewController: UITableViewController, UITableViewDataSource {
     @IBAction func leftNavBarButtonAction(sender: UIBarButtonItem) {
         
         // check if in editing mode
-        if(isEditing){
+        if(isEditingMeme){
             
             // if editing, then delete the selected memes
             deleteMemes()
             
             // turn flag off
-            isEditing = false
+            isEditingMeme = false
             
             // reset button title
             leftBarButton.title = "Back"

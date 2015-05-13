@@ -47,7 +47,7 @@ class ColorPickerViewController: UIViewController, UICollectionViewDelegate, UIC
 			cString = cString.substringFromIndex(advance(cString.startIndex, 1))
 		}
 		
-		if (countElements(cString) != 6) {
+		if (count(cString) != 6) {
 			return UIColor.grayColor()
 		}
 		
@@ -69,14 +69,14 @@ class ColorPickerViewController: UIViewController, UICollectionViewDelegate, UIC
 	}
 	// UICollectionViewDataSource Protocol:
 	// Returns the number of columns in collection view
-	internal func numberOfSectionsInCollectionView(collectionView: UICollectionView!) -> Int {
+	internal func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
 		return 16
 	}
 	// UICollectionViewDataSource Protocol:
 	// Inilitializes the collection view cells
 	internal func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
 		
-		var cell = collectionView.dequeueReusableCellWithReuseIdentifier("Cell", forIndexPath: indexPath) as UICollectionViewCell
+		var cell = collectionView.dequeueReusableCellWithReuseIdentifier("Cell", forIndexPath: indexPath) as! UICollectionViewCell
 		cell.backgroundColor = UIColor.clearColor()
 		cell.tag = tag++
 		
@@ -84,7 +84,7 @@ class ColorPickerViewController: UIViewController, UICollectionViewDelegate, UIC
 	}
 	
 	// Recognizes and handles when a collection view cell has been selected
-	internal func collectionView(collectionView: UICollectionView!, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+	internal func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
 		
 		var colorPalette: Array<String>
 		
@@ -93,7 +93,7 @@ class ColorPickerViewController: UIViewController, UICollectionViewDelegate, UIC
 		let pListArray = NSArray(contentsOfFile: path!)
 		
 		if let colorPalettePlistFile = pListArray {
-			colorPalette = colorPalettePlistFile as [String]
+			colorPalette = colorPalettePlistFile as! [String]
 			
 			var cell: UICollectionViewCell  = collectionView.cellForItemAtIndexPath(indexPath)! as UICollectionViewCell
 			var hexString = colorPalette[cell.tag]
