@@ -44,10 +44,10 @@ class ColorPickerViewController: UIViewController, UICollectionViewDelegate, UIC
 		var cString:String = hex.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet() as NSCharacterSet).uppercaseString
 		
 		if (cString.hasPrefix("#")) {
-			cString = cString.substringFromIndex(advance(cString.startIndex, 1))
+			cString = cString.substringFromIndex(cString.startIndex.advancedBy(1))
 		}
 		
-		if (count(cString) != 6) {
+		if (cString.characters.count != 6) {
 			return UIColor.grayColor()
 		}
 		
@@ -76,7 +76,7 @@ class ColorPickerViewController: UIViewController, UICollectionViewDelegate, UIC
 	// Inilitializes the collection view cells
 	internal func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
 		
-		var cell = collectionView.dequeueReusableCellWithReuseIdentifier("Cell", forIndexPath: indexPath) as! UICollectionViewCell
+		let cell = collectionView.dequeueReusableCellWithReuseIdentifier("Cell", forIndexPath: indexPath) 
 		cell.backgroundColor = UIColor.clearColor()
 		cell.tag = tag++
 		
@@ -95,8 +95,8 @@ class ColorPickerViewController: UIViewController, UICollectionViewDelegate, UIC
 		if let colorPalettePlistFile = pListArray {
 			colorPalette = colorPalettePlistFile as! [String]
 			
-			var cell: UICollectionViewCell  = collectionView.cellForItemAtIndexPath(indexPath)! as UICollectionViewCell
-			var hexString = colorPalette[cell.tag]
+			let cell: UICollectionViewCell  = collectionView.cellForItemAtIndexPath(indexPath)! as UICollectionViewCell
+			let hexString = colorPalette[cell.tag]
 			color = hexStringToUIColor(hexString)
 			delegate?.setTextColor(color)
             self.dismissViewControllerAnimated(false, completion: nil)

@@ -21,26 +21,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Customize all the different UI Elementes
         
         // Customize navigation bar
-        var navigationBarAppearance = UINavigationBar.appearance()
+        let navigationBarAppearance = UINavigationBar.appearance()
         navigationBarAppearance.tintColor = UIColor.whiteColor()
         navigationBarAppearance.barTintColor = UIColor.orangeColor()
         navigationBarAppearance.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.whiteColor()]
         
         // Customize Tab Bar
-        var tabBarAppearance = UITabBar.appearance()
+        let tabBarAppearance = UITabBar.appearance()
         tabBarAppearance.tintColor = UIColor.whiteColor()
         tabBarAppearance.barTintColor = UIColor.orangeColor()
         
         // Customize Table View
-        var tableViewAppearance = UITableView.appearance()
+        let tableViewAppearance = UITableView.appearance()
         tableViewAppearance.backgroundColor = UIColor.orangeColor()
         
         // Customize TableView Cells
-        var tableCellAppearance = CustomTableViewCell.appearance()
+        let tableCellAppearance = CustomTableViewCell.appearance()
         tableCellAppearance.backgroundColor = UIColor.clearColor()
         
         // Customize CollectionView Cells
-        var collectionCellAppearance = UICollectionViewCell.appearance()
+        let collectionCellAppearance = UICollectionViewCell.appearance()
         collectionCellAppearance.backgroundColor = UIColor.clearColor()
         
         // Customize status bar

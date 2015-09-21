@@ -10,7 +10,7 @@ import UIKit
 
 /* This class is used for the Sent Memes Table View Controller
 */
-class TableViewController: UITableViewController, UITableViewDataSource {
+class TableViewController: UITableViewController {
     
     // Outlets
     @IBOutlet weak var leftBarButton: UIBarButtonItem! // left nav bar button
@@ -139,13 +139,13 @@ class TableViewController: UITableViewController, UITableViewDataSource {
          * https://developer.apple.com/library/ios/documentation/UIKit/Reference/UITableView_Class/
          * and: http://stackoverflow.com/questions/29387462/how-to-delete-a-cell-from-a-uitableview-with-multi-section-in-swift
          */
-        if let indexPaths = tableView.indexPathsForSelectedRows() {
+        if let indexPaths = tableView.indexPathsForSelectedRows {
             
             // iterate over each selected row
             for(var i = indexPaths.count - 1; i >= 0; i--){
                 
                 // get the index path
-                var indexPath = indexPaths[i] as! NSIndexPath
+                let indexPath = indexPaths[i] 
                 
                 // remove from the saved memes array
                 appDelegate.memes.removeAtIndex(indexPath.row)
@@ -177,7 +177,7 @@ class TableViewController: UITableViewController, UITableViewDataSource {
     func deselectAll(){
         
         // get all the index paths
-        if let selectedRowPaths = memeTableView.indexPathsForSelectedRows() as? [NSIndexPath] {
+        if let selectedRowPaths = memeTableView.indexPathsForSelectedRows {
             // iterate over each index path
             for indexPath in selectedRowPaths {
                 // get the cell and deselect

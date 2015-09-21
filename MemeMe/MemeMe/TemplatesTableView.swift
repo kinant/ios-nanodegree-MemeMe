@@ -12,7 +12,7 @@ import UIKit
  * templates that the user can pick from to make a Meme. It uses the same custom table cell as the one
  * that is used for the Sent memes table.
 */
-class TemplatesTableViewController: UITableViewController, UITableViewDataSource {
+class TemplatesTableViewController: UITableViewController {
     
     // Variables
     var templates = [Template]() // the array of template objects
@@ -104,10 +104,10 @@ class TemplatesTableViewController: UITableViewController, UITableViewDataSource
         for(var i = 0; i < titles.count; i++){
             
             // set the image
-            var image = UIImage(named: "t\(i + 1).jpg")
+            let image = UIImage(named: "t\(i + 1).jpg")
             
             // create the template
-            var template = Template(image: image!, title: titles[i])
+            let template = Template(image: image!, title: titles[i])
             
             // append
             templates.append(template)

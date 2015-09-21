@@ -27,7 +27,7 @@ class FontPickerViewController : UIViewController, UITableViewDelegate, UITableV
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("FontCell") as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("FontCell")!
         // Set the text
         if let textValue = (self.fonts[indexPath.row] as? String) {
             cell.textLabel?.text = textValue

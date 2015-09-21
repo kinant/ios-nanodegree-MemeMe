@@ -200,7 +200,7 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrol
     // set the scrollView
     // this function sets the various properties of the scrollview (for zooming and content size) based on the image that the imageView is displaying.
     func setScrollView(){
-        var image = imageView.image
+        let image = imageView.image
         imageView.contentMode = UIViewContentMode.Center
         imageView.frame = CGRectMake(0, 0, image!.size.width, image!.size.height)
         
@@ -309,10 +309,12 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrol
         // Source for help with swift code: http://stackoverflow.com/questions/25241188/get-a-range-from-a-string
         // Source that helped with using NSString: http://oleb.net/blog/2014/07/swift-strings/
         
-        let textFieldText = textField.text as NSString
+        let textFieldText = textField.text! as NSString
         
         if let lowCharRange = string.rangeOfCharacterFromSet(NSCharacterSet.lowercaseLetterCharacterSet()) {
+            
             textField.text = textFieldText.stringByReplacingCharactersInRange(range, withString: string.uppercaseString)
+            
             
             return false
         }
@@ -355,7 +357,7 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrol
         }
         
         // make sure text is uppercase
-        textField.text = textField.text.uppercaseString
+        textField.text = textField.text!.uppercaseString
         
         textField.resignFirstResponder()
     }
@@ -366,7 +368,7 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrol
     // =========================================================================
     
     // function for the imagePicker controller
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]){
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]){
         
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             imageView.image = image
@@ -395,19 +397,19 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrol
     // BELOW ARE ALL THE FUNCTIONS THAT ARE RELATED TO GENERATING AND SAVING MEMES
     // =========================================================================
     
-    func save(activityType:String!, completed: Bool, returnedItems: [AnyObject]!, error: NSError!) {
+    func save(activityType:String?, completed: Bool, returnedItems: [AnyObject]?, error: NSError?) {
         //Create the meme
         if completed {
             
             // create the meme
             let meme = Meme(
-                topText: topTextField.text,
-                bottomText: bottomTextField.text,
+                topText: topTextField.text!,
+                bottomText: bottomTextField.text!,
                 original: imageView.image!,
                 zoom: self.scrollView.zoomScale,
                 meme: memeImg,
-                font: topTextField.font,
-                fontColor: topTextField.textColor,
+                font: topTextField.font!,
+                fontColor: topTextField.textColor!,
                 offset: scrollView.contentOffset,
                 bottomTextCenter: bottomTextField.center,
                 topTextCenter: topTextField.center
@@ -457,7 +459,7 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrol
         UIGraphicsBeginImageContext(frame.size)
         
         // this rectangle will only cover the parts of the screen that we want as an image
-        var rectangle = CGRectMake(
+        let rectangle = CGRectMake(
             scrollView.frame.origin.x,
             self.scrollView.frame.origin.y - 44 - additive - 20,
             self.scrollView.frame.width,
@@ -583,16 +585,16 @@ UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate, UIScrol
     @IBAction func pickImageChoices(){
         
         // create a new action sheet alert
-        var pickAlert = UIAlertController(title: "Choose Source", message: "", preferredStyle: UIAlertControllerStyle.ActionSheet)
+        let pickAlert = UIAlertController(title: "Choose Source", message: "", preferredStyle: UIAlertControllerStyle.ActionSheet)
         
         // photo album choice
-        pickAlert.addAction(UIAlertAction(title: "Photo Album", style: .Default, handler: { (action: UIAlertAction!) in
+        pickAlert.addAction(UIAlertAction(title: "Photo Album", style: .Default, handler: { (action: UIAlertAction) in
             // show the photo album
             self.pickImage()
         }))
         
         // template image choice
-        pickAlert.addAction(UIAlertAction(title: "Meme Templates", style: .Default, handler: { (action: UIAlertAction!) in
+        pickAlert.addAction(UIAlertAction(title: "Meme Templates", style: .Default, handler: { (action: UIAlertAction) in
             // show templates table view
             self.viewTemplates()
         }))

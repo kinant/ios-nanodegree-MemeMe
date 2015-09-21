@@ -12,7 +12,7 @@ import UIKit
 
 /* This class is used for the Saved Memes Collection View
 */
-class CollectionViewController: UICollectionViewController, UICollectionViewDataSource {
+class CollectionViewController: UICollectionViewController {
     
     @IBOutlet weak var leftBarButton: UIBarButtonItem! // left nav bar button
     @IBOutlet weak var rightBarButton: UIBarButtonItem! // right nav bar button
@@ -96,7 +96,7 @@ class CollectionViewController: UICollectionViewController, UICollectionViewData
             // iterate over all index paths
             for(var i = indexPaths.count - 1; i >= 0; i--){
                 // get the current indexPath
-                var indexPath = indexPaths[i] as! NSIndexPath
+                let indexPath = indexPaths[i] 
                 
                 // remove the meme from the saved memes array (in App Delegate)
                 appDelegate.memes.removeAtIndex(indexPath.row)
@@ -130,7 +130,7 @@ class CollectionViewController: UICollectionViewController, UICollectionViewData
     func deselectAll(){
         
         // get all the index paths
-        if let selectedRowPaths = memeCollectionView.indexPathsForSelectedItems() as? [NSIndexPath] {
+        if let selectedRowPaths = memeCollectionView.indexPathsForSelectedItems() {
             // iterate over each index path
             for indexPath in selectedRowPaths {
                 // get the cell and deselect
